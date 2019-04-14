@@ -1,0 +1,56 @@
+main.admin-page
+  h1.admin-title = @page_config[:title]
+  = form_with model: @page_config[:model], class: 'uk-form', multipart: true
+    .uk-margin.uk-flex
+      input.uk-input type="text" name="name" placeholder="Название"
+      - if @page_config[:model] == Model
+        select.uk-select name="manufacturer"
+          - @manufacturers.each do |option|
+            option value=option.id = option.name
+      - if @page_config[:model] == Color
+        input.uk-input style="width: 70px;" type="color" name="color" value="#2196f3"
+      button.uk-button.uk-button-primary = "Добавить"
+  table.uk-table.uk-table-striped.uk-table-small.uk-table-responsive.admin-options
+    caption = @page_config[:title]
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        - if @page_config[:model] == Color
+          th = "Цвет"
+        th = "Название"
+        - if @page_config[:model] == Model
+          th = "Производитель"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@page_config[:objects].count}"
+    tbody
+      - @page_config[:objects].each do |part|
+        tr data-id=part.id
+          td = part.id
+          - if @page_config[:model] == Color
+            td
+              .color-cube style="background: #{part.hex}"
+          td
+            input.uk-input.uk-form-blank.part-name data-id=part.id onfocus="window.changing = this.value" onblur="editPart(this, #{part.id}, '#{@page_config[:edit_url]}')" value=part.name
+          - if @page_config[:model] == Model
+            td = part.manufacturer.name
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id}, '#{@page_config[:delete_url]}')" = "Удалить"
+
+coffee:
+  window.deletePart = (partId, url) ->
+    $.get "#{url}=#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
+  window.editPart = (el, partId, url) ->
+    if el.value != window.changing
+      $.get "#{url}=#{partId}&new_name=#{el.value}", (data) ->
+        console.log(data.headers)

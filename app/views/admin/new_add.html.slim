@@ -1,0 +1,29 @@
+main.admin-page
+  h1.admin-title = "Публикация новой новости"
+  = form_with model: New, class: 'uk-form-horizontal', multipart: true
+  .uk-margin
+    label.uk-form-label for="form-horizontal-text" = "Название"
+    .uk-form-controls
+      input.uk-input#form-horizontal-text type="text" name="title" placeholder="Заголовок"
+  .uk-margin
+    label.uk-form-label for="form-horizontal-descr" = "Описание"
+    .uk-form-controls
+      textarea.uk-textarea#form-horizontal-descr type="text" name="content" placeholder="Текст"
+  .uk-margin
+    label.uk-form-label for="form-horizontal-file" = "Картинка"
+    .uk-form-controls
+      div uk-form-custom="target: true"
+        input.uk-input#form-horizontal-file type="file" multiple="true" name="images[]" placeholder="Картинка" accept="image/x-png,image/gif,image/jpeg"
+        input class="uk-input uk-form-width-medium" type="text" placeholder="Загрузить картинку"
+  .uk-margin
+    .uk-form-controls
+      button.uk-button.uk-button-primary type="submit" ="Опубликовать"
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )

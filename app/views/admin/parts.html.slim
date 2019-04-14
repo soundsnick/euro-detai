@@ -1,0 +1,37 @@
+main.admin-page
+  h1.admin-title = "Управление Запчастями"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Последние запчасти"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Название"
+        th = "Производитель"
+        th = "Цена"
+        th = "Добавлено"
+        th
+          = "Управление"
+          a.uk-button-primary.admin-control__button href=partadd_path = "+"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody
+      - @parts.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td = part.title
+          td = part.manufacturer.name
+          td = part.cost
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-primary onclick="Turbolinks.visit('#{aparts_edit_path(part.id)}')" = "Изменить"
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+coffee:
+  window.deletePart = (partId) ->
+    $.get "/api/part.delete?part_id=#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")

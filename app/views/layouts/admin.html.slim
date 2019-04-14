@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title = "Admin"
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header.header-nav.admin-header
+      .container
+        nav.uk-navbar.admin-navbar
+          a.uk-link-text href=root_path = 'Вернуться на сайт'
+          a href="" uk-icon="heart"
+          .uk-navbar-right
+            - if not auth
+              a.uk-link-text href="/api/user.auth?country=1&phone=+77052275715&password=1-14-40ernazar" = 'Войти'
+              a.uk-link-text href="/api/user.auth?country=1&phone=+77052275715&password=1-14-40ernaza" = 'Войти с ошибкой'
+            - if auth
+              a.uk-link-text href="/logout" = 'Выйти'
+    - if notice
+      .container.notice
+        .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
+          a.uk-alert-close[uk-close]
+          p = notice
+    app.admin
+      .container
+        .admin-wrapper
+          aside.admin-sidebar
+            h6.admin-sidebar__subtitle.uk-heading-line = "Отгрузки"
+            nav.admin-sidebar__navbar
+              a.admin-sidebar__nav.uk-nav href=anews_path = "Новости"
+            h6.admin-sidebar__subtitle.uk-heading-line = "Машина"
+            nav.admin-sidebar__navbar
+              a.admin-sidebar__nav.uk-nav href=aparts_path = "Каталог"
+              a.admin-sidebar__nav.uk-nav href=amanufacturers_path = "Марки"
+              a.admin-sidebar__nav.uk-nav href=amodels_path = "Модели"
+              a.admin-sidebar__nav.uk-nav href=acarcasses_path = "Кузовы"
+              a.admin-sidebar__nav.uk-nav href=afuels_path = "Типы Топлива"
+              a.admin-sidebar__nav.uk-nav href=avolumes_path = "Объемы двигателя"
+              a.admin-sidebar__nav.uk-nav href=acolors_path = "Цвета"
+            h6.admin-sidebar__subtitle.uk-heading-line = "Пользователи"
+            nav.admin-sidebar__navbar
+              a.admin-sidebar__nav.uk-nav href=ausers_path = "Управление"
+              a.admin-sidebar__nav.uk-nav href=acountries_path = "Страны"
+              a.admin-sidebar__nav.uk-nav href=aroles_path = "Привилегии"
+
+          = yield

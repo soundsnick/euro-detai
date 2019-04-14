@@ -1,0 +1,28 @@
+main.admin-page
+  h3.admin-title = "Добро пожаловать, #{session[:auth]['phone']}"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Последние запчасти"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Название"
+        th = "Производитель"
+        th = "Цена"
+        th = "Добавлено"
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+        td
+        td
+        td
+        td
+          a href=aparts_path = "Управление"
+    tbody
+      - @parts.each do |part|
+        tr
+          td = part.id
+          td = part.title
+          td = part.manufacturer.name
+          td = part.cost
+          td = part.created_at
+

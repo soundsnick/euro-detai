@@ -1,0 +1,360 @@
+@import "vars";
+html, body{
+  min-height: 100vh;
+}
+*{
+  box-sizing: border-box;
+
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  font-weight: 200;
+  font-size: 14px;
+  font-family: "Gotham Pro", sans-serif;
+}
+.container{
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  &-min{
+    max-width: 400px;
+    margin: auto;
+    position: relative;
+  }
+}
+.part{
+  display: flex;
+  border-bottom: 1px solid #dfdfdf;
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+  align-items: center;
+  .uk-card-body{
+    display: flex;
+    flex: 1;
+    padding: 25px;
+    align-self: normal;
+  }
+  &__image{ max-width: 155px!important; margin-left: 30px; border-radius: 6px;}
+  &__info{
+    padding: 0 40px 0 0;
+    flex: 1;
+  }
+  &__title{
+    margin-top: 0!important;
+    font-size: 20px!important;
+    margin-bottom: 5px!important;
+    font-weight: 300;
+  }
+  &__title, &__model, &__manufacturer{
+    margin: 0.4em 0;
+  }
+  &__manufacturer{
+    text-align: left;
+    font-weight: 300;
+    font-size: 13px;
+    color: #656565;
+    font-family: inherit;
+  }
+  &__model{
+    font-size: 12px;
+    margin-left: 15px;
+    font-weight: 300;
+  }
+  .flex-equal{
+    display: flex;
+    align-items: center;
+  }
+  &__table{
+    text-align: left;
+    width: 100%;
+    caption{
+      text-align: left;
+      font-weight: 300;
+      font-size: 12px;
+      padding-bottom: 5px;
+    }
+    th{
+      font-size: 12px;
+      font-weight: 300;
+      padding-right: 30px;
+      padding-left: 0!important;
+    }
+    td{
+      font-size: 12px;
+    }
+  }
+  &__cost--wrapper{ text-align: right;
+    align-self: flex-end;}
+  &__cost{
+    font-size: 15px;
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+  &__buy{
+    padding: 20px 40px;
+    font-size: 0.9em;
+  }
+  &__more{
+    margin-right: 5px!important;
+  }
+}
+.header-nav{
+  background: #fff;
+  .uk-navbar{
+    margin: 0 -15px;
+  }
+  a{
+    font-size: 13px;
+    position: relative;
+    font-weight: 300;
+    padding: 20px 15px;
+    &::after{
+      content: '';
+      display: block;
+      width: 0%;
+      height: 3px;
+      background: #FF5722;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transition: width $transition;
+      will-change: width;
+    }
+    &:hover{
+      text-decoration: none;
+      &::after{
+        width: 100%;
+      }
+    }
+  }
+}
+.notice{
+  margin: 10px auto;
+  .uk-alert-close{
+    left: auto!important;
+  }
+}
+.color-cube{
+  background-color: #000;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+.flex{ display: flex; }
+.part-search__common{
+  padding: 10px;
+  background: url(/assets/pattern.png), #f7f7f7;
+  box-shadow: 0 4px 3px -2px rgba(0, 0, 0, 0.05);
+  background-size: 17%;
+  background-position: center 42px;
+}
+.title{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 300;
+  text-shadow: 0 1px 1px #fff;
+}
+
+
+// Admin
+.admin{
+  &-header{
+    color: #fff;
+    background-color: #0f7ae5;
+    a:hover{
+      color: #fefefe!important;
+    }
+  }
+  &-wrapper{
+    display: flex;
+    align-items: flex-start;
+  }
+  &-sidebar{
+    flex: 0 0 250px;
+    max-width: 250px;
+    margin-top: 20px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 20px;
+    transition: box-shadow $transition;
+    &__title{
+      font-weight: 200;
+      font-size: 17px;
+      color: #7d7d7d;
+      text-shadow: 0 1px 2px #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 9px;
+      box-shadow: 0 1px 0 #f7f7f7;
+      margin-bottom: 0;
+    }
+    &__subtitle{
+      font-size: 17px;
+      text-shadow: 0 1px 2px #fff;
+      margin: 0 0 5px;
+      color: #7d7d7d;
+      font-weight: 200;
+    }
+    &__navbar{
+      margin-bottom: 10px;
+    }
+    &__nav{
+      display: block;
+      padding: 4px 10px!important;
+    }
+  }
+  &-page{
+    flex: 1;
+    padding: 20px 30px;
+  }
+  &-title{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 200;
+    padding: 20px;
+  }
+  &-control{
+    &__button{
+      padding: 5px 7px;
+      border-radius: 100px;
+      outline: none;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+  }
+  &-options{
+    td{
+      vertical-align: middle!important;
+    }
+  }
+}
+.login{
+  padding: 50px 20px;
+}
+.advanced-search{
+  flex: 0 0 300px;
+  margin-top: 40px;
+  background: #f5f5f5;
+  border-radius: 5px;
+  transition: box-shadow $transition;
+  .uk-card-body{
+    padding: 30px!important;
+  }
+}
+.header-static{
+  padding: 20px 0;
+  background: linear-gradient(to right, rgba(0,0,0,.8), rgba(0,0,0,.5)), url("/assets/header.jpg");
+  background-size: cover;
+  background-position: center;
+  .uk-flex{
+    align-items: center;
+  }
+}
+.header{
+  &__contacts{
+    flex: 1;
+    span{
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+  &__phone{
+    margin: 2px 0;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 200;
+    font-family: inherit;
+    a{
+      color: #da685a;
+    }
+  }
+  &__adress{
+    flex: 1;
+    p{
+      margin: 0;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}
+.logo{
+  &-container{
+    flex: 0 0 30%;
+    align-self: center;
+  }
+  &__info{
+    font-size: 12px;
+    color: #d2d2d2;
+    padding-top: 5px;
+  }
+}
+.home-grid{
+  margin-top: 50px;
+  &__title{
+    margin: 0;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+  &__info{
+    padding: 0 20px;
+    p{
+      text-align: left;
+      margin: 0;
+    }
+  }
+}
+.success-iconed{
+  li{
+    display: flex;
+    align-items: center;
+    span{ flex: 1;}
+  }
+  li::before{
+    content: '';
+    display: block;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    background-image: url(/assets/checked.svg);
+    background-size: cover;
+    margin-right: 15px;
+  }
+}
+.footer{
+  padding-top: 30px;
+  &__inner{
+    padding: 30px 0;
+  }
+  .uk-list{
+    margin-bottom: 0;
+  }
+}
+.part-page {
+  padding: 50px 0;
+  .part{
+    border-radius: 0;
+  }
+  table{
+    margin-left: 50px;
+  }
+  img{
+    max-width: 250px!important;
+  }
+  td {
+    text-align: left;
+  }
+}
+.new-pre{
+  font-family: inherit;
+  font-weight: 200;
+  white-space: pre-wrap;
+  line-break: normal!important;
+  word-break: break-word;
+  line-height: 1.5;
+}

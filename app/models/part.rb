@@ -1,0 +1,8 @@
+class Part < ApplicationRecord
+  belongs_to :manufacturer
+  belongs_to :model
+  belongs_to :volume
+  belongs_to :carcass
+  belongs_to :color
+  belongs_to :fuel
+end

@@ -1,0 +1,100 @@
+main.admin-page
+  h1.admin-title = "Добавление запчасти"
+  = form_with model: Part, class: 'uk-form-horizontal', multipart: true, method: :put
+    input type="hidden" name="part_id" value=@part.id
+    .uk-margin
+      label.uk-form-label for="form-horizontal-text" = "Название"
+      .uk-form-controls
+        input.uk-input#form-horizontal-text type="text" name="title" placeholder="Название" value=@part.title
+    .uk-margin
+      label.uk-form-label for="form-horizontal-man" = "Производитель"
+      .uk-form-controls
+        select.uk-select#form-horizontal-man name="manufacturer"
+          - @options.each do |manufacturer|
+            - if manufacturer.id == @part.manufacturer.id
+              - selected = 'selected'
+            option selected=selected value=manufacturer.id = manufacturer.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-model" = "Модель"
+      .uk-form-controls
+        select.uk-select#form-horizontal-model name="model"
+          - @models.each do |model|
+            - if model.id == @part.model.id
+              - selected = 'selected'
+            option selected=selected value=model.id = model.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-year" = "Год выпуска"
+      .uk-form-controls
+        input.uk-input#form-horizontal-year type="number" min="1900" max="2099" step="1" placeholder="Год выпуска" name="year" value=@part.year
+    .uk-margin
+      label.uk-form-label for="form-horizontal-volume" = "Объем двигателя"
+      .uk-form-controls
+        select.uk-select#form-horizontal-volume name="volume"
+          - @volumes.each do |volume|
+            - if volume.id == @part.volume.id
+              - selected = 'selected'
+            option selected=selected value=volume.id = volume.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-fuel" = "Тип топлива"
+      .uk-form-controls
+        select.uk-select#form-horizontal-fuel name="fuel"
+          - @fuels.each do |fuel|
+            - if fuel.id == @part.fuel.id
+              - selected = 'selected'
+            option selected=selected value=fuel.id = fuel.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-carcass" = "Тип кузова"
+      .uk-form-controls
+        select.uk-select#form-horizontal-carcass name="carcass"
+          - @carcasses.each do |carcass|
+            - if carcass.id == @part.carcass.id
+              - selected = 'selected'
+            option selected=selected value=carcass.id = carcass.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-color" = "Цвет"
+      .uk-form-controls
+        select.uk-select#form-horizontal-color name="color"
+          - @colors.each do |color|
+            - if color.id == @part.color.id
+              - selected = 'selected'
+            option selected=selected   value=color.id = color.name
+    .uk-margin
+      label.uk-form-label for="form-horizontal-mark" = "Маркировка"
+      .uk-form-controls
+        input.uk-input#form-horizontal-mark type="text" name="mark" placeholder="Маркировка" value=@part.mark
+    .uk-margin
+      label.uk-form-label for="form-horizontal-num" = "Констр. номер"
+      .uk-form-controls
+        input.uk-input#form-horizontal-num type="text" name="mark" placeholder="Констр. номер" value=@part.constr_num
+    .uk-margin
+      label.uk-form-label for="form-horizontal-descr" = "Описание"
+      .uk-form-controls
+        textarea.uk-textarea#form-horizontal-descr type="text" name="description" placeholder="Описание" = @part.description
+    .uk-margin
+      label.uk-form-label for="form-horizontal-options" = "Доп. опции"
+      .uk-form-controls
+        textarea.uk-textarea#form-horizontal-options type="text" name="options" placeholder="Дополнительные опции (ключ:значение, ключ:значение)..." = @part.options
+    .uk-margin
+      label.uk-form-label for="form-horizontal-file" = "Картинка"
+      .uk-form-controls
+        div uk-form-custom="target: true"
+          input.uk-input#form-horizontal-file type="file" name="image" placeholder="Картинка" accept="image/x-png,image/gif,image/jpeg"
+          input class="uk-input uk-form-width-medium" type="text" placeholder="Загрузить картинку"
+    .uk-margin
+      label.uk-form-label for="form-horizontal-cost" = "Цена"
+      .uk-form-controls
+        div uk-form-custom="target: true"
+          input.uk-input#form-horizontal-cost type="number" name="cost" placeholder="Цена" value=@part.cost
+    .uk-margin
+      .uk-form-controls
+        button.uk-button.uk-button-primary type="submit" ="Сохранить"
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+      console.log(data)
+  )

@@ -1,0 +1,138 @@
+main.parts
+  .container
+    .admin-wrapper
+      aside.advanced-search.uk-card.uk-card-default
+        .uk-card-body
+          h1.uk-card-title = "Расширенный поиск"
+          form.uk-form-stacked action="/parts/advanced_search" method="get"
+            .uk-margin
+              label.uk-form-label = "Марка автомобиля: "
+              .uk-form-controls
+                select.uk-select#form-horizontal-man name="manufacturer"
+                  - @manufacturers.each do |manufacturer|
+                    option value=manufacturer.id = manufacturer.name
+            .uk-margin
+              label.uk-form-label = "Модель автомобиля:"
+              .uk-form-controls
+                select.uk-select#form-horizontal-model name="model"
+                  - @models.each do |manufacturer|
+                    option value=manufacturer.id = manufacturer.name
+            .uk-margin
+              label.uk-form-label = "Тип кузова:"
+              .uk-form-controls
+                select.uk-select name="carcass"
+                  - @carcasses.each do |manufacturer|
+                    option value=manufacturer.id = manufacturer.name
+            .uk-margin
+              label.uk-form-label = "Цвет:"
+              .uk-form-controls
+                select.uk-select name="color"
+                  - @colors.each do |manufacturer|
+                    option value=manufacturer.id = manufacturer.name
+            .uk-margin
+              label.uk-form-label = "Тип топлива:"
+              .uk-form-controls
+                select.uk-select name="fuel"
+                  - @fuels.each do |manufacturer|
+                    option value=manufacturer.id = manufacturer.name
+            .uk-margin
+              label.uk-form-label for="form-horizontal-volume" = "Объем двигателя:"
+              .uk-form-controls
+                input.uk-input#form-horizontal-volume type="text" value="0" placeholder="с 0" name="volume_from"
+                input.uk-input type="text" placeholder="до #{@volumes.where.not(id: 1).maximum(:name)}" name="volume_to"
+            .uk-margin
+              label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
+              .uk-form-controls
+                input.uk-input#form-horizontal-year type="number" value="1900" min="1900" max="2099" step="1" placeholder="с" name="year_from"
+                input.uk-input type="number" min="1900" max="2099" step="1" placeholder="до" name="year_to"
+            .uk-margin
+              label.uk-form-label for="form-horizontal-cost" = "Цена:"
+              .uk-form-controls
+                input.uk-input#form-horizontal-cost type="number" step="1" value="0" placeholder="Выше" name="cost_from" style="width: 100%"
+                input.uk-input type="number" step="1" placeholder="Ниже" name="cost_to" style="width: 100%"
+            input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
+      main.admin-page style="padding: 40px;"
+        .parts
+          uk.horizontal-nav
+            a.uk-link href=root_path = "Главная"
+            = " | "
+            a.uk-link href=parts_path = "Каталог"
+          .flex style="align-items: center;"
+            - if params[:action] != "advanced_search"
+              h1.title style="flex: 1;" = @page_config[:title]
+            - if params[:action] == "advanced_search"
+              div.filter-result style="flex: 1"
+                h1.title = "Примененные фильтры:"
+            p.amount style="margin: 10px 0;" = "В каталоге #{Part.all.count} запчастей"
+          - if params[:action] == "advanced_search"
+            table.uk-alert-primary.uk-animation-fade.uk-animation-fast.uk-alert.filter.part__table.uk-table-responsive.uk-table-small
+              tr
+                th.uk-table-shrink = "Марка автомобиля"
+                td = @filter[:manufacturer]
+              tr
+                th.uk-table-shrink = "Модель автомобиля"
+                td = @filter[:model]
+              tr
+                th.uk-table-shrink = "Тип кузова"
+                td = @filter[:carcass]
+              tr
+                th.uk-table-shrink = "Цвет"
+                td = @filter[:color]
+              tr
+                th.uk-table-shrink = "Тип топлива"
+                td = @filter[:fuel]
+              tr
+                th.uk-table-shrink = "Объем"
+                td = @filter[:volume]
+              tr
+                th.uk-table-shrink = "Год"
+                td = @filter[:year]
+              tr
+                th.uk-table-shrink = "Цена"
+                td = @filter[:cost]
+            a href=parts_path  = "Сбросить фильтр"
+          - @a_parts.each do |part|
+            .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
+              - p_image = (part.image == nil) ? 'no_photo.png' : part.image
+              .part__image--wrapper data-image=p_image
+                img.part__image src="/images/#{p_image}"
+              .uk-card-body
+                .part__info
+                  h2.part__title.uk-card-title = part.title
+                  .flex-equal
+                    h4.part__manufacturer
+                      = part.manufacturer.name
+                      = " " + part.model.name
+                  table.part__table.uk-table-responsive.uk-table-hover
+                    tbody
+                      tr
+                        th.uk-table-shrink = '№'
+                        td
+                          = part.id
+                      tr
+                        th.uk-table-shrink = 'Цвет'
+                        td
+                          .color-cube style="background-color: #{part.color.hex}"
+                          = part.color.name
+                      tr
+                        th.uk-table-shrink = 'Описание'
+                        td = part.description
+                      tr
+                        th.uk-table-shrink = 'Год'
+                        td = part.year
+                .part__cost--wrapper
+                  h6.part__cost = 'Цена: ' + part.cost.to_s + 'P'
+                  a.part__more.uk-button.uk-button-default.uk-button-small href=part_path(part.id) data-cost=part.cost = 'Подробнее'
+                  button.part__buy.uk-button.uk-button-primary.uk-button-small data-cost=part.cost = 'Купить'
+          - if @a_parts.empty?
+            .uk-margin
+              .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )

@@ -1,0 +1,2 @@
+class Carcass < ApplicationRecord
+end

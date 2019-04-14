@@ -1,0 +1,25 @@
+main.home
+  .container
+    .admin-wrapper
+      = render 'layouts/news'
+      main.admin-page style="padding: 40px;"
+        h1.title style="text-align: center" = @new.title
+        pre.new-pre
+          = @new.content
+          div[style="margin-top: 20px; background: #282828; padding: 20px; border-radius: 6px; " class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider]
+            ul class="uk-slider-items uk-child-width-1-3" style="align-items: center; padding: 20px;"
+              - @new.attachments.each do |image|
+                li style="padding: 10px;"
+                  img src="/images/#{image.image}"
+            a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
+            a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]
+
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )

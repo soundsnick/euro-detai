@@ -1,0 +1,45 @@
+main.admin-page
+  h1.admin-title = @page_config[:title]
+  = form_with model: @page_config[:model], class: 'uk-form', multipart: true
+  table.uk-table.uk-table-striped.uk-table-small.uk-table-responsive.admin-options
+    caption = @page_config[:title]
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Номер"
+        th = "Страна"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@page_config[:objects].count}"
+    tbody
+      - @page_config[:objects].each do |part|
+        tr data-id=part.id
+          td = part.id
+          td = part.phone
+          td = part.country.name
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-primary data-id=part.id onclick="toggleAdmin(#{part.id}, '#{@page_config[:toggleadmin_url]}')"
+              = (part.role_id == 1) ? "Разжаловать" : "Назначить"
+            button.uk-button-small.uk-button.uk-button-danger onclick="deleteUser(#{part.id}, '#{@page_config[:delete_url]}')" = "Удалить"
+
+coffee:
+  window.deleteUser = (userId, url) ->
+    $.get "#{url}=#{userId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{userId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
+  window.toggleAdmin = (userId, url) ->
+    $.get "#{url}=#{userId}", (data) ->
+      if data.headers.status == 200
+        el = $(".uk-button-small.uk-button.uk-button-primary[data-id=#{userId}]")
+        el.html if el.html() == "Назначить" then "Разжаловать" else "Назначить"
+      else
+        console.log(data.headers)
+        console.log("Ошибка")

@@ -1,0 +1,22 @@
+aside.advanced-search.uk-card.uk-card-default
+  h1.uk-card-title style="text-align: center; padding-top: 20px;" = "Отгрузки"
+  div[style="max-width: 300px;" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider=""]
+    ul class="uk-slider-items uk-child-width-1-1"
+      - @news.each do |new|
+        li
+          .uk-card.uk-card-secondary.new-card
+            .uk-card-body
+              h3.uk-card-title
+                a href=new_path(new.id) = new.title
+              - new_image = "no_photo.png"
+              - if new.attachments.count > 0
+                - new_image = new.attachments.take.image
+              img.new-card__image src="/images/#{new_image}"
+              p.new-card__content = new.content.slice(0, 30)
+    a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
+    a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]
+  .uk-margin style="text-align: center"
+    a.uk-link href=news_path = "Архив новостей"
+  - if @news.empty?
+    div.uk-alert.uk-alert-primary
+      span = "Нет новостей"

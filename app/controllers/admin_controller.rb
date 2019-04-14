@@ -1,0 +1,414 @@
+class AdminController < ApplicationController
+  layout 'admin'
+
+  def main
+    if admin
+      @parts = Part.all.order(id: :asc).limit(10)
+      @count = Part.count
+    else admin_err
+    end
+  end
+
+  def parts
+    if admin
+      @parts = Part.all.order(id: :asc)
+      @count = @parts.count
+    else admin_err
+    end
+  end
+
+  def manufacturers
+    if admin
+      @page_config = {
+          'title': 'Производители',
+          'model': Manufacturer,
+          'objects': Manufacturer.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/manufacturer.change?manufacturer_id',
+          'delete_url': '/api/manufacturer.delete?manufacturer_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def news
+    if admin
+      @news = New.all
+    else admin_err
+    end
+  end
+
+  def models
+    if admin
+      @manufacturers = Manufacturer.all.order(id: :asc)
+      @page_config = {
+          'title': 'Модели',
+          'model': Model,
+          'objects': Model.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/model.change?model_id',
+          'delete_url': '/api/model.delete?model_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def carcasses
+    if admin
+      @page_config = {
+          'title': 'Кузовы',
+          'model': Carcass,
+          'objects': Carcass.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/carcass.change?carcass_id',
+          'delete_url': '/api/carcass.delete?carcass_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def fuels
+    if admin
+      @page_config = {
+          'title': 'Типы топлива',
+          'model': Fuel,
+          'objects': Fuel.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/fuel.change?fuel_id',
+          'delete_url': '/api/fuel.delete?fuel_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def volumes
+    if admin
+      @page_config = {
+          'title': 'Объемы двигателя',
+          'model': Volume,
+          'objects': Volume.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/volume.change?volume_id',
+          'delete_url': '/api/volume.delete?volume_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def colors
+    if admin
+      @page_config = {
+          'title': 'Цвета',
+          'model': Color,
+          'objects': Color.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/color.change?color_id',
+          'delete_url': '/api/color.delete?color_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def manufacturer_add
+    if admin
+      if params[:name]
+        manufacturer = Manufacturer.new
+        manufacturer.name = params[:name]
+        if manufacturer.save
+          redirect_to amanufacturers_path, notice: 'Успешно добавлено'
+        else redirect_to amanufacturers_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to amanufacturers_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def model_add
+    if admin
+      if params[:name]
+        model = Model.new
+        model.name = params[:name]
+        model.manufacturer_id = params[:manufacturer]
+        if model.save
+          redirect_to amodels_path, notice: 'Успешно добавлено'
+        else redirect_to amodel_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to amodels_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def carcass_add
+    if admin
+      if params[:name]
+        carcass = Carcass.new
+        carcass.name = params[:name]
+        if carcass.save
+          redirect_to acarcasses_path, notice: 'Успешно добавлено'
+        else redirect_to acarcass_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to acarcass_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def fuel_add
+    if admin
+      if params[:name]
+        fuel = Fuel.new
+        fuel.name = params[:name]
+        if fuel.save
+          redirect_to afuels_path, notice: 'Успешно добавлено'
+        else redirect_to afuels_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to afuels_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def volumes_add
+    if admin
+      if params[:name]
+        volume = Volume.new
+        volume.name = params[:name]
+        if volume.save
+          redirect_to avolumes_path, notice: 'Успешно добавлено'
+        else redirect_to avolumes_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to avolume_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def colors_add
+    if admin
+      if params[:name]
+        color = Color.new
+        color.name = params[:name]
+        color.hex = params[:color]
+        if color.save
+          redirect_to acolors_path, notice: 'Успешно добавлено'
+        else redirect_to acolors_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to acolors_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def countries_add
+    if admin
+      if params[:name]
+        country = Country.new
+        country.name = params[:name]
+        if country.save
+          redirect_to acountries_path, notice: 'Успешно добавлено'
+        else redirect_to acountries_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to acountries_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def roles_add
+    if admin
+      if params[:name]
+        roles = Role.new
+        roles.name = params[:name]
+        if roles.save
+          redirect_to aroles_path, notice: 'Успешно добавлено'
+        else redirect_to aroles_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to aroles_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def part_add
+    if admin
+      @options = Manufacturer.all.order(id: :asc)
+      @models = Model.where(manufacturer_id: @options.take.id).order(id: :asc)
+      @volumes = Volume.all.order(id: :asc)
+      @fuels = Fuel.all.order(id: :asc)
+      @carcasses = Carcass.all.order(id: :asc)
+      @colors = Color.all.order(id: :asc)
+    else admin_err
+    end
+  end
+
+  def part_edit
+    if admin && params[:part_id]
+      @part = Part.find_by(id: params[:part_id])
+      if @part
+        @options = Manufacturer.all.order(id: :asc)
+        @models = Model.where(manufacturer_id: @part.manufacturer_id).order(id: :asc)
+        @models = @models.count == 0 ? Model.where(id: @part.model_id) : @models
+        @volumes = Volume.all.order(id: :asc)
+        @fuels = Fuel.all.order(id: :asc)
+        @carcasses = Carcass.all.order(id: :asc)
+        @colors = Color.all.order(id: :asc)
+      else redirect_to aparts_path, notice: 'Не найдено'
+      end
+    else admin_err
+    end
+  end
+
+  def part_update
+    if admin && params[:part_id]
+      @part = Part.find_by(id: params[:part_id])
+      if @part
+        @part.title = params[:title]
+        @part.manufacturer_id = params[:manufacturer]
+        @part.model_id = params[:model]
+        @part.year = params[:year]
+        @part.volume_id = params[:volume]
+        @part.fuel_id = params[:fuel]
+        @part.carcass_id = params[:carcass]
+        @part.color_id = params[:color]
+        @part.mark = params[:mark]
+        @part.description = params[:description]
+        @part.options = params[:options]
+        @part.cost = params[:cost]
+        if params[:image]
+          if @part.image
+            File.delete(Rails.root.join('public', 'images', @part.image)) if File.exist?(Rails.root.join('public', 'images', @part.image))
+          end
+          image = params[:image]
+          imagehex = Digest::SHA256.hexdigest image.original_filename
+          imagehex = imagehex.slice(0, 10)
+          File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+            file.write(image.read)
+            @part.image = imagehex + image.original_filename
+          end
+        end
+        if @part.save
+          redirect_to aparts_path, notice: 'Успешно добавлено'
+        else
+          redirect_to aparts_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to aparts_path, notice: 'Не найдено'
+      end
+    else admin_err
+    end
+  end
+
+  def new_add
+    if admin
+
+    else admin_err
+    end
+  end
+
+  def news_new
+    if admin
+      if params[:title] and params[:content]
+        @new = New.new
+        @new.title = params[:title]
+        @new.content = params[:content]
+        @new.save
+        if params[:images]
+          params[:images].each do |image|
+            imagehex = Digest::SHA256.hexdigest image.original_filename
+            imagehex = imagehex.slice(0, 10)
+            File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+              file.write(image.read)
+              @image = Attachment.new
+              @image.new_id = @new.id
+              @image.image = imagehex + image.original_filename
+              @image.save
+            end
+          end
+        end
+        redirect_to anews_path, notice: 'Успешно добавлено!'
+      else
+        redirect_to newadd_path, notice: 'Заполните все поля'
+      end
+    else admin_err
+    end
+  end
+
+  def part_new
+    if admin
+      @part = Part.new
+      @part.title = params[:title]
+      @part.manufacturer_id = params[:manufacturer]
+      @part.model_id = params[:model]
+      @part.year = params[:year]
+      @part.volume_id = params[:volume]
+      @part.fuel_id = params[:fuel]
+      @part.carcass_id = params[:carcass]
+      @part.color_id = params[:color]
+      @part.mark = params[:mark]
+      @part.description = params[:description]
+      @part.options = params[:options]
+      @part.cost = params[:cost]
+      if params[:image]
+        image = params[:image]
+        imagehex = Digest::SHA256.hexdigest image.original_filename
+        imagehex = imagehex.slice(0, 10)
+        File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+          file.write(image.read)
+          @part.image = imagehex + image.original_filename
+        end
+      end
+      if @part.save
+        redirect_to partadd_path, notice: 'Успешно добавлено'
+      else
+        redirect_to partadd_path, notice: 'Произошла ошибка'
+      end
+    else admin_err
+    end
+  end
+
+  def users
+    if admin
+      @page_config = {
+          'title': 'Пользователи',
+          'objects': User.where.not(id: session[:auth]['id']).order(id: :asc),
+          'toggleadmin_url': '/api/user.toggleAdmin?user_id',
+          'delete_url': '/api/user.delete?user_id'
+      }
+    else admin_err
+    end
+  end
+
+  def countries
+    if admin
+      @page_config = {
+          'title': 'Страны',
+          'model': Country,
+          'objects': Country.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/country.change?country_id',
+          'delete_url': '/api/country.delete?country_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def roles
+    if admin
+      @page_config = {
+          'title': 'Привилегии',
+          'model': Role,
+          'objects': Role.all.order(id: :asc),
+          'edit_url': '/api/role.change?role_id',
+          'delete_url': '/api/role.delete?role_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  private
+  def admin_err
+    render body: 'Вы не являетесь администратором'
+  end
+end

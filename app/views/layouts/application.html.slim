@@ -1,0 +1,91 @@
+doctype html
+html
+  head
+    - title = "Auto"
+    - if @title
+      - title = @title
+    title = title
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header.header-static
+      .container.uk-flex
+        .logo-container
+          .logo-wrapper
+            img.logo src="/assets/logo.png"
+          .logo__info = "Контрактные б/у двигатели, коробки передач для иномарок из Европы, Японии и США"
+        .header__contacts
+          span = "Звонок по России - бесплатно!"
+          h6.header__phone
+            a href="tel:+78002343150" = "8 (800) 23-43-150"
+        .header__adress
+          p
+            b = "Офис: "
+            = "г. Краснодар"
+            br
+            = "ул. Волгоградская, 95/1"
+            br
+            = "8 (928) 406-56-06"
+    header.header-nav
+      .container
+        nav.uk-navbar
+          a.uk-link-text href=root_path = 'Главная'
+          a.uk-link-text href=parts_path = 'Каталог'
+          a.uk-link-text href="#" = 'Оплата и доставка'
+          a.uk-link-text href="#" = 'Гарантия'
+          a.uk-link-text href=news_path = 'Отгрузки'
+          a.uk-link-text href="#" = 'Отзывы'
+          a.uk-link-text href="#" = 'Контакты'
+          .uk-navbar-right
+            - if not auth
+              a.uk-link-text href=login_path = 'Войти'
+            - if admin
+              a.uk-link-text href="/admin" = 'Админ-панель'
+            - if auth
+              a.uk-link-text href="/logout" = 'Выйти'
+    - if notice
+      .container.notice
+        .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
+          a.uk-alert-close[uk-close]
+          p = notice
+    .parts-search
+      .part-search__common
+        .container
+          form.common-search.flex action="/parts/search" method="get"
+            input.uk-input type="search" name="query" placeholder="Поиск по названию..." value=params[:query]
+            input.uk-button.uk-button-secondary type="submit" value="Поиск"
+    = yield
+    footer.footer
+      header.header-nav.uk-card.uk-card-default
+        .container
+          nav.uk-navbar
+            a.uk-link-text href=root_path = 'Главная'
+            a.uk-link-text href=parts_path = 'Каталог'
+            a.uk-link-text href="#" = 'Оплата и доставка'
+            a.uk-link-text href="#" = 'Гарантия'
+            a.uk-link-text href=news_path = 'Отгрузки'
+            a.uk-link-text href="#" = 'Отзывы'
+            a.uk-link-text href="#" = 'Контакты'
+            .uk-navbar-right
+              - if not auth
+                a.uk-link-text href=login_path = 'Войти'
+              - if admin
+                a.uk-link-text href="/admin" = 'Админ-панель'
+              - if auth
+                a.uk-link-text href="/logout" = 'Выйти'
+      .footer__inner.uk-card.uk-card-secondary
+        .container.uk-flex style="align-items: center;"
+          .footer__info style="flex: 1;"
+            ul.uk-list
+              li.footer__span = "ЕвроДеталь, 2012-2018"
+              li.footer__span
+                b = "Тел.: "
+                = "8 (926) 665-20-97"
+              li.footer__span
+                b = "email: "
+                a href="mailto:detal911@yandex.ru" = "detal911@yandex.ru"
+          .footer__copyright
+            a href="https://vk.com/nickyerg" = "Разработка сайта"
+            br
+            span = "Ерназар Аскарович"
