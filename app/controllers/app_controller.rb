@@ -1,17 +1,40 @@
 class AppController < ApplicationController
 
   def home
+    @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
     @news = New.all
   end
-  def login
+
+  def warranties
+    @title = "Продажа бу запчастей. Гарантийные условия"
+    @news = New.all
+  end
+
+  def contacts
+    @title = "Ищете, где купить контрактный двигатель, АКПП, МКПП? Звоните нам!"
+    @news = New.all
+  end
+
+  def payment_shipping
+    @title = "Продажа б/у запчастей. Доставка по России, Казахстану!"
+    @news = New.all
+    @cities = City.all
+    render 'payment-shipping'
+  end
+
+  def register
     @countries = Country.where.not(id: 1)
   end
+
+  def login; end
 
   def new
     if params[:id]
       @new = New.find_by(id: params[:id])
       if @new
+        @commentaries = Commentary.where(new_id: @new.id, status: 1)
         @news = New.all
+        @title = @new.title
       else redirect_to root_path, notice: 'Новость не найдена'
       end
     else redirect_to root_path, notice: 'Новость не найдена'
@@ -19,6 +42,7 @@ class AppController < ApplicationController
   end
 
   def news
+    @title = "Бу запчасти с доставкой в регионы"
     @news = New.all
     @page_config = {
         'title': 'Новости'
@@ -37,6 +61,7 @@ class AppController < ApplicationController
   end
 
   def parts
+    @title = "Ищете, где купить б.у запчасти? Каталог с ценами здесь!"
     @a_parts = Part.all.limit(10).order(id: :desc)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
@@ -144,6 +169,75 @@ class AppController < ApplicationController
       @title = @part.title
     else render status: 404
     end
+  end
+
+  def buy
+    if params[:partId]
+      @news = New.all.limit(5).order(id: :desc)
+      @title = "Купить комплектацию"
+    else redirect_to root_path, notice: "Данная комплектация не найдена"
+    end
+  end
+
+  def commentary_add
+    if auth
+      if params[:text] and params[:newId]
+        commentary = Commentary.new
+        commentary.text = params[:text]
+        commentary.user_id = session[:auth]['id']
+        commentary.new_id = params[:newId]
+        commentary.status = 0
+        commentary.save
+        redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def commentary_delete
+    if auth
+      if params[:id]
+        commentary = Commentary.find_by(id: params[:id])
+        if commentary.user_id == session[:auth]['id'] or admin
+          commentary.destroy
+          redirect_back fallback_location: root_path
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def review_add
+    if params[:text] && params[:email] && params[:name]
+      commentary = Feedback.new
+      commentary.text = params[:text]
+      commentary.email = params[:email]
+      commentary.name = params[:name]
+      commentary.save
+      redirect_to reviews_path, notice: "Ваше сообщение принято!"
+    else redirect_back fallback_location: root_path
+    end
+  end
+
+  def reviews
+    @title = "Контрактные двигатели, МКПП, АКПП от ЕвроДеталь - отзывы"
+    @news = Feedback.where(status: 1).order(id: :desc)
+    @page_config = {
+        'title': 'Отзывы'
+    }
+    render 'reviews'
+  end
+
+  def reviews_search
+    @title = "Отзывы"
+    @news = Feedback.where('lower(text) like ? and status = 1', "%#{params[:query]}%").order(id: :desc)
+    @page_config = {
+        'title': "Поиск отзывов по запросу \"#{params[:query]}\""
+    }
+    render 'reviews'
   end
 
 end

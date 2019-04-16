@@ -1,0 +1,71 @@
+main.admin-page
+  h1.admin-title = "Комментарий к публикации"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Комментарий"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Запись"
+        th = "Автор"
+        th = "Текст"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody
+      - @parts.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td
+            a href=new_path(part.new_id) = part.new.title
+          td = part.user_id.to_s + ". " + part.user.name
+          td = part.text
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-primary onclick="publishPart(#{part.id})" = "Опубликовать"
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+  h1.admin-title = "Все комментарии"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Комментарий"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Запись"
+        th = "Автор"
+        th = "Текст"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@commentaries.count}"
+    tbody
+      - @commentaries.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td
+            a href=new_path(part.new_id) = part.new.title
+          td = part.user_id.to_s + ". " + part.user.name
+          td = part.text
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+coffee:
+  window.deletePart = (partId) ->
+    $.get "/api/commentary/delete/#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
+  window.publishPart = (partId) ->
+    $.get "/api/commentary/publish/#{partId}", (data) ->
+      if data.headers.status == 200
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")

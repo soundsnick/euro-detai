@@ -6,6 +6,8 @@ main.admin-page
     thead
       tr
         th.uk-table-shrink = "id"
+        th = "Имя"
+        th = "Почта"
         th = "Номер"
         th = "Страна"
         th = "Добавлено"
@@ -19,6 +21,8 @@ main.admin-page
       - @page_config[:objects].each do |part|
         tr data-id=part.id
           td = part.id
+          td = part.name
+          td = part.email
           td = part.phone
           td = part.country.name
           td = part.created_at

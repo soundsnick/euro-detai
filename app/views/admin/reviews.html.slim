@@ -1,0 +1,69 @@
+main.admin-page
+  h1.admin-title = "Отзывы к публикации"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Отзывы"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Имя"
+        th = "Email"
+        th = "Текст"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody
+      - @parts.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td = part.name
+          td = part.email
+          td = part.text
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-primary onclick="publishPart(#{part.id})" = "Опубликовать"
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+  h1.admin-title = "Все отзывы"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Отзывы"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Имя"
+        th = "Email"
+        th = "Текст"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody
+      - @commentaries.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td = part.name
+          td = part.email
+          td = part.text
+          td = part.created_at
+          td
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+coffee:
+  window.deletePart = (partId) ->
+    $.get "/api/review/delete/#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
+  window.publishPart = (partId) ->
+    $.get "/api/review/publish/#{partId}", (data) ->
+      if data.headers.status == 200
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")

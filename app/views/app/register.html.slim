@@ -1,0 +1,34 @@
+main.login
+  .container
+    h1.admin-title = "Регистрация"
+    .container-min.login-wrapper.uk-card.uk-card-default
+      = form_tag '/api/user.auth', class: 'uk-card-body uk-form-stacked', method: :get
+      .uk-margin
+        label.uk-form-label for="form-horizontal-country" = "Страна"
+        .uk-form-controls
+          select.uk-select#form-horizontal-country name="country"
+            - @countries.each do |country|
+              option value=country.id = country.name
+      .uk-margin
+        label.uk-form-label for="form-horizontal-num" = "Телефон"
+        .uk-form-controls
+          input.uk-input#form-horizontal-num type="tel" required="required" data-pattern="+[0-9]{11}" name="phone" placeholder="пример: +71234567890"
+      .uk-margin
+        label.uk-form-label = "Ваше имя"
+        .uk-form-controls
+          input.uk-input type="text" name="name" placeholder="Введите имя"
+      .uk-margin
+        label.uk-form-label = "Ваша почта"
+        .uk-form-controls
+          input.uk-input#email type="text" name="email" placeholder="Введите адрес электронной почты"
+      .uk-margin
+        label.uk-form-label for="form-horizontal-pass" = "Пароль"
+        .uk-form-controls
+          input.uk-input#form-horizontal-pass type="password" name="password" placeholder="мин. 6 символов"
+      .uk-margin style="text-align: center"
+        .uk-form-controls
+          input.uk-button.uk-button-primary type="submit" value="Зарегистрироваться"
+        .uk-margin
+          a.uk-link href=login_path = "Войти"
+javascript:
+    $("#form-horizontal-num").inputmask({"mask": "+9(999) 999-9999"});

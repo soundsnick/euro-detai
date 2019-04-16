@@ -19,6 +19,8 @@ class UserController < ApplicationController
             user.country_id = params[:country]
             user.phone = params[:phone]
             user.password = Digest::SHA256.hexdigest params[:password]
+            user.email = params[:email]
+            user.name = params[:name]
             user.role_id = 0
             if user.save
               session[:auth] = user

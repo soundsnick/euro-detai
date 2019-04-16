@@ -26,9 +26,11 @@ html
       .container
         .admin-wrapper
           aside.admin-sidebar
-            h6.admin-sidebar__subtitle.uk-heading-line = "Отгрузки"
+            h6.admin-sidebar__subtitle.uk-heading-line = "Новости"
             nav.admin-sidebar__navbar
-              a.admin-sidebar__nav.uk-nav href=anews_path = "Новости"
+              a.admin-sidebar__nav.uk-nav href=anews_path = "Записи"
+              a.admin-sidebar__nav.uk-nav href=acommentaries_path = "Комментарий"
+              a.admin-sidebar__nav.uk-nav href=areviews_path = "Отзывы"
             h6.admin-sidebar__subtitle.uk-heading-line = "Машина"
             nav.admin-sidebar__navbar
               a.admin-sidebar__nav.uk-nav href=aparts_path = "Каталог"
@@ -38,6 +40,7 @@ html
               a.admin-sidebar__nav.uk-nav href=afuels_path = "Типы Топлива"
               a.admin-sidebar__nav.uk-nav href=avolumes_path = "Объемы двигателя"
               a.admin-sidebar__nav.uk-nav href=acolors_path = "Цвета"
+              a.admin-sidebar__nav.uk-nav style="color: red" href=aorders_path = "Заказы"
             h6.admin-sidebar__subtitle.uk-heading-line = "Пользователи"
             nav.admin-sidebar__navbar
               a.admin-sidebar__nav.uk-nav href=ausers_path = "Управление"

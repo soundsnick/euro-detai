@@ -1,0 +1,42 @@
+main.home
+  .container
+    .admin-wrapper
+      = render 'layouts/news'
+      main.admin-page style="padding: 40px;"
+        h1.title style="text-align: center" = "Запросить счет"
+        = form_with model: Order, class: 'uk-form'
+          input type="hidden" name="partId" value=params[:partId]
+          .uk-margin
+            label.uk-label = "ФИО:"
+            .uk-form-controls
+              input.uk-input type="text" name="name" placeholder="ФИО"
+          .uk-margin
+            label.uk-label = "Телефон:"
+            .uk-form-controls
+              input.uk-input type="text" name="phone" placeholder="Телефон"
+          .uk-margin
+            label.uk-label = "Город:"
+            .uk-form-controls
+              input.uk-input type="text" name="city" placeholder="Город"
+          .uk-margin
+            label.uk-label = "Электронная почта:"
+            .uk-form-controls
+              input.uk-input type="text" name="email" placeholder="Email"
+          .uk-margin
+            label.uk-label = "Дополнительная информация:"
+            .uk-form-controls
+              textarea.uk-textarea name="additional" placeholder="Текст"
+          .uk-margin
+            input.uk-button.uk-button-primary type="submit" value="Запросить"
+
+
+
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )

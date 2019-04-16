@@ -1,4 +1,4 @@
-aside.advanced-search.uk-card.uk-card-default
+aside.advanced-search.uk-card.uk-card-default[new]
   h1.uk-card-title style="text-align: center; padding-top: 20px;" = "Отгрузки"
   div[style="max-width: 300px;" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider=""]
     ul class="uk-slider-items uk-child-width-1-1"
@@ -6,7 +6,7 @@ aside.advanced-search.uk-card.uk-card-default
         li
           .uk-card.uk-card-secondary.new-card
             .uk-card-body
-              h3.uk-card-title
+              h3.uk-card-title style="font-size: 19px; margin-bottom: 15px;"
                 a href=new_path(new.id) = new.title
               - new_image = "no_photo.png"
               - if new.attachments.count > 0

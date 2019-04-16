@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190414044426) do
+ActiveRecord::Schema.define(version: 20190416122955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 20190414044426) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "country"
+    t.string "name"
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.string "hex"
@@ -33,10 +38,29 @@ ActiveRecord::Schema.define(version: 20190414044426) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "commentaries", force: :cascade do |t|
+    t.string "email"
+    t.text "text"
+    t.integer "new_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "status"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
   end
 
   create_table "fuels", force: :cascade do |t|
@@ -63,6 +87,15 @@ ActiveRecord::Schema.define(version: 20190414044426) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "city"
+    t.string "email"
+    t.text "additional"
+    t.integer "part_id"
   end
 
   create_table "parts", force: :cascade do |t|
@@ -97,6 +130,8 @@ ActiveRecord::Schema.define(version: 20190414044426) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role_id"
+    t.string "name"
+    t.string "email"
   end
 
   create_table "volumes", force: :cascade do |t|

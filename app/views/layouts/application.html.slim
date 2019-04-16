@@ -5,9 +5,12 @@ html
     - if @title
       - title = @title
     title = title
+    meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    meta name="description" content="Купить контрактный двигатель, коробку передач б.у, блок ДВС, ГБЦ, раздатки, редукторы, мосты, детали кузова из Германии, Англии, Бельгии, Польши, Литвы. Доставка по России, в Казахстан, Армению, Киргизию."
+    meta name="wmail-verification" content="aa541131c6148439"
   body
     header.header-static
       .container.uk-flex
@@ -27,49 +30,91 @@ html
             = "ул. Волгоградская, 95/1"
             br
             = "8 (928) 406-56-06"
+    .mobile-header
+      .container
+        nav class="uk-navbar uk-navbar-container"
+          .uk-navbar-left
+            button class="uk-button uk-button-default uk-navbar-toggle" type="button" uk-toggle="target: #offcanvas-overlay" style="border: none"
+              span[uk-navbar-toggle-icon]
+              span class="uk-margin-small-left" = "Меню"
+          .uk-navbar-right
+            .parts-search[mobile]
+              .part-search__common style="background: #f7f7f7; box-shadow: none; padding: 0 10px;"
+                .container
+                  form.common-search.flex action="/parts/search" method="get"
+                    input.uk-input type="search" name="query" placeholder="Поиск по названию..." value=params[:query]
+                    input.uk-button.uk-button-secondary type="submit" value="Поиск"
+    div id="offcanvas-overlay" uk-offcanvas="overlay: true"
+      div class="uk-offcanvas-bar"
+        button[class="uk-offcanvas-close" type="button" uk-close]
+        h3 = "Навигация по сайту"
+        ul class="uk-list uk-list-divider uk-list-large"
+          li
+            a.uk-link-text href=root_path = 'Главная/О компании'
+          li
+            a.uk-link-text href=parts_path = 'Каталог'
+          li
+            a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
+          li
+            a.uk-link-text href=warranties_path = 'Гарантия'
+          li
+            a.uk-link-text href=news_path = 'Отгрузки'
+          li
+            a.uk-link-text href=reviews_path = 'Отзывы'
+          li
+            a.uk-link-text href=contacts_path = 'Контакты'
+          - if not auth
+            li
+              a.uk-link-text uk-tooltip="Войти или зарегистрироваться" href=login_path = 'Войти'
+          - if admin
+            li
+              a.uk-link-text href="/admin" = 'Админ-панель'
+          - if auth
+            li
+              a.uk-link-text href="/logout" = 'Выйти'
     header.header-nav
       .container
         nav.uk-navbar
-          a.uk-link-text href=root_path = 'Главная'
+          a.uk-link-text href=root_path = 'Главная/О компании'
           a.uk-link-text href=parts_path = 'Каталог'
-          a.uk-link-text href="#" = 'Оплата и доставка'
-          a.uk-link-text href="#" = 'Гарантия'
+          a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
+          a.uk-link-text href=warranties_path = 'Гарантия'
           a.uk-link-text href=news_path = 'Отгрузки'
-          a.uk-link-text href="#" = 'Отзывы'
-          a.uk-link-text href="#" = 'Контакты'
+          a.uk-link-text href=reviews_path = 'Отзывы'
+          a.uk-link-text href=contacts_path = 'Контакты'
           .uk-navbar-right
             - if not auth
-              a.uk-link-text href=login_path = 'Войти'
+              a.uk-link-text uk-tooltip="Войти или зарегистрироваться" href=login_path = 'Войти'
             - if admin
               a.uk-link-text href="/admin" = 'Админ-панель'
             - if auth
               a.uk-link-text href="/logout" = 'Выйти'
-    - if notice
-      .container.notice
-        .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
-          a.uk-alert-close[uk-close]
-          p = notice
     .parts-search
       .part-search__common
         .container
           form.common-search.flex action="/parts/search" method="get"
             input.uk-input type="search" name="query" placeholder="Поиск по названию..." value=params[:query]
             input.uk-button.uk-button-secondary type="submit" value="Поиск"
+    - if notice
+      .container.notice
+        .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
+          a.uk-alert-close[uk-close]
+          p = notice
     = yield
     footer.footer
       header.header-nav.uk-card.uk-card-default
         .container
           nav.uk-navbar
-            a.uk-link-text href=root_path = 'Главная'
+            a.uk-link-text href=root_path = 'Главная/О компании'
             a.uk-link-text href=parts_path = 'Каталог'
-            a.uk-link-text href="#" = 'Оплата и доставка'
-            a.uk-link-text href="#" = 'Гарантия'
+            a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
+            a.uk-link-text href=warranties_path = 'Гарантия'
             a.uk-link-text href=news_path = 'Отгрузки'
-            a.uk-link-text href="#" = 'Отзывы'
-            a.uk-link-text href="#" = 'Контакты'
+            a.uk-link-text href=reviews_path = 'Отзывы'
+            a.uk-link-text href=contacts_path = 'Контакты'
             .uk-navbar-right
               - if not auth
-                a.uk-link-text href=login_path = 'Войти'
+                a.uk-link-text uk-tooltip="Войти или зарегистрироваться" href=login_path = 'Войти'
               - if admin
                 a.uk-link-text href="/admin" = 'Админ-панель'
               - if auth
@@ -86,6 +131,6 @@ html
                 b = "email: "
                 a href="mailto:detal911@yandex.ru" = "detal911@yandex.ru"
           .footer__copyright
-            a href="https://vk.com/nickyerg" = "Разработка сайта"
+            a href="https://кубань-сайт.рф" = "Разработка сайта"
             br
-            span = "Ерназар Аскарович"
+            span = "Сайт в Краснодаре"

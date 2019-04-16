@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'app#home'
 
   get 'login', to: 'app#login', as: :login
+  get 'register', to: 'app#register', as: :register
   get 'parts', to: 'app#parts', as: :parts
   get 'parts/search', to: 'app#search', as: :search
   get 'parts/advanced_search', to: 'app#advanced_search', as: :advanced_search
@@ -10,6 +11,17 @@ Rails.application.routes.draw do
   get 'new/:id(.:format)', to: 'app#new', as: :new
   get 'news', to: 'app#news', as: :news
   get 'news/search', to: 'app#news_search', as: :news_search
+  post 'commentary/add', to: 'app#commentary_add'
+  get 'commentary/delete/:id(.:format)', to: 'app#commentary_delete'
+  get 'commentary/publish/:id(.:format)', to: 'admin#commentary_publish'
+  get 'reviews/', to: 'app#reviews'
+  post 'review/add', to: 'app#review_add'
+  get 'warranties/', to: 'app#warranties', as: :warranties
+  get 'payment-shipping/', to: 'app#payment_shipping', as: :payment_shipping
+  get 'contacts', to: 'app#contacts', as: :contacts
+  get 'reviews/search', to: 'app#reviews_search'
+  get 'buy/:partId(.:format)', to: 'app#buy', as: :buy
+  post 'order/new', to: 'admin#order_new', as: :orders
 
   # User Routing
   get 'api/user.auth', to: 'user#authorisation'
@@ -32,6 +44,11 @@ Rails.application.routes.draw do
   get 'admin/users', to: 'admin#users', as: :ausers
   get 'admin/countries', to: 'admin#countries', as: :acountries
   get 'admin/roles', to: 'admin#roles', as: :aroles
+  get 'admin/commentaries', to: 'admin#commentaries', as: :acommentaries
+  get 'admin/reviews', to: 'admin#reviews', as: :areviews
+  get 'api/review/delete/:id(.:format)', to: 'admin#review_delete'
+  get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
+  get 'admin/orders', to: 'admin#orders', as: :aorders
   post 'parts', to: 'admin#part_new'
   post 'manufacturers', to: 'admin#manufacturer_add', as: :manufacturers
   post 'models', to: 'admin#model_add', as: :models
@@ -56,4 +73,9 @@ Rails.application.routes.draw do
   get 'api/manufacturer.:method(.:format)', to: 'car#manufacturer'
   get 'api/color.:method(.:format)', to: 'car#color'
   get 'api/new.:method(.:format)', to: 'car#new'
+  get 'api/commentary/delete/:id(.:format)', to: 'admin#commentary_delete'
+  get 'api/commentary/publish/:id(.:format)', to: 'admin#commentary_publish'
+  get 'api/review/delete/:id(.:format)', to: 'admin#review_delete'
+  get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
+  get 'api/order/delete/:id(.:format)', to: 'admin#order_delete'
 end

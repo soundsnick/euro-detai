@@ -1,0 +1,47 @@
+main.parts
+  .container
+    .admin-wrapper
+      aside.advanced-search.uk-card.uk-card-default
+        .uk-card-body
+          h1.uk-card-title = "Поиск"
+          form.uk-form-stacked action="/reviews/search" method="get"
+            .uk-margin
+              label.uk-form-label = "Поиск отзыва: "
+              .uk-form-controls
+                input.uk-input type="text" name="query" placeholder="Введите запрос..."
+            input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
+      main.admin-page style="padding: 40px;"
+        .parts
+          uk.horizontal-nav
+            a.uk-link href=root_path = "Главная"
+            = " | "
+            a.uk-link href=news_path = "Новости"
+          .review-form
+            = form_with model: Feedback, class: 'uk-form-stacked uk-margin', url: "/review/add", method: :post
+              h1.title = "Добавить отзыв"
+              .uk-margin
+                label.uk-form-label = "Ваш email: "
+                .uk-form-controls
+                  input.uk-textarea type="text" name="email" placeholder="Ваш email"
+              .uk-margin
+                label.uk-form-label = "Ваше имя: "
+                .uk-form-controls
+                  input.uk-textarea type="text" name="name" placeholder="Ваше имя"
+              .uk-margin
+                label.uk-form-label = "Добавить комментарий: "
+                .uk-form-controls
+                  textarea.uk-textarea name="text" placeholder="Текст комментария"
+              input.uk-button.uk-button-primary type="submit" value="Добавить"
+          .flex style="align-items: center;"
+            - if params[:action] != "advanced_search"
+              h1.title style="flex: 1;" = @page_config[:title]
+          - @news.each do |part|
+            .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
+              .uk-card-body
+                .part__info
+                  h2.part__title.uk-card-title = part.name
+                  span = part.email
+                  p.content = part.text
+          - if @news.empty?
+            .uk-margin
+              .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"

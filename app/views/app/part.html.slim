@@ -50,4 +50,4 @@ main.part-page
                   th = option[0]
                   td = option[1]
         h6.part__cost = @part.cost.to_s + 'P'
-        button.part__buy.uk-button.uk-button-primary data-cost=@part.cost = 'Купить'
+        a.part__buy.uk-button.uk-button-primary href=buy_path(@part.id) data-cost=@part.cost = 'Запросить счет'

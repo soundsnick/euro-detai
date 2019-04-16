@@ -5,4 +5,5 @@ class Part < ApplicationRecord
   belongs_to :carcass
   belongs_to :color
   belongs_to :fuel
+  has_many :orders
 end

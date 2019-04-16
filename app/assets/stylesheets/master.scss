@@ -358,3 +358,39 @@ body{
   word-break: break-word;
   line-height: 1.5;
 }
+.commentaries{
+  margin-top: 20px;
+}
+.comment{
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  a{
+    font-size: 10px;
+  }
+  &-title{
+    font-weight: 100;
+    font-size: 13px;
+    margin: 0;
+    padding: 0 20px;
+  }
+  &-body{
+    padding: 10px 20px;
+    background: #fff;
+    margin: 5px 0;
+    border-radius: 13px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.03);
+  }
+  &-body p{
+    margin: 5px 0;
+  }
+  &-published{
+    display: block;
+    padding: 4px 15px;
+    font-size: 10px;
+    text-align: right;
+    color: #a7a7a7;
+    font-family: inherit;
+  }
+}
+h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}

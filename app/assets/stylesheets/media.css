@@ -1,0 +1,44 @@
+.mobile-header{
+    display: none;
+}
+@media only screen and (max-width: 980px){
+    .mobile-header{
+        display: block;
+    }
+    .header-nav{
+        display: none;
+    }
+    .parts-search{
+        display: none;}
+    .parts-search[mobile]{
+        display: block;}
+    .advanced-search[new]{
+        display: none;}
+    .footer__inner{
+        padding: 20px;
+    }
+    .admin-wrapper{
+        display: block;
+    }
+    .home-paragraph{ columns: 1!important;}
+    .header-static .container{
+        display: block;
+        padding: 20px;
+    }
+
+}
+@media only screen and (max-width: 600px){
+    .part{
+        display: block!important;
+    }
+    .part__image--wrapper{
+        text-align: center;
+        padding: 20px;
+    }
+    .part__image--wrapper img{
+        max-width: 100%!important;
+    }
+    .part .uk-card-body{
+        display: block!important;
+    }
+}

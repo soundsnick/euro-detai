@@ -13,6 +13,32 @@ main.home
                   img src="/images/#{image.image}"
             a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
             a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]
+        .commentaries-wrapper
+          - if auth
+            = form_with model: Commentary, class: 'uk-form-stacked', url:"/commentary/add", method: :post
+              input type="hidden" name="newId" value=@new.id
+              .uk-margin
+                label.uk-form-label = "Добавить комментарий: "
+                .uk-form-controls
+                  textarea.uk-textarea name="text" placeholder="Текст комментария"
+              input.uk-button.uk-button-primary type="submit" value="Добавить"
+          - if not auth
+            .uk-alert.uk-alert-warning
+              span = "Авторизуйтесь чтобы оставить комментарий"
+          .commentaries
+            h1.title = "Комментарий"
+            - if @commentaries.empty?
+              .uk-alert.uk-alert-primary
+                span = "Будьте первым кто оставит комментарий"
+            - @commentaries.each do |commentary|
+              .comment data-id=commentary.id
+                h5.comment-title = commentary.user.name + ":"
+                .comment-body
+                  p = commentary.text
+                  - if auth and commentary.user_id == session[:auth]['id']
+                    br
+                    a.uk-comment-meta href="/commentary/delete/#{commentary.id}" = "Удалить комментарий"
+                span.comment-published = commentary.created_at.strftime("%Y-%m-%d")
 
 coffee:
   $('#form-horizontal-man').on('change', ->

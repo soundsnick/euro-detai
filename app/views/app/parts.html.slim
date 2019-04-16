@@ -123,7 +123,7 @@ main.parts
                 .part__cost--wrapper
                   h6.part__cost = 'Цена: ' + part.cost.to_s + 'P'
                   a.part__more.uk-button.uk-button-default.uk-button-small href=part_path(part.id) data-cost=part.cost = 'Подробнее'
-                  button.part__buy.uk-button.uk-button-primary.uk-button-small data-cost=part.cost = 'Купить'
+                  a.part__buy.uk-button.uk-button-primary.uk-button-small href=buy_path(part.id) data-cost=part.cost = 'Купить'
           - if @a_parts.empty?
             .uk-margin
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"

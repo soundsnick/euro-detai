@@ -17,6 +17,109 @@ class AdminController < ApplicationController
     end
   end
 
+  def commentaries
+    if admin
+      @parts = Commentary.where.not(status: 1).order(id: :asc)
+      @commentaries = Commentary.where(status: 1).order(id: :asc)
+      @count = @parts.count
+    else admin_err
+    end
+  end
+
+  def orders
+    if admin
+      @parts = Order.all.order(id: :asc)
+      @count = @parts.count
+    else admin_err
+    end
+  end
+
+  def reviews
+    if admin
+      @parts = Feedback.where(status: nil).order(id: :asc)
+      @commentaries = Feedback.where(status: 1).order(id: :asc)
+      @count = @parts.count
+    else admin_err
+    end
+  end
+
+  def review_delete
+    if auth
+      if params[:id]
+        commentary = Feedback.find_by(id: params[:id])
+        if admin
+          commentary.destroy
+          render json: construct_response(410, 'success')
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def commentary_delete
+    if auth
+      if params[:id]
+        commentary = Commentary.find_by(id: params[:id])
+        if commentary.user_id == session[:auth]['id'] or admin
+          commentary.destroy
+          render json: construct_response(410, 'success')
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def order_delete
+    if auth
+      if params[:id]
+        commentary = Order.find_by(id: params[:id])
+        if admin
+          commentary.destroy
+          render json: construct_response(410, 'success')
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def commentary_publish
+    if auth
+      if params[:id]
+        commentary = Commentary.find_by(id: params[:id])
+        if admin
+          commentary.status = 1
+          commentary.save
+          render json: construct_response(200, 'success')
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
+  def review_publish
+    if auth
+      if params[:id]
+        commentary = Feedback.find_by(id: params[:id])
+        if admin
+          commentary.status = 1
+          commentary.save
+          render json: construct_response(200, 'success')
+        else redirect_back fallback_location: root_path
+        end
+      else redirect_back fallback_location: root_path
+      end
+    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    end
+  end
+
   def manufacturers
     if admin
       @page_config = {
@@ -404,6 +507,21 @@ class AdminController < ApplicationController
       }
       render 'options'
     else admin_err
+    end
+  end
+
+  def order_new
+    if params[:partId] && params[:name] && params[:phone] && params[:city] && params[:email]
+      @p = Order.new
+      @p.part_id = params[:partId]
+      @p.name = params[:name]
+      @p.phone = params[:phone]
+      @p.city = params[:city]
+      @p.email = params[:email]
+      @p.additional = params[:additional]
+      @p.save
+      redirect_to root_path, notice: "Спасибо! Ваш запрос отправлен! Ожидайте ответа на e-mail!"
+    else redirect_to root_path, notice: 'Заполните все пункты'
     end
   end
 
