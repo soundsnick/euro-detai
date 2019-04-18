@@ -246,8 +246,8 @@ body{
   }
 }
 .header-static{
-  padding: 20px 0;
-  background: linear-gradient(to right, rgba(0,0,0,.8), rgba(0,0,0,.5)), url("/assets/header.jpg");
+  padding: 60px 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url("/assets/header.jpg");
   background-size: cover;
   background-position: center;
   .uk-flex{
@@ -257,19 +257,20 @@ body{
 .header{
   &__contacts{
     flex: 1;
+    text-align: center;
     span{
       color: #fff;
-      font-size: 14px;
+      font-size: 20px;
+      font-weight: 300;
     }
   }
   &__phone{
     margin: 2px 0;
-    font-size: 18px;
+    font-size: 24px;
     font-style: italic;
-    font-weight: 200;
-    font-family: inherit;
+    font-weight: 300;
     a{
-      color: #da685a;
+      color: #ff503b;
     }
   }
   &__adress{
@@ -277,20 +278,26 @@ body{
     p{
       margin: 0;
       color: #fff;
-      font-size: 12px;
+      font-size: 16px;
+      text-align: right;
     }
   }
 }
 .logo{
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: 10px;
   &-container{
     flex: 0 0 30%;
     align-self: center;
   }
   &__info{
-    font-size: 12px;
+    font-size: 14px;
     color: #d2d2d2;
     padding-top: 5px;
+    margin-right: 48px;
   }
+
 }
 .home-grid{
   margin-top: 50px;
@@ -394,3 +401,22 @@ body{
   }
 }
 h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}
+.circle{
+  font-size: 18px;
+  width: 80px;
+  flex: 0 0 80px;
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  background: #607D8B;
+  color: #fff;
+  border-radius: 100%;
+  display: block;
+  box-shadow: 0 6px 3px rgba(0,0,0,.05);
+}
+.home-grid__titlez{
+  font-size: 16px;
+  text-align: left;
+  font-weight: 300;
+  margin: 0;
+}

@@ -3,6 +3,23 @@ main.home
     .admin-wrapper
       = render 'layouts/news'
       main.admin-page style="padding: 40px;"
+        h1.title style="text-align: center" = "О компании в цифрах"
+        .home-grid
+          div[uk-grid class="uk-child-width-expand@s uk-text-center uk-card uk-card-default uk-card-body" style="margin: 0;border-radius: 100px;"]
+            div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
+              .circle = "7"
+              div.home-grid__info
+                h4.home-grid__titlez = "7 лет на рынке б/у запчастей"
+            div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
+              .circle = "1800+"
+              div.home-grid__info
+                h4.home-grid__titlez = "отгруженных агрегатов"
+            div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
+              img.home-grid__image src="/assets/fgs16_city_y1-color.svg"
+              div.home-grid__info
+                h4.home-grid__titlez = "офис в Краснодаре"
+        br
+        br
         h1.title style="text-align: center" = "Почему стоит покупать б/у запчасти именно у нас?"
         .home-grid
           div[uk-grid class="uk-child-width-expand@s uk-text-center"]
@@ -41,26 +58,26 @@ main.home
           li = "широкое наличие бу двигателей и коробок передач - порядка 2 000 моторокомплектов - на складах в Беларуси"
           li = "сотрудничество с крупными разборками и поставщиками б/у запчастей в Европе (Англия, Ирландия, Испания, Германия, Бельгия и др.) и Америке"
           li = "еженедельное пополнение складов"
-        .uk-card.uk-card-secondary
-          .uk-card-body
-            h1.uk-card-title = "Этапы работы"
-            div[uk-grid class="uk-grid uk-grid-small uk-child-width-expand@s"]
-              div
-                h1.home-grid__title = "1. Заявка"
-                p
-                  | Вы оставляете заявку на сайте или по телефону. Мы подтверждаем наличие на складе, комплектность и стоимость
-              div
-                h1.home-grid__title = "2. Договор"
-                p
-                  | Заключаем договор. Вы совершаете оплату 100%. Передаем заказ в работу. Готовим агрегат к отгрузке. Отправляем фотоотчет на утверждение.
-              div
-                h1.home-grid__title = "3. Отгрузка"
-                p
-                  | Получаем подтверждение фотоотчета и сдаем груз в транспортную компанию. Отправляем накладную для отслеживания.
-              div
-                h1.home-grid__title = "4. Заказ выполнен!"
-                p
-                  | Вы получаете заказанный агрегат на терминале транспортной компании в Вашем Городе.
+    .uk-card.uk-card-secondary style="border-radius: 4px; padding-bottom: 40px;"
+      .uk-card-body
+        h1.uk-card-title = "Этапы работы"
+        div[uk-grid class="uk-grid uk-grid-small uk-child-width-expand@s"]
+          div
+            h1.home-grid__title = "1. Заявка"
+            p
+              | Вы оставляете заявку на сайте или по телефону. Мы подтверждаем наличие на складе, комплектность и стоимость
+          div
+            h1.home-grid__title = "2. Договор"
+            p
+              | Заключаем договор. Вы совершаете оплату 100%. Передаем заказ в работу. Готовим агрегат к отгрузке. Отправляем фотоотчет на утверждение.
+          div
+            h1.home-grid__title = "3. Отгрузка"
+            p
+              | Получаем подтверждение фотоотчета и сдаем груз в транспортную компанию. Отправляем накладную для отслеживания.
+          div
+            h1.home-grid__title = "4. Заказ выполнен!"
+            p
+              | Вы получаете заказанный агрегат на терминале транспортной компании в Вашем Городе.
 coffee:
   $('#form-horizontal-man').on('change', ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
