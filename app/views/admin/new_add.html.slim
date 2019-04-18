@@ -27,3 +27,26 @@ coffee:
       formOption option for option in data['body']
       $('#form-horizontal-model').html options
   )
+
+  window.image = ''
+
+  readURL = (input) ->
+    if (input.files and input.files[0])
+      reader = new FileReader();
+      reader.onload = (e) ->
+        window.image = e.target.result
+        $.get "https://api.vk.com/api.php?oauth=1&method=photos.getMarketUploadServer&access_token=f0b9be744a1547a1c751b5727f46cca0e74dd16b8119ef64889e6861b4a7835801307aea0137210d51531&v=5.9&group_id=95451494&main_photo=1", (body) ->
+          option = ""
+          upload_url = body['body']['response']['upload_url']
+          $.post upload_url + "file=" + window.image, (data) ->
+            options = ""
+            $.get "https://api.vk.com/api.php?oauth=1&method=photos.saveMarketPhoto&access_token=f0b9be744a1547a1c751b5727f46cca0e74dd16b8119ef64889e6861b4a7835801307aea0137210d51531&v=5.9&group_id=95451494&server=#{data['body']['response']['server']}&hash=#{data['body']['response']['hash']}&crop_data=#{data['body']['response']['crop_data']}&crop_hash=#{data['body']['response']['crop_hash']}&photo=#{data['body']['response']['photo']}", (body) ->
+              option = ""
+              console.log data['body']['response']
+
+      reader.readAsDataURL(input.files[0]);
+
+  $('#form-horizontal-file').on('change', ->
+    readURL(document.getElementById('form-horizontal-file'))
+
+  )

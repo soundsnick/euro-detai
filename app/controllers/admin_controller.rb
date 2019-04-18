@@ -1,5 +1,8 @@
 class AdminController < ApplicationController
   layout 'admin'
+  require 'net/http'
+  require 'open-uri'
+
 
   def main
     if admin
