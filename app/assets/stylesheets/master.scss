@@ -165,22 +165,35 @@ body{
 .admin{
   &-header{
     color: #fff;
-    background-color: #0f7ae5;
+    background-color: #fff;
+    a{
+      color: #000!important;
+    }
     a:hover{
-      color: #fefefe!important;
+      color: #00a151!important;
     }
   }
   &-wrapper{
     display: flex;
     align-items: flex-start;
   }
+  tbody.uk-card-default{
+    background: #fff;
+    box-shadow: 0 3px 4px rgba(0,0,0,.03);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  th, td{
+    text-align: center!important;
+  }
   &-sidebar{
     flex: 0 0 250px;
     max-width: 250px;
     margin-top: 20px;
-    background: #f5f5f5;
     border-radius: 5px;
-    padding: 20px;
+    background: #fff;
+    padding: 26px;
+    box-shadow: 0 3px 4px rgba(0,0,0,.03);
     transition: box-shadow $transition;
     &__title{
       font-weight: 200;
@@ -196,8 +209,8 @@ body{
       font-size: 17px;
       text-shadow: 0 1px 2px #fff;
       margin: 0 0 5px;
-      color: #7d7d7d;
-      font-weight: 200;
+      font-weight: 300;
+      color: #000;
     }
     &__navbar{
       margin-bottom: 10px;
@@ -205,6 +218,7 @@ body{
     &__nav{
       display: block;
       padding: 4px 10px!important;
+      color:  #000;
     }
   }
   &-page{

@@ -1,6 +1,6 @@
 main.admin-page
   h3.admin-title = "Добро пожаловать, #{session[:auth]['phone']}"
-  table.uk-table.uk-table-striped.uk-table-small
+  table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
     caption = "Последние запчасти"
     thead
       tr
@@ -17,7 +17,7 @@ main.admin-page
         td
         td
           a href=aparts_path = "Управление"
-    tbody
+    tbody.uk-card.uk-card-default.uk-card-body
       - @parts.each do |part|
         tr
           td = part.id

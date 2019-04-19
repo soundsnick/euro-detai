@@ -1,6 +1,6 @@
 main.admin-page
   h1.admin-title = "Отзывы к публикации"
-  table.uk-table.uk-table-striped.uk-table-small
+  table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
     caption = "Отзывы"
     thead
       tr
@@ -42,7 +42,7 @@ main.admin-page
     tfoot
       tr
         td = "Общее количество: #{@count}"
-    tbody
+    tbody.uk-card.uk-card-default.uk-card-body
       - @commentaries.each do |part|
         tr data-id=part.id
           td = part.id

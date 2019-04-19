@@ -10,7 +10,7 @@ main.admin-page
       - if @page_config[:model] == Color
         input.uk-input style="width: 70px;" type="color" name="color" value="#2196f3"
       button.uk-button.uk-button-primary = "Добавить"
-  table.uk-table.uk-table-striped.uk-table-small.uk-table-responsive.admin-options
+  table.uk-table.uk-table-divider.uk-table-hover.uk-table-small.uk-table-responsive.admin-options
     caption = @page_config[:title]
     thead
       tr
@@ -27,7 +27,7 @@ main.admin-page
     tfoot
       tr
         td = "Общее количество: #{@page_config[:objects].count}"
-    tbody
+    tbody.uk-card.uk-card-default.uk-card-body
       - @page_config[:objects].each do |part|
         tr data-id=part.id
           td = part.id

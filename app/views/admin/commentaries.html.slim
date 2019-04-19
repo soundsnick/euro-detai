@@ -28,7 +28,7 @@ main.admin-page
             button.uk-button-small.uk-button.uk-button-primary onclick="publishPart(#{part.id})" = "Опубликовать"
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
   h1.admin-title = "Все комментарии"
-  table.uk-table.uk-table-striped.uk-table-small
+  table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
     caption = "Комментарий"
     thead
       tr
@@ -43,7 +43,7 @@ main.admin-page
     tfoot
       tr
         td = "Общее количество: #{@commentaries.count}"
-    tbody
+    tbody.uk-card.uk-card-default.uk-card-body
       - @commentaries.each do |part|
         tr data-id=part.id
           td = part.id
