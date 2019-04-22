@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   post 'countries', to: 'admin#countries_add', as: :countries
   post 'roles', to: 'admin#roles_add', as: :roles
   post 'news', to: 'admin#news_new'
+  post 'query/add', to: 'admin#query_add'
 
 
   # Api Routing
