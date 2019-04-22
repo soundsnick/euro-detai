@@ -2,10 +2,13 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
+      main.admin-page style="padding: 0px 40px; padding-bottom: 40px;"
+        .uk-margin
+          = render 'layouts/advanced'
+        br
         h1.title style="text-align: center" = "О компании в цифрах"
         .home-grid
-          div[uk-grid class="uk-child-width-expand@s uk-text-center uk-card uk-card-default uk-card-body" style="margin: 0;border-radius: 100px;"]
+          div[uk-grid class="uk-child-width-expand@s uk-text-center uk-card uk-card-default uk-card-body" style="margin: 0;border-radius: 100px;padding-bottom: 20px!important"]
             div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
               .circle = "7"
               div.home-grid__info

@@ -187,6 +187,35 @@ class AdminController < ApplicationController
     end
   end
 
+  def categories
+    if admin
+      @page_config = {
+          'title': 'Категории',
+          'model': Category,
+          'objects': Category.where.not(id: 0).order(id: :asc),
+          'edit_url': '/api/category.change?category_id',
+          'delete_url': '/api/category.delete?category_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def category_new
+    if admin
+      if params[:name]
+        manufacturer = Category.new
+        manufacturer.name = params[:name]
+        if manufacturer.save
+          redirect_to acategories_path, notice: 'Успешно добавлено'
+        else redirect_to acategories_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to acategories_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
   def volumes
     if admin
       @page_config = {
@@ -342,6 +371,7 @@ class AdminController < ApplicationController
       @options = Manufacturer.all.order(id: :asc)
       @models = Model.where(manufacturer_id: @options.take.id).order(id: :asc)
       @volumes = Volume.all.order(id: :asc)
+      @categories = Category.all.order(id: :asc)
       @fuels = Fuel.all.order(id: :asc)
       @carcasses = Carcass.all.order(id: :asc)
       @colors = Color.all.order(id: :asc)
@@ -357,6 +387,7 @@ class AdminController < ApplicationController
         @models = Model.where(manufacturer_id: @part.manufacturer_id).order(id: :asc)
         @models = @models.count == 0 ? Model.where(id: @part.model_id) : @models
         @volumes = Volume.all.order(id: :asc)
+        @categories = Category.all.order(id: :asc)
         @fuels = Fuel.all.order(id: :asc)
         @carcasses = Carcass.all.order(id: :asc)
         @colors = Color.all.order(id: :asc)
@@ -378,6 +409,7 @@ class AdminController < ApplicationController
         @part.fuel_id = params[:fuel]
         @part.carcass_id = params[:carcass]
         @part.color_id = params[:color]
+        @part.category_id = params[:category]
         @part.mark = params[:mark]
         @part.description = params[:description]
         @part.options = params[:options]
@@ -451,6 +483,7 @@ class AdminController < ApplicationController
       @part.fuel_id = params[:fuel]
       @part.carcass_id = params[:carcass]
       @part.color_id = params[:color]
+      @part.category_id = params[:category]
       @part.mark = params[:mark]
       @part.description = params[:description]
       @part.options = params[:options]

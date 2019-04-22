@@ -44,7 +44,7 @@ body{
   }
   &__title{
     margin-top: 0!important;
-    font-size: 20px!important;
+    font-size: 16px!important;
     margin-bottom: 5px!important;
     font-weight: 300;
   }
@@ -53,10 +53,10 @@ body{
   }
   &__manufacturer{
     text-align: left;
-    font-weight: 300;
-    font-size: 13px;
+    font-weight: 200;
+    font-size: 12px;
+    margin-top: 0;
     color: #656565;
-    font-family: inherit;
   }
   &__model{
     font-size: 12px;
@@ -103,6 +103,7 @@ body{
 }
 .header-nav{
   background: #fff;
+  border-top: 1px solid #f3f3f3;
   .uk-navbar{
     margin: 0 -15px;
   }
@@ -258,12 +259,39 @@ body{
   .uk-card-body{
     padding: 30px!important;
   }
+  &[new]{
+    h1.uk-card-title{
+      font-size: 15px;
+      text-align: center;
+      padding-top: 20px;
+      border-bottom: 1px solid #f3f3f3;
+      margin: 0;
+      padding-bottom: 20px;
+    }
+    h3.uk-card-title{
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .uk-slider{
+      border-bottom: 1px solid #f3f3f3;
+    }
+    .new-card__image{
+      border-radius: 7px;
+    }
+    .new-card__content{
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .uk-card-body{
+      padding: 20px!important;
+    }
+  }
 }
 .header-static{
-  padding: 60px 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0)), url("/assets/header.jpg");
+  padding: 20px 0;
+  background: #fff;
   background-size: cover;
-  background-position: center;
   .uk-flex{
     align-items: center;
   }
@@ -271,43 +299,62 @@ body{
 .header{
   &__contacts{
     flex: 1;
-    text-align: center;
     span{
-      color: #fff;
-      font-size: 20px;
+      color: #636363;
+      font-size: 15px;
       font-weight: 300;
     }
   }
   &__phone{
     margin: 2px 0;
-    font-size: 24px;
-    font-style: italic;
+    font-size: 17px;
     font-weight: 300;
     a{
       color: #ff503b;
+      &:hover{
+        color: darkred;
+      }
     }
+
   }
   &__adress{
     flex: 1;
     p{
       margin: 0;
-      color: #fff;
-      font-size: 16px;
+      color: #636363;
+      font-size: 13px;
       text-align: right;
     }
   }
+  &__social{
+    padding-left: 20px;
+    img{
+      width: 30px;
+      margin: 5px;
+      height: 30px;
+      transition: transform 0.2s;
+      &:hover{
+        transform: scale(1.1) rotate(-5deg);
+      }
+      &:active{
+        transform: scale(1) rotate(0deg);
+      }
+    }
+  }
 }
+
 .logo{
   height: auto;
   box-sizing: border-box;
+  padding: 10px 20px;
   margin-bottom: 10px;
   &-container{
     flex: 0 0 30%;
     align-self: center;
   }
   &__info{
-    font-size: 14px;
-    color: #d2d2d2;
+    font-size: 12px;
+    color: #6d6d6d;
     padding-top: 5px;
     margin-right: 48px;
   }
@@ -416,21 +463,24 @@ body{
 }
 h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}
 .circle{
-  font-size: 18px;
-  width: 80px;
-  flex: 0 0 80px;
+  font-size: 15px;
+  width: 65px;
+  flex: 0 0 65px;
   text-align: center;
-  height: 80px;
-  line-height: 80px;
-  background: #607D8B;
+  height: 65px;
+  line-height: 65px;
+  background: #565150;
+  font-weight: 300;
   color: #fff;
   border-radius: 100%;
   display: block;
-  box-shadow: 0 6px 3px rgba(0,0,0,.05);
+  box-shadow: 0 6px 3px rgba(0, 0, 0, 0.05);
 }
 .home-grid__titlez{
-  font-size: 16px;
+  font-size: 13px;
   text-align: left;
   font-weight: 300;
   margin: 0;
+  color: #424242;
+  padding-right: 29px;
 }

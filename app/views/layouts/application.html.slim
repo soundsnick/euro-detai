@@ -12,7 +12,7 @@ html
     meta name="description" content="Купить контрактный двигатель, коробку передач б.у, блок ДВС, ГБЦ, раздатки, редукторы, мосты, детали кузова из Германии, Англии, Бельгии, Польши, Литвы. Доставка по России, в Казахстан, Армению, Киргизию."
     meta name="wmail-verification" content="aa541131c6148439"
   body
-    header.header-static
+    header.header-static  uk-parallax="bgy: -200"
       .container.uk-flex
         .logo-container
           .logo-wrapper
@@ -22,16 +22,20 @@ html
           span = "Звонок по России - бесплатно!"
           h6.header__phone
             a href="tel:+78002343150" = "8 (800) 23-43-150"
-          br
-          a.uk-button.uk-button-primary href=parts_path ="Найти запчасть"
+          a.uk-button.uk-button-primary.uk-button-small style="margin-top: 5px;" href=parts_path ="Узнать стоимость"
         .header__adress
           p
-            b = "Офис: "
+            = "Офис: "
             = "г. Краснодар"
             br
             = "ул. Волгоградская, 95/1"
             br
             = "8 (928) 406-56-06"
+        .header__social
+          a href="https://vk.com/eurodetall"
+            img src="/assets/vk.png"
+          a href="https://instagram.com/evrodetal.rf"
+            img src="/assets/insta.png"
     .mobile-header
       .container
         nav class="uk-navbar uk-navbar-container"
@@ -77,7 +81,9 @@ html
     header.header-nav
       .container
         nav.uk-navbar
-          a.uk-link-text href=root_path = 'Главная/О компании'
+          a.uk-link-text href=root_path = 'О компании'
+          - Category.where.not(id: 0).each do |category|
+            a.uk-link-text href="/parts/advanced_search?category=#{category.id}" = category.name
           a.uk-link-text href=parts_path = 'Каталог'
           a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
           a.uk-link-text href=warranties_path = 'Гарантия'
@@ -107,7 +113,7 @@ html
       header.header-nav.uk-card.uk-card-default
         .container
           nav.uk-navbar
-            a.uk-link-text href=root_path = 'Главная/О компании'
+            a.uk-link-text href=root_path = 'О компании'
             a.uk-link-text href=parts_path = 'Каталог'
             a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
             a.uk-link-text href=warranties_path = 'Гарантия'

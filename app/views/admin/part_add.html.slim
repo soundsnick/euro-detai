@@ -6,6 +6,12 @@ main.admin-page
       .uk-form-controls
         input.uk-input#form-horizontal-text type="text" name="title" placeholder="Название"
     .uk-margin
+      label.uk-form-label = "Категория"
+      .uk-form-controls
+        select.uk-select name="category"
+          - @categories.each do |manufacturer|
+            option value=manufacturer.id = manufacturer.name
+    .uk-margin
       label.uk-form-label for="form-horizontal-man" = "Производитель"
       .uk-form-controls
         select.uk-select#form-horizontal-man name="manufacturer"

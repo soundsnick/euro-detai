@@ -3,6 +3,14 @@ class AppController < ApplicationController
   def home
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
     @news = New.all
+    @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
+    @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
+    @models = @models.count == 0 ? Model.where(id: 1) : @models
+    @volumes = Volume.all.order(id: :asc)
+    @fuels = Fuel.all.order(id: :asc)
+    @carcasses = Carcass.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
+    @colors = Color.all.order(id: :asc)
   end
 
   def warranties
@@ -68,6 +76,7 @@ class AppController < ApplicationController
     @models = @models.count == 0 ? Model.where(id: 1) : @models
     @volumes = Volume.all.order(id: :asc)
     @fuels = Fuel.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
     @carcasses = Carcass.all.order(id: :asc)
     @colors = Color.all.order(id: :asc)
     @page_config = {
@@ -102,64 +111,74 @@ class AppController < ApplicationController
     @volumes = Volume.all.order(id: :asc)
     @fuels = Fuel.all.order(id: :asc)
     @carcasses = Carcass.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
     @colors = Color.all.order(id: :asc)
     @page_config = {
         'title': "Поиск по запросу \"#{params[:query]}\""
     }
-    if Integer(params[:manufacturer]) > 1
+    if params[:category] and Integer(params[:category]) > 0
+      @a_parts = @a_parts.where(category_id: params[:category])
+    end
+    if params[:manufacturer] and  Integer(params[:manufacturer]) > 1
       @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
     end
-    if Integer(params[:model]) > 1
+    if params[:model] and  Integer(params[:model]) > 1
       @a_parts = @a_parts.where(model_id: params[:model])
     end
-    if Integer(params[:carcass]) > 1
+    if params[:carcass] and  Integer(params[:carcass]) > 1
       @a_parts = @a_parts.where(carcass_id: params[:carcass])
     end
-    if Integer(params[:color]) > 1
+    if params[:color] and  Integer(params[:color]) > 1
       @a_parts = @a_parts.where(color_id: params[:color])
     end
-    if Integer(params[:fuel]) > 1
+    if params[:fuel] and  Integer(params[:fuel]) > 1
       @a_parts = @a_parts.where(fuel_id: params[:fuel])
     end
-    volume_from = params[:volume_from]
-    volume_to = Volume.where.not(id: 1).maximum(:name)
-    if params[:volume_from] != ""
-      if params[:volume_to] != ""
-        volume_to = params[:volume_to]
+    if params[:volume_from]
+      volume_from = params[:volume_from]
+      volume_to = Volume.where.not(id: 1).maximum(:name)
+      if params[:volume_from] != ""
+        if params[:volume_to] != ""
+          volume_to = params[:volume_to]
+        end
+        volumes = Volume.where(name: Float(volume_from)..Float(volume_to)).where.not(id: 1)
+        ids = []
+        volumes.each do |volume|
+          ids.push volume.id
+        end
+        @a_parts = @a_parts.where(volume_id: ids)
       end
-      volumes = Volume.where(name: Float(volume_from)..Float(volume_to)).where.not(id: 1)
-      ids = []
-      volumes.each do |volume|
-        ids.push volume.id
-      end
-      @a_parts = @a_parts.where(volume_id: ids)
     end
-    year_from = params[:year_from]
-    year_to = Date.today.year.to_s
-    if params[:year_from] != ""
-      if params[:year_to] != ""
-        year_to = params[:year_to]
+    if params[:year_from]
+      year_from = params[:year_from]
+      year_to = Date.today.year.to_s
+      if params[:year_from] != ""
+        if params[:year_to] != ""
+          year_to = params[:year_to]
+        end
+        @a_parts = @a_parts.where(year: Integer(year_from)..Integer(year_to))
       end
-      @a_parts = @a_parts.where(year: Integer(year_from)..Integer(year_to))
     end
-    cost_from = params[:cost_from]
-    cost_to = Part.maximum(:cost)
-    if params[:cost_from] != ""
-      if params[:cost_to] != ""
-        cost_to = params[:cost_to]
+    if params[:cost_from]
+      cost_from = params[:cost_from]
+      cost_to = Part.maximum(:cost)
+      if params[:cost_from] != ""
+        if params[:cost_to] != ""
+          cost_to = params[:cost_to]
+        end
+        @a_parts = @a_parts.where(cost: Integer(cost_from)..Integer(cost_to))
       end
-      @a_parts = @a_parts.where(cost: Integer(cost_from)..Integer(cost_to))
     end
-    @filter = {
-      'manufacturer': Manufacturer.find_by(id: params[:manufacturer]).name,
-      'model': Model.find_by(id: params[:model]).name,
-      'carcass': Carcass.find_by(id: params[:carcass]).name,
-      'color': Color.find_by(id: params[:color]).name,
-      'fuel': Fuel.find_by(id: params[:fuel]).name,
-      'volume': volume_from.to_s + '..' + volume_to.to_s,
-      'year': year_from.to_s + '..' + year_to.to_s,
-      'cost': cost_from.to_s + '..' + cost_to.to_s
-    }
+
+    @filter = {'category': Category.find_by(id: params[:category]).name}
+    @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
+    @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
+    @filter[:carcass] = Carcass.find_by(id: params[:carcass]).name if params[:carcass]
+    @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
+    @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
+    @filter[:volume_from] = volume_from.to_s + '..' + volume_to.to_s if params[:volume_from]
+    @filter[:year_from] = year_from.to_s + '..' + year_to.to_s if params[:year_from]
+    @filter[:cost_from] = cost_from.to_s + '..' + cost_to.to_s if params[:cost_from]
     @a_parts = @a_parts.order(id: :desc)
     render 'parts'
   end

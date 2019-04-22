@@ -398,6 +398,63 @@ class CarController < ApplicationController
     end
   end
 
+  def category
+    if admin && params[:method]
+      case params[:method]
+      when 'all'
+        render json: construct_response(200, 'success', Category.all)
+      when 'get'
+        if params[:category_id]
+          model = Category.find_by(id: params[:category_id])
+          if model
+            render json: construct_response(200, 'success', model)
+          else render json: construct_response(404, 'not_found: category')
+          end
+        else render json: construct_response(204, 'empty: category_id')
+        end
+      when 'add'
+        if params[:name]
+          model = Category.find_by(name: params[:name])
+          if not model
+            model = Category.new
+            model.name = params[:name]
+            model.save
+            render json: construct_response(201, 'success', model.to_json)
+          else render json: construct_response(208, 'already exists', model.to_json)
+          end
+        else render json: construct_response(204, 'empty: name')
+        end
+      when 'delete'
+        if params[:category_id]
+          model = Category.find_by(id: params[:category_id])
+          if model
+            @parts = Part.where(category_id: params[:category_id]).each do |part|
+              part.category_id = 0
+              part.save
+            end
+            model.destroy
+            render json: construct_response(410, 'success')
+          else render json: construct_response(404, 'not_found: category')
+          end
+        else render json: construct_response(204, 'empty: category_id')
+        end
+      when 'change'
+        if params[:category_id] && params[:new_name]
+          model = Category.find_by(id: params[:category_id])
+          if model
+            model.name = params[:new_name]
+            model.save
+            render json: construct_response(200, 'success', model.to_json)
+          else render json: construct_response(4040, 'not_found: model')
+          end
+        else render json: construct_response(204, 'empty: category_id')
+        end
+      else render json: construct_response(404, 'not_found: method')
+      end
+    else render json: construct_response(204, 'empty: method or not_admin')
+    end
+  end
+
   def manufacturer
     if admin && params[:method]
       case params[:method]

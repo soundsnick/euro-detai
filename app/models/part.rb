@@ -6,4 +6,5 @@ class Part < ApplicationRecord
   belongs_to :color
   belongs_to :fuel
   has_many :orders
+  belongs_to :category
 end
