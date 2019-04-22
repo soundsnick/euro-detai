@@ -296,7 +296,7 @@ class AppController < ApplicationController
       params[:images].each do |image|
         imagehex = Digest::SHA256.hexdigest image.original_filename
         imagehex = imagehex.slice(0, 10)
-        imagehex2 = Digest::SHA256.hexdigest rand(0..100)
+        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
         imagehex2 = imagehex2.slice(0, 10)
         imagehex = imagehex2 + imagehex
         File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
