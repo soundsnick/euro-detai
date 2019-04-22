@@ -296,9 +296,20 @@ body{
     align-items: center;
   }
 }
+.counter{
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: initial;
+  padding: 1px 10px;
+  background: #009688;
+  border-radius: 10px;
+  color: #fff;
+  line-height: 23px;
+}
 .header{
   &__contacts{
     flex: 1;
+    text-align: right;
     span{
       color: #636363;
       font-size: 15px;

@@ -259,4 +259,56 @@ class AppController < ApplicationController
     render 'reviews'
   end
 
+  def query
+    @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
+    @news = New.all
+    @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
+    @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
+    @models = @models.count == 0 ? Model.where(id: 1) : @models
+    @volumes = Volume.all.order(id: :asc)
+    @fuels = Fuel.all.order(id: :asc)
+    @carcasses = Carcass.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
+    @colors = Color.all.order(id: :asc)
+  end
+
+  def query_add
+    @q = Query.new
+    @q.manufacturer_id = params[:manufacturer]
+    @q.model = params[:model]
+    @q.year = params[:year]
+    @q.carcass_id = params[:carcass]
+    @q.fuel_id = params[:fuel]
+    @q.volume = params[:volume]
+    @q.power = params[:power]
+    @q.engine = params[:engine]
+    @q.changer = params[:changer]
+    @q.privod = params[:privod]
+    @q.kpp = params[:kpp]
+    @q.part = params[:part]
+    @q.description = params[:description]
+    @q.name = params[:name]
+    @q.city = params[:city]
+    @q.email = params[:email]
+    @q.phone = params[:phone]
+    @q.save
+    if params[:images]
+      params[:images].each do |image|
+        imagehex = Digest::SHA256.hexdigest image.original_filename
+        imagehex = imagehex.slice(0, 10)
+        imagehex2 = Digest::SHA256.hexdigest rand(0..100)
+        imagehex2 = imagehex2.slice(0, 10)
+        imagehex = imagehex2 + imagehex
+        File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+          file.write(image.read)
+          @image = QueryImage.new
+          @image.query_id = @q.id
+          @image.image = imagehex + image.original_filename
+          @image.save
+        end
+      end
+    end
+    redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
+  end
+
 end

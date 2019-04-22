@@ -3,7 +3,9 @@ main.part-page
     .part data-id=@part.id style="align-items: flex-start; border-bottom: none;"
       - p_image = (@part.image == nil) ? 'no_photo.png' : @part.image
       .part__image--wrapper data-image=p_image
-        img.part__image src="/images/#{p_image}"
+        div[uk-lightbox]
+          a href="/images/#{p_image}" data-caption=@part.title
+            img.part__image src="/images/#{p_image}"
       .part__cost--wrapper style="flex: 1"
         - part = @part
         h1.title style="text-align: left; padding-left: 50px;" = part.title

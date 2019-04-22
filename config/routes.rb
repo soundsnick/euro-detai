@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'buy/:partId(.:format)', to: 'app#buy', as: :buy
   post 'order/new', to: 'admin#order_new', as: :orders
   post 'category/new', to: 'admin#category_new', as: :categories
+  get 'query', to: 'app#query', as: :query
+  post 'query/add', to: 'app#query_add', as: :queries
 
   # User Routing
   get 'api/user.auth', to: 'user#authorisation'
@@ -51,6 +53,9 @@ Rails.application.routes.draw do
   get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
   get 'admin/orders', to: 'admin#orders', as: :aorders
   get 'admin/categories', to: 'admin#categories', as: :acategories
+  get 'admin/queries', to: 'admin#queries', as: :aqueries
+  get 'admin/query/:id(.:format)', to: 'admin#query', as: :aquery
+  get '/api/query/delete/:id(.:format)', to: 'admin#query_delete', as: :query_delete
   post 'parts', to: 'admin#part_new'
   post 'manufacturers', to: 'admin#manufacturer_add', as: :manufacturers
   post 'models', to: 'admin#model_add', as: :models
@@ -76,6 +81,7 @@ Rails.application.routes.draw do
   get 'api/color.:method(.:format)', to: 'car#color'
   get 'api/category.:method(.:format)', to: 'car#category'
   get 'api/new.:method(.:format)', to: 'car#new'
+  get 'api/query.:method(.:format)', to: 'car#query'
   get 'api/commentary/delete/:id(.:format)', to: 'admin#commentary_delete'
   get 'api/commentary/publish/:id(.:format)', to: 'admin#commentary_publish'
   get 'api/review/delete/:id(.:format)', to: 'admin#review_delete'

@@ -29,8 +29,18 @@ html
             h6.admin-sidebar__subtitle.uk-heading-line = "Новости"
             nav.admin-sidebar__navbar
               a.admin-sidebar__nav.uk-nav href=anews_path = "Записи"
-              a.admin-sidebar__nav.uk-nav href=acommentaries_path = "Комментарий"
-              a.admin-sidebar__nav.uk-nav href=areviews_path = "Отзывы"
+              a.admin-sidebar__nav.uk-nav href=aqueries_path
+                = "Запросы стоимости"
+                - if Query.count > 0
+                  .counter = Query.count
+              a.admin-sidebar__nav.uk-nav href=acommentaries_path
+                = "Комментарий"
+                - if Commentary.where.not(status: 1).count > 0
+                  .counter = Commentary.where.not(status: 1).count
+              a.admin-sidebar__nav.uk-nav href=areviews_path
+                = "Отзывы"
+                - if Feedback.where.not(status: 1).count > 0
+                  .counter = Feedback.where.not(status: 1).count
             h6.admin-sidebar__subtitle.uk-heading-line = "Машина"
             nav.admin-sidebar__navbar
               a.admin-sidebar__nav.uk-nav href=aparts_path = "Каталог"

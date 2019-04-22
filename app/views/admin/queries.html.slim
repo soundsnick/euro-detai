@@ -1,0 +1,36 @@
+main.admin-page
+  h1.admin-title = "Запросы о рассчете стоимости"
+  table.uk-table.uk-table-striped.uk-table-small
+    caption = "Запросы"
+    thead
+      tr
+        th.uk-table-shrink = "id"
+        th = "Запчасть"
+        th = "Автор"
+        th = "Текст"
+        th = "Добавлено"
+        th
+          = "Управление"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody
+      - @parts.each do |part|
+        tr data-id=part.id
+          td = part.id
+          td = part.model
+          td = part.email
+          td = part.description
+          td = part.created_at
+          td
+            a.uk-button-small.uk-button.uk-button-default href="/admin/query/#{part.id}" = "Подробнее"
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+coffee:
+  window.deletePart = (partId) ->
+    $.get "/api/query/delete/#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")

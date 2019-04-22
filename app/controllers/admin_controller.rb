@@ -29,6 +29,42 @@ class AdminController < ApplicationController
     end
   end
 
+  def queries
+    if admin
+      @parts = Query.all.order(id: :asc)
+    else admin_err
+    end
+  end
+
+  def query
+    if admin
+      if params[:id] and @new = Query.find_by(id: params[:id])
+
+      else redirect_to admin_path, notice: 'Не найдено'
+      end
+    else admin_err
+    end
+  end
+
+  def query_delete
+    if admin
+      if params[:id]
+        model = Query.find_by(id: params[:id])
+        if model
+          @images = QueryImage.where(query_id: params[:id]).each do |part|
+            File.delete(Rails.root.join('public', 'images', part.image)) if File.exist?(Rails.root.join('public', 'images', part.image))
+            part.destroy
+          end
+          model.destroy
+          render json: construct_response(410, 'success')
+        else render json: construct_response(404, 'not_found: model')
+        end
+      else render json: construct_response(204, 'empty: id')
+      end
+    else admin_err
+    end
+  end
+
   def orders
     if admin
       @parts = Order.all.order(id: :asc)
@@ -455,6 +491,9 @@ class AdminController < ApplicationController
           params[:images].each do |image|
             imagehex = Digest::SHA256.hexdigest image.original_filename
             imagehex = imagehex.slice(0, 10)
+            imagehex2 = Digest::SHA256.hexdigest rand(0..100)
+            imagehex2 = imagehex2.slice(0, 10)
+            imagehex = imagehex2 + imagehex
             File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
               file.write(image.read)
               @image = Attachment.new
@@ -562,6 +601,7 @@ class AdminController < ApplicationController
   end
 
   private
+
   def admin_err
     render body: 'Вы не являетесь администратором'
   end

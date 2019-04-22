@@ -1,0 +1,82 @@
+main.home style="flex: 1"
+  .container
+    .admin-wrapper
+      main.admin-page style="padding: 40px;"
+        table.uk-table.uk-table-responsive.uk-table-striped.uk-table-small style="width: 100%"
+          caption = 'Характеристики'
+          tbody
+            tr
+              th class="uk-width-small" style="text-align: left!important" = "Марка"
+              td = @new.manufacturer.name
+            tr
+              th style="text-align: left!important" = "Модель"
+              td = @new.model
+            tr
+              th style="text-align: left!important" = 'Год'
+              td = @new.year
+            tr
+              th style="text-align: left!important" = 'Кузов'
+              td = @new.carcass.name
+            tr
+              th style="text-align: left!important" = 'Тип топлива'
+              td = @new.fuel.name
+            tr
+              th style="text-align: left!important" = 'Объем'
+              td = @new.volume
+            tr
+              th style="text-align: left!important" = 'Мощность двигателя'
+              td = @new.power
+            tr
+              th style="text-align: left!important" = 'Модель двигателя'
+              td = @new.engine
+            tr
+              th style="text-align: left!important" = 'Передатчик'
+              td = @new.changer
+            tr
+              th style="text-align: left!important" = 'Привод'
+              td = @new.privod
+            tr
+              th style="text-align: left!important" = 'КПП'
+              td = @new.kpp
+            tr
+              th style="text-align: left!important" = 'Искомая запчасть'
+              td = @new.part
+            tr
+              th style="text-align: left!important" = 'Описание'
+              td = @new.description
+        table.uk-table.uk-table-responsive.uk-table-striped.uk-table-small style="width: 100%"
+          caption = 'Контакная информация'
+          tbody
+            tr
+              th class="uk-width-small" style="text-align: left!important" = "Имя"
+              td = @new.name
+            tr
+              th style="text-align: left!important" = "Email"
+              td = @new.email
+            tr
+              th style="text-align: left!important" = 'Телефон'
+              td = @new.phone
+            tr
+              th style="text-align: left!important" = 'Город'
+              td = @new.city
+        pre.new-pre
+          = "Прикрепленные картинки:"
+          div[style="margin-top: 20px; background: #282828; padding: 20px; border-radius: 6px; " class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider]
+            ul class="uk-slider-items uk-child-width-1-3" style="align-items: center; padding: 20px;"
+              - @new.query_images.each do |image|
+                li style="padding: 10px;"
+                  div[uk-lightbox]
+                    a class="uk-button uk-button-default" href="/images/#{image.image}" data-caption=image.image
+                      img src="/images/#{image.image}"
+            a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
+            a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]
+
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )

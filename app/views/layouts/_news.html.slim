@@ -11,7 +11,9 @@ aside.advanced-search.uk-card.uk-card-default[new]
               - new_image = "no_photo.png"
               - if new.attachments.count > 0
                 - new_image = new.attachments.take.image
-              img.new-card__image src="/images/#{new_image}"
+              div[uk-lightbox]
+                a href="/images/#{new_image}" data-caption=new.title
+                  img.new-card__image src="/images/#{new_image}"
               p.new-card__content = new.content.slice(0, 30)
     a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
     a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]

@@ -1,0 +1,89 @@
+main.home
+  .container
+    .admin-wrapper
+      = render 'layouts/news'
+      main.admin-page style="padding: 40px;"
+        h1.admin-title style="text-align: center" = "Узнать стоимость ДВС, КПП, раздатки, редуктора"
+        h3.title
+          = "Узнать, сколько стоит необходимая запчасть - легко!"
+          br
+          = "Просто заполните представленную ниже форму!"
+        p.home-paragraph
+          | Пожалуйста, внимательно заполните все поля формы, так как от полноты и достоверности информации в заявке зависит быстрота и точность результата поиска.
+        p.home-paragraph
+          | Будьте внимательны!!! Мы НЕ отправляем сообщения на мобильные телефоны с предложением перечислить деньги за детали по указанным в них реквизитам! Документы на оплату при оформлении заказа Вы получаете по указанному в заявке адресу электронной почты.
+        p.home-paragraph
+          | Мы НЕ продаем отдельно оптику, замки, стекла, дверные ручки и прочие мелкие детали, а также арки, пороги (карнизы) и прочие жестяные ремонтные элементы.
+        p.home-paragraph
+          | Чтобы быть ближе к покупателю, в 2015 году открыто представительство в г. Краснодаре - офис и склад навесного оборудования к ДВС: б/у стартеры, генераторы, компрессоры кондиционера.
+        = form_with model: Query, class: 'uk-form-stacked', multipart: true
+          .uk-margin
+            label.uk-form-label = "Марка автомобиля"
+            select.uk-select#form-horizontal-man name="manufacturer"
+              - @manufacturers.each do |manufacturer|
+                option value=manufacturer.id = manufacturer.name
+          .uk-margin
+            label.uk-form-label = "Модель автомобиля"
+            input.uk-input type="text" name="model" placeholder="Например, Vectra B, Passat B6, 525 tds E39... "
+          .uk-margin
+            label.uk-form-label = "Марка автомобиля"
+            select.uk-select name="year"
+              - (1985..2019).each do |manufacturer|
+                option value=manufacturer = manufacturer
+          .uk-margin
+            label.uk-form-label = "Тип кузова"
+            select.uk-select name="carcass"
+              - @carcasses.each do |manufacturer|
+                option value=manufacturer.id = manufacturer.name
+          .uk-margin
+            label.uk-form-label = "Тип топлива"
+            select.uk-select name="fuel"
+              - @fuels.each do |manufacturer|
+                option value=manufacturer.id = manufacturer.name
+          .uk-margin
+            label.uk-form-label = "Объем, см3:"
+            input.uk-input type="text" name="volume" placeholder="например, 2500"
+          .uk-margin
+            label.uk-form-label = "Мощность, л.с:"
+            input.uk-input type="text" name="power" placeholder="Мощность"
+          .uk-margin
+            label.uk-form-label = "Модель двигателя:"
+            input.uk-input type="text" name="engine" placeholder="Модель"
+          .uk-margin
+            label.uk-form-label = "Тип коробки передач:"
+            input.uk-input type="text" name="changer" placeholder="например, 3-АКПП"
+          .uk-margin
+            label.uk-form-label = "Привод"
+            select.uk-select name="privod"
+              option value="передний" = "передний"
+              option value="передний" = "задний"
+              option value="передний" = "постоянный полный"
+              option value="передний" = "подключаемый полный"
+          .uk-margin
+            label.uk-form-label = "Модель КПП:"
+            input.uk-input type="text" name="kpp" placeholder=""
+          .uk-margin
+            label.uk-form-label = "Искомая запчасть:"
+            input.uk-input type="text" name="part" placeholder=""
+          .uk-margin
+            label.uk-form-label = "Примечания (напишите то, что считаете важным нам сообщить):"
+            textarea.uk-textarea name="description" placeholder="например, ГБЦ 16-ти клапанная, или АКПП - типтрон, или кузов после рестайлинга. Особенности - наличие парктроников, элементов решеток либо противотуманных фар в бамперах; комплектность дверей, каталожный номер, номер с таблички (шильды) и т.д. "
+          .uk-margin
+            label.uk-form-label = "Прикрепить фото деталей"
+            input type="file" name="images[]" multiple="true"
+            br
+            span = "Вы можете прикрепить фото искомой детали, включая надписи с табличек (шильд) "
+          h3.title = "Контактная информация"
+          .uk-margin
+            label.uk-form-label = "Ваше имя:"
+            input.uk-input type="text" name="name"
+          .uk-margin
+            label.uk-form-label = "Ваш город:"
+            input.uk-input type="text" name="city"
+          .uk-margin
+            label.uk-form-label = "Ваш e-mail (для ответа):"
+            input.uk-input type="text" name="email"
+          .uk-margin
+            label.uk-form-label = "Ваш номер телефона (для ответа):"
+            input.uk-input type="text" name="phone"
+          input.uk-button.uk-button-primary type="submit" value="Отправить"
