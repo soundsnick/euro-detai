@@ -88,6 +88,7 @@ class AppController < ApplicationController
     if not params[:query]
       redirect_to parts_path
     else
+      @categories = Category.all.order(id: :asc)
       @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
       @a_parts = Part.where("lower(title) like ?", "%#{params[:query].downcase}%").order(id: :desc)
       @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
