@@ -1,0 +1,16 @@
+main.admin-page
+  h1.admin-title = 'Изменить акцию'
+  - title = ""
+  - if @announcement
+    - title = @announcement.title
+  = form_with url: '/announcement', class: 'uk-form', multipart: true, method: :post
+    .uk-margin.uk-flex
+      input.uk-input type="text" name="title" placeholder="Заголовок" value=title
+      select.uk-select name="new_id"
+        - @news.each do |option|
+          - selected = ''
+          - if @announcement
+            - if option.id == @announcement.new_id
+              - selected = 'selected'
+          option selected=selected value=option.id = option.title
+      button.uk-button.uk-button-primary = "Сохранить"

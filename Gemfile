@@ -9,6 +9,7 @@ gem 'slim'
 gem 'pry'
 gem 'jquery-inputmask-rails'
 gem 'rack-cors'
+gem 'creek'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'

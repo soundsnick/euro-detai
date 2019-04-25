@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'admin/news', to: 'admin#news', as: :anews
   get 'admin/manufacturers', to: 'admin#manufacturers', as: :amanufacturers
   get 'admin/models', to: 'admin#models', as: :amodels
+  get 'admin/announcement', to: 'admin#announcement', as: :aannouncements
   get 'admin/carcasses', to: 'admin#carcasses', as: :acarcasses
   get 'admin/fiels', to: 'admin#fuels', as: :afuels
   get 'admin/volumes', to: 'admin#volumes', as: :avolumes
@@ -66,6 +67,7 @@ Rails.application.routes.draw do
   post 'countries', to: 'admin#countries_add', as: :countries
   post 'roles', to: 'admin#roles_add', as: :roles
   post 'news', to: 'admin#news_new'
+  post 'announcement', to: 'admin#announcement_change'
   post 'query/add', to: 'admin#query_add'
 
 
@@ -88,4 +90,8 @@ Rails.application.routes.draw do
   get 'api/review/delete/:id(.:format)', to: 'admin#review_delete'
   get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
   get 'api/order/delete/:id(.:format)', to: 'admin#order_delete'
+
+
+
+  # get 'parser', to: 'admin#parser'
 end

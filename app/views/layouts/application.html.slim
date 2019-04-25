@@ -12,7 +12,11 @@ html
     meta name="description" content="Купить контрактный двигатель, коробку передач б.у, блок ДВС, ГБЦ, раздатки, редукторы, мосты, детали кузова из Германии, Англии, Бельгии, Польши, Литвы. Доставка по России, в Казахстан, Армению, Киргизию."
     meta name="wmail-verification" content="aa541131c6148439"
   body
-    header.header-static  uk-parallax="bgy: -200"
+    - if (announcement = Announcement.take)
+      a href=new_path(announcement.new_id)
+        .announcement data-title=announcement.title
+          span = announcement.title
+    header.header-static
       .container.uk-flex
         .logo-container
           .logo-wrapper
@@ -83,7 +87,7 @@ html
       .container
         nav.uk-navbar
           a.uk-link-text href=root_path = 'О компании'
-          - Category.where.not(id: 0).each do |category|
+          - Category.where.not(id: 0).limit(3).each do |category|
             a.uk-link-text href="/parts/advanced_search?category=#{category.id}" = category.name
           a.uk-link-text href=parts_path = 'Каталог'
           a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'

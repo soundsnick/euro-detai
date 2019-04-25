@@ -25,7 +25,17 @@
         display: block;
         padding: 20px;
     }
-
+    .header-static{
+        text-align: center;
+    }
+    .header__contacts{
+        text-align: center;
+        padding: 10px;
+    }
+    .header__adress p{
+        text-align: center;
+        padding: 10px 10px 20px;
+    }
 }
 @media only screen and (max-width: 600px){
     .part{

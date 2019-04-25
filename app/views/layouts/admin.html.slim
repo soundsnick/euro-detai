@@ -10,11 +10,7 @@ html
       .container
         nav.uk-navbar.admin-navbar
           a.uk-link-text href=root_path = 'Вернуться на сайт'
-          a href="" uk-icon="heart"
           .uk-navbar-right
-            - if not auth
-              a.uk-link-text href="/api/user.auth?country=1&phone=+77052275715&password=1-14-40ernazar" = 'Войти'
-              a.uk-link-text href="/api/user.auth?country=1&phone=+77052275715&password=1-14-40ernaza" = 'Войти с ошибкой'
             - if auth
               a.uk-link-text href="/logout" = 'Выйти'
     - if notice
@@ -29,6 +25,7 @@ html
             h6.admin-sidebar__subtitle.uk-heading-line = "Новости"
             nav.admin-sidebar__navbar
               a.admin-sidebar__nav.uk-nav href=anews_path = "Записи"
+              a.admin-sidebar__nav.uk-nav href=aannouncements_path = "Акция"
               a.admin-sidebar__nav.uk-nav href=aqueries_path
                 = "Запросы стоимости"
                 - if Query.count > 0

@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190422202805) do
+ActiveRecord::Schema.define(version: 20190425201025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "title"
+    t.integer "new_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.integer "new_id"
@@ -106,10 +113,10 @@ ActiveRecord::Schema.define(version: 20190422202805) do
 
   create_table "parts", force: :cascade do |t|
     t.string "title"
-    t.string "image"
+    t.text "image"
     t.integer "manufacturer_id"
     t.integer "model_id"
-    t.integer "year"
+    t.text "year"
     t.integer "volume_id"
     t.string "mark"
     t.string "constr_num"
@@ -122,6 +129,8 @@ ActiveRecord::Schema.define(version: 20190422202805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+    t.text "tags"
+    t.string "privod"
   end
 
   create_table "queries", force: :cascade do |t|

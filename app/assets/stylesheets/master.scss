@@ -306,6 +306,15 @@ body{
   color: #fff;
   line-height: 23px;
 }
+.announcement{
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 200;
+  color: #7b7b7b;
+  background: #f5f5f5;
+}
 .header{
   &__contacts{
     flex: 1;

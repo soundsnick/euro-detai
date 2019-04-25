@@ -56,11 +56,16 @@ main.parts
             a href=parts_path  = "Сбросить фильтр"
           - @a_parts.each do |part|
             .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
-              - p_image = (part.image == nil) ? 'no_photo.png' : part.image
+              - p_image = "/images/no_photo.png"
+              - if part.image
+                - images = part.image.split(',')
+                - p_image = (images[0] == nil) ? "/images/no_photo.png" : "/images/#{images[0]}"
+                - if images[0].split('http').count > 0
+                  - p_image = images[0]
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
-                  a href="/images/#{p_image}" data-caption=part.title
-                    img.part__image src="/images/#{p_image}"
+                  a href=p_image data-caption=part.title
+                    img.part__image src=p_image
               .uk-card-body
                 .part__info
                   h2.part__title.uk-card-title = part.title
@@ -81,7 +86,7 @@ main.parts
                           = part.color.name
                       tr
                         th.uk-table-shrink = 'Описание'
-                        td = part.description
+                        td = part.description.html_safe
                       tr
                         th.uk-table-shrink = 'Год'
                         td = part.year
