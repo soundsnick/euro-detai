@@ -36,6 +36,33 @@
         text-align: center;
         padding: 10px 10px 20px;
     }
+    .part-page {
+        padding: 0!important;}
+    .part-page .part{
+        padding: 0 15px;
+    }
+    .part-page table {
+        width: 100%;
+        margin: 0!important;
+    }
+    .part-page caption{
+        text-align: center!important;
+        display: block;
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+    .header__social{
+        padding: 0!important;
+    }
+    .admin-wrapper{
+        padding: 0 15px;
+    }
+    .home .admin-page{
+        padding: 0!important;
+    }
+    .home-grid div[uk-grid]{
+        border-radius: 45px!important;
+    }
 }
 @media only screen and (max-width: 600px){
     .part{

@@ -20,6 +20,8 @@ main.admin-page
         th = "Название"
         - if @page_config[:model] == Model
           th = "Производитель"
+        - if @page_config[:model] == Manufacturer
+          th = "Текст"
         th = "Добавлено"
         th
           = "Управление"
@@ -38,6 +40,9 @@ main.admin-page
             input.uk-input.uk-form-blank.part-name data-id=part.id onfocus="window.changing = this.value" onblur="editPart(this, #{part.id}, '#{@page_config[:edit_url]}')" value=part.name
           - if @page_config[:model] == Model
             td = part.manufacturer.name
+          - if @page_config[:model] == Manufacturer
+            td
+              input.uk-input.uk-form-blank.part-text data-id=part.id onfocus="window.changings = this.value" onblur="eeditPart(this, #{part.id}, '/api/manufacturer.changeText?manufacturer_id')" value=part.text
           td = part.created_at
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id}, '#{@page_config[:delete_url]}')" = "Удалить"
@@ -52,5 +57,9 @@ coffee:
         console.log("Ошибка")
   window.editPart = (el, partId, url) ->
     if el.value != window.changing
+      $.get "#{url}=#{partId}&new_name=#{el.value}", (data) ->
+        console.log(data.headers)
+  window.eeditPart = (el, partId, url) ->
+    if el.value != window.changings
       $.get "#{url}=#{partId}&new_name=#{el.value}", (data) ->
         console.log(data.headers)

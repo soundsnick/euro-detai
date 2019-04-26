@@ -1,0 +1,15 @@
+input#id
+textarea#text
+
+
+
+button#button = "asdadsdasdad"
+coffee:
+  $('#button').click ->
+    id = $('#id').val()
+    text = $($('#text').val())
+    arr = ""
+    eat = (food) -> arr += food.innerHTML + ","
+    eat food for food in text.children()
+    $.get "/modelparsers?id=#{id}&text=#{arr}", (data) ->
+      console.log data

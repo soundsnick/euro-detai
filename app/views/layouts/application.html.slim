@@ -27,7 +27,6 @@ html
           span = "Звонок по России - бесплатно!"
           h6.header__phone
             a href="tel:+78002343150" = "8 (800) 23-43-150"
-          a.uk-button.uk-button-primary.uk-button-small style="margin-top: 5px;" href=query_path ="Узнать стоимость"
         .header__adress
           p
             = "Офис: "
@@ -36,6 +35,8 @@ html
             = "ул. Волгоградская, 95/1"
             br
             = "8 (928) 406-56-06"
+            br
+            a.uk-button.uk-button-primary.uk-button-small style="margin-top: 5px;" href=query_path = "Узнать стоимость"
         .header__social
           a href="https://vk.com/eurodetall"
             img src="/assets/vk.png"
@@ -61,7 +62,10 @@ html
         h3 = "Навигация по сайту"
         ul class="uk-list uk-list-divider uk-list-large"
           li
-            a.uk-link-text href=root_path = 'Главная/О компании'
+            a.uk-link-text href=root_path = 'О компании'
+          - Category.where.not(id: 0).limit(3).each do |category|
+            li
+              a.uk-link-text href="/parts/advanced_search?category=#{category.id}" = category.name
           li
             a.uk-link-text href=parts_path = 'Каталог'
           li
@@ -119,6 +123,8 @@ html
         .container
           nav.uk-navbar
             a.uk-link-text href=root_path = 'О компании'
+            - Category.where.not(id: 0).limit(3).each do |category|
+              a.uk-link-text href="/parts/advanced_search?category=#{category.id}" = category.name
             a.uk-link-text href=parts_path = 'Каталог'
             a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
             a.uk-link-text href=warranties_path = 'Гарантия'
@@ -146,3 +152,6 @@ html
           .footer__copyright
             a href="https://кубань-сайт.рф"
               img src="/assets/kuban_site.png"
+    coffee:
+      $('.previous_page').html "Назад"
+      $('.next_page').html "Вперед"

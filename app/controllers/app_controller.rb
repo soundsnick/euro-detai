@@ -70,7 +70,7 @@ class AppController < ApplicationController
 
   def parts
     @title = "Ищете, где купить б.у запчасти? Каталог с ценами здесь!"
-    @a_parts = Part.paginate(page: params[:page]).order(id: :desc)
+    @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -90,7 +90,7 @@ class AppController < ApplicationController
     else
       @categories = Category.all.order(id: :asc)
       @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
-      @a_parts = Part.where("lower(title) like ?", "%#{params[:query].downcase}%").paginate(page: params[:page]).order(id: :desc).order(id: :desc)
+      @a_parts = Part.where("lower(title) like ?", "%#{params[:query].downcase}%").paginate(page: params[:page], per_page: 10).order(id: :desc).order(id: :desc)
       @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
       @models = @models.count == 0 ? Model.where(id: 1) : @models
       @volumes = Volume.all.order(id: :asc)
@@ -105,7 +105,7 @@ class AppController < ApplicationController
   end
 
   def advanced_search
-    @a_parts = Part.paginate(page: params[:page]).order(id: :desc)
+    @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -313,6 +313,13 @@ class AppController < ApplicationController
     end
     DefaultMailer.query_email(@q).deliver
     redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
+  end
+
+  def manufacturer
+    if params[:name] && @manufacturer = Manufacturer.find_by(name: params[:name])
+      @news = New.limit(5)
+    else redirect_to root_path, notice: 'Производитель не найден'
+    end
   end
 
 end

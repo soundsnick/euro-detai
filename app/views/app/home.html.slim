@@ -61,7 +61,16 @@ main.home
           li = "широкое наличие бу двигателей и коробок передач - порядка 2 000 моторокомплектов - на складах в Беларуси"
           li = "сотрудничество с крупными разборками и поставщиками б/у запчастей в Европе (Англия, Ирландия, Испания, Германия, Бельгия и др.) и Америке"
           li = "еженедельное пополнение складов"
-    .uk-card.uk-card-secondary style="border-radius: 4px; padding-bottom: 40px;"
+  .uk-card.uk-card-default
+    .container style="text-align: center"
+      .uk-card-body.uk-grid-small[uk-grid]
+        - @manufacturers.each do |manufacturers|
+          - if manufacturers.image
+            .manufacturer
+              a href="/magazin/#{manufacturers.name}"
+                img src="/assets/#{manufacturers.image}"
+  .uk-card.uk-card-secondary.steps
+    .container
       .uk-card-body
         h1.uk-card-title = "Этапы работы"
         div[uk-grid class="uk-grid uk-grid-small uk-child-width-expand@s"]
@@ -81,6 +90,7 @@ main.home
             h1.home-grid__title = "4. Заказ выполнен!"
             p
               | Вы получаете заказанный агрегат на терминале транспортной компании в Вашем Городе.
+
 coffee:
   $('#form-horizontal-man').on('change', ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->

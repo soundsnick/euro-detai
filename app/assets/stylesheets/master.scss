@@ -101,6 +101,25 @@ body{
     margin-right: 5px!important;
   }
 }
+CSS
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
 .current{
   color: #fff;
   font-style: normal;
@@ -511,4 +530,16 @@ h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}
   margin: 0;
   color: #424242;
   padding-right: 29px;
+}
+.steps{
+  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/assets/warehouse.jpg')!important;
+  background-size: cover!important;
+  background-position-x: center!important;
+  padding-bottom: 40px;
+  padding-top: 20px;
+  margin-bottom: -40px!important;
+}
+.manufacturer{ padding: 0 5px!important; margin: 5px 0!important; }
+.manufacturer img{
+  width: 65px;
 }

@@ -90,6 +90,7 @@ Rails.application.routes.draw do
   get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
   get 'api/order/delete/:id(.:format)', to: 'admin#order_delete'
 
+  get 'magazin/:name(.:format)', to: 'app#manufacturer'
 
 
   # get 'parser', to: 'admin#parser'

@@ -514,6 +514,17 @@ class CarController < ApplicationController
           end
         else render json: construct_response(204, 'empty: manufacturer_id')
         end
+      when 'changeText'
+        if params[:manufacturer_id] && params[:new_name]
+          manufacturer = Manufacturer.find_by(id: params[:manufacturer_id])
+          if manufacturer
+            manufacturer.text = params[:new_name]
+            manufacturer.save
+            render json: construct_response(200, 'success', manufacturer.to_json)
+          else render json: construct_response(4040, 'not_found: manufacturer')
+          end
+        else render json: construct_response(204, 'empty: manufacturer_id')
+        end
       else render json: construct_response(404, 'not_found: method')
       end
     else render json: construct_response(204, 'empty: method or not_admin')
