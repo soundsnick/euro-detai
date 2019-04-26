@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h3 = "Новый заказ от #{@order.name}"
+    table
+      tbody
+        tr
+          th align="left" = "Запчасть: "
+          td
+            a href="https://евро-деталь.рф/part/#{@order.part.id}"
+        tr
+          th align="left" style="text-align: center" = "Дополнительная информация: "
+          td = @order.additional
+        tr
+          th align="left" = "Имя: "
+          td = @order.name
+        tr
+          th align="left" = "Электронная почта: "
+          td = @order.email
+        tr
+          th align="left" = "Телефонный номер: "
+          td = @order.phone
+        tr
+          th align="left" = "Город: "
+          td = @order.city
+    h5
+      = "Посмотреть все заказы: "
+      a href="https://евро-деталь.рф/admin/orders" = "https://евро-деталь.рф/admin/orders"

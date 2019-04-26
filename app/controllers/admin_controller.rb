@@ -631,6 +631,7 @@ class AdminController < ApplicationController
       @p.email = params[:email]
       @p.additional = params[:additional]
       @p.save
+      DefaultMailer.order_email(@p).deliver
       redirect_to root_path, notice: "Спасибо! Ваш запрос отправлен! Ожидайте ответа на e-mail!"
     else redirect_to root_path, notice: 'Заполните все пункты'
     end

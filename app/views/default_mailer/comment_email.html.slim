@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h3 = "Добавлен новый комментарий"
+    table
+      tbody
+        tr
+          th align="left" = "Автор: "
+          td = @comment.user.name
+        tr
+          th align="left" style="text-align: center" = "Запись: "
+          td
+            a href="https://евро-деталь.рф/new/#{@comment.new.id}" = @comment.new.title
+        tr
+          th align="left" = "Текст: "
+          td = @comment.text
+    h5
+      = "Посмотреть неопубликованные комментарии: "
+      a href="https://евро-деталь.рф/admin/commentaries" = "https://евро-деталь.рф/admin/commentaries"

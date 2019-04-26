@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h3 = "Добавлен новый отзыв"
+    table
+      tbody
+        tr
+          th align="left" = "Автор: "
+          td = @comment.name + " : " + @comment.email
+        tr
+          th align="left" = "Текст: "
+          td = @comment.text
+    h5
+      = "Посмотреть неопубликованные отзывы: "
+      a href="https://евро-деталь.рф/admin/reviews" = "https://евро-деталь.рф/admin/reviews"

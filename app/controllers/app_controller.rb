@@ -208,6 +208,7 @@ class AppController < ApplicationController
         commentary.new_id = params[:newId]
         commentary.status = 0
         commentary.save
+        DefaultMailer.comment_email(commentary).deliver
         redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
       else redirect_back fallback_location: root_path
       end
@@ -237,6 +238,7 @@ class AppController < ApplicationController
       commentary.email = params[:email]
       commentary.name = params[:name]
       commentary.save
+      DefaultMailer.feedback_email(commentary).deliver
       redirect_to reviews_path, notice: "Ваше сообщение принято!"
     else redirect_back fallback_location: root_path
     end
