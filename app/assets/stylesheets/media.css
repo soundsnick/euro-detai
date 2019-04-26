@@ -47,6 +47,10 @@
     }
     .part__image--wrapper img{
         max-width: 100%!important;
+        margin: 0!important;
+    }
+    td{
+        word-break: break-word;
     }
     .part .uk-card-body{
         display: block!important;
