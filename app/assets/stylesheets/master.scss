@@ -53,10 +53,10 @@ body{
   }
   &__manufacturer{
     text-align: left;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 12px;
     margin-top: 0;
-    color: #656565;
+    color: #282828;
   }
   &__model{
     font-size: 12px;
@@ -100,6 +100,14 @@ body{
   &__more{
     margin-right: 5px!important;
   }
+}
+.current{
+  color: #fff;
+  font-style: normal;
+  font-weight: 300;
+  background: #282828;
+  padding: 5px 10px;
+  border-radius: 11px;
 }
 .header-nav{
   background: #fff;

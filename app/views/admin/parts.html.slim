@@ -27,6 +27,7 @@ main.admin-page
           td
             button.uk-button-small.uk-button.uk-button-primary onclick="Turbolinks.visit('#{aparts_edit_path(part.id)}')" = "Изменить"
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+  = will_paginate @parts
 coffee:
   window.deletePart = (partId) ->
     $.get "/api/part.delete?part_id=#{partId}", (data) ->

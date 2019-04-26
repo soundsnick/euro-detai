@@ -70,7 +70,7 @@ class AppController < ApplicationController
 
   def parts
     @title = "Ищете, где купить б.у запчасти? Каталог с ценами здесь!"
-    @a_parts = Part.all.limit(10).order(id: :desc)
+    @a_parts = Part.paginate(page: params[:page]).order(id: :desc)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -90,7 +90,7 @@ class AppController < ApplicationController
     else
       @categories = Category.all.order(id: :asc)
       @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
-      @a_parts = Part.where("lower(title) like ?", "%#{params[:query].downcase}%").order(id: :desc)
+      @a_parts = Part.where("lower(title) like ?", "%#{params[:query].downcase}%").paginate(page: params[:page]).order(id: :desc).order(id: :desc)
       @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
       @models = @models.count == 0 ? Model.where(id: 1) : @models
       @volumes = Volume.all.order(id: :asc)
@@ -105,7 +105,7 @@ class AppController < ApplicationController
   end
 
   def advanced_search
-    @a_parts = Part.all
+    @a_parts = Part.paginate(page: params[:page]).order(id: :desc)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -123,8 +123,8 @@ class AppController < ApplicationController
     if params[:manufacturer] and  Integer(params[:manufacturer]) > 1
       @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
     end
-    if params[:model] and  Integer(params[:model]) > 1
-      @a_parts = @a_parts.where(model_id: params[:model])
+    if params[:model]
+      @a_parts = @a_parts.where("title like ?", "%"+params[:model]+"%")
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1
       @a_parts = @a_parts.where(carcass_id: params[:carcass])
@@ -173,7 +173,7 @@ class AppController < ApplicationController
 
     @filter = {'category': Category.find_by(id: params[:category]).name}
     @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
-    @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
+    @filter[:model] =  params[:model] if params[:model]
     @filter[:carcass] = Carcass.find_by(id: params[:carcass]).name if params[:carcass]
     @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
     @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
@@ -309,6 +309,7 @@ class AppController < ApplicationController
         end
       end
     end
+    DefaultMailer.query_email(@q).deliver
     redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
   end
 

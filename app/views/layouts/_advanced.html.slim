@@ -9,48 +9,33 @@ aside.advanced-search.uk-card.uk-card-default
             select.uk-select#form-horizontal-man name="manufacturer"
               - @manufacturers.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
+          label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
+          .uk-margin
+            input.uk-input#form-horizontal-year type="number" value="1900" min="1900" max="2099" step="1" placeholder="с" name="year_from"
+            input.uk-input type="number" min="1900" max="2099" step="1" placeholder="до" name="year_to"
+        div class="uk-width-1-2@m"
           label.uk-form-label = "Модель автомобиля:"
           .uk-margin
-            select.uk-select#form-horizontal-model name="model"
-              - @models.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
-        div class="uk-width-1-2@m"
+            input.uk-input type="text" name="model" placeholder="Не задано"
           label.uk-form-label = "Категория:"
           .uk-margin
             select.uk-select name="category"
               - @categories.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
-          label.uk-form-label = "Тип топлива:"
-          .uk-margin
-            select.uk-select name="fuel"
-              - @fuels.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
       .uk-margin
         button.uk-button.uk-button-default uk-toggle="target: #advanced" type="button" = "Дополнительные параметры"
       .uk-grid-small.uk-margin#advanced[uk-grid hidden]
-        div class="uk-width-1-2@m"
-          label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
-          .uk-margin
-            input.uk-input#form-horizontal-year type="number" value="1900" min="1900" max="2099" step="1" placeholder="с" name="year_from"
-            input.uk-input type="number" min="1900" max="2099" step="1" placeholder="до" name="year_to"
-          label.uk-form-label = "Цвет:"
-          .uk-margin
-            select.uk-select name="color"
-              - @colors.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
-          label.uk-form-label for="form-horizontal-cost" = "Цена:"
-          .uk-margin
-            input.uk-input#form-horizontal-cost type="number" step="1" value="0" placeholder="Выше" name="cost_from" style="width: 100%"
-            input.uk-input type="number" step="1" placeholder="Ниже" name="cost_to" style="width: 100%"
         div class="uk-width-1-2@m"
           label.uk-form-label for="form-horizontal-volume" = "Объем двигателя:"
           .uk-margin
             input.uk-input#form-horizontal-volume type="text" value="0" placeholder="с 0" name="volume_from"
             input.uk-input type="text" placeholder="до #{@volumes.where.not(id: 1).maximum(:name)}" name="volume_to"
-          label.uk-form-label = "Тип кузова:"
+        div class="uk-width-1-2@m"
+          label.uk-form-label = "Тип топлива:"
           .uk-margin
-            select.uk-select name="carcass"
-              - @carcasses.each do |manufacturer|
+            select.uk-select name="fuel"
+              - @fuels.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
+
 
       input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"

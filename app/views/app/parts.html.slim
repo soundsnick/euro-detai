@@ -72,7 +72,6 @@ main.parts
                   .flex-equal
                     h4.part__manufacturer
                       = part.manufacturer.name
-                      = " " + part.model.name
                   table.part__table.uk-table-responsive.uk-table-hover
                     tbody
                       tr
@@ -80,16 +79,14 @@ main.parts
                         td
                           = part.id
                       tr
-                        th.uk-table-shrink = 'Цвет'
-                        td
-                          .color-cube style="background-color: #{part.color.hex}"
-                          = part.color.name
-                      tr
-                        th.uk-table-shrink = 'Описание'
-                        td = part.description.html_safe
-                      tr
                         th.uk-table-shrink = 'Год'
                         td = part.year
+                      tr
+                        th.uk-table-shrink = 'Тип'
+                        td = part.category.name
+                      tr
+                        th.uk-table-shrink = 'Объем'
+                        td = part.volume.name
                 .part__cost--wrapper
                   h6.part__cost = 'Цена: ' + part.cost.to_s + 'P'
                   a.part__more.uk-button.uk-button-default.uk-button-small href=part_path(part.id) data-cost=part.cost = 'Подробнее'
@@ -97,6 +94,7 @@ main.parts
           - if @a_parts.empty?
             .uk-margin
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
+    = will_paginate @a_parts
 coffee:
   $('#form-horizontal-man').on('change', ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->

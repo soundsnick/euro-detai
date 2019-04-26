@@ -14,7 +14,7 @@ class AdminController < ApplicationController
 
   def parts
     if admin
-      @parts = Part.all.order(id: :asc)
+      @parts = Part.paginate(page: params[:page]).order(id: :desc).order(id: :asc)
       @count = @parts.count
     else admin_err
     end

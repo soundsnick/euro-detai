@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   post 'roles', to: 'admin#roles_add', as: :roles
   post 'news', to: 'admin#news_new'
   post 'announcement', to: 'admin#announcement_change'
-  post 'query/add', to: 'admin#query_add'
 
 
   # Api Routing

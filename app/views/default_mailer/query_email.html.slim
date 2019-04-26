@@ -1,0 +1,66 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h3 = "Заполнена анкета на Вашем сайте \"Узнать стоимость ДВС, КПП...\""
+    table
+      tbody
+        tr
+          th align="left" = "Марка автомобиля: "
+          td = @query.manufacturer.name
+        tr
+          th align="left" style="text-align: center" = "Модель автомобиля: "
+          td = @query.model
+        tr
+          th align="left" = "Год выпуска: "
+          td = @query.year
+        tr
+          th align="left" = "Тип кузова: "
+          td = @query.carcass.name
+        tr
+          th align="left" = "Тип двигателя: "
+          td = @query.fuel.name
+        tr
+          th align="left" = "Объем двигателя: "
+          td = @query.volume
+        tr
+          th align="left" = "Мощность двигателя: "
+          td = @query.power
+        tr
+          th align="left" = "Модель двигателя: "
+          td  = @query.engine
+        tr
+          th align="left" = "Тип коробки передач: "
+          td = @query.changer
+        tr
+          th align="left" = "Привод: "
+          td = @query.privod
+        tr
+          th align="left" = "Модель КПП: "
+          td = @query.kpp
+        tr
+          th align="left" = "Искомая запчасть: "
+          td = @query.part
+        tr
+          th align="left" = "Примечания: "
+          td = @query.description
+        tr
+          th align="left" = "Марка автомобиля: "
+          td = @query.manufacturer.name
+        tr
+          th align="left" = "Имя: "
+          td = @query.name
+        tr
+          th align="left" = "Город: "
+          td align="left" = @query.city
+        tr
+          th align="left" = "Электронная почта: "
+          td = @query.email
+        tr
+          th align="left" = "Телефонный номер: "
+          td = @query.phone
+
+    h5
+      = "Посмотреть картинки и подробную информацию: "
+      a href="https://евро-деталь.рф/admin/query/#{@query.id}" = "https://евро-деталь.рф/admin/query/#{@query.id}"
