@@ -371,23 +371,27 @@ class AppController < ApplicationController
       image = part.image.split(',')
       images = ""
       image.each do |img|
-        img = img.split()[0]
-        download = open(img)
-        imagehex = Digest::SHA256.hexdigest img.split('/').last
-        imagehex = imagehex.slice(0, 10)
-        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
-        imagehex2 = imagehex2.slice(0, 10)
-        imagehex = imagehex2 + imagehex
-        File.open(Rails.root.join('public', 'images', imagehex + img.split('/').last), 'wb') do |file|
-          file.write(imagehex + img.split('/').last, download.read)
-          images += imagehex + img.split('/').last
-          if img != image.last
-            images += ","
+        if img.split('http').length > 0
+          img = img.split()[0]
+          download = open(img)
+          imagehex = Digest::SHA256.hexdigest img.split('/').last
+          imagehex = imagehex.slice(0, 10)
+          imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+          imagehex2 = imagehex2.slice(0, 10)
+          imagehex = imagehex2 + imagehex
+          File.open(Rails.root.join('public', 'images', imagehex + img.split('/').last), 'wb') do |file|
+            file.write(imagehex + img.split('/').last, download.read)
+            images += imagehex + img.split('/').last
+            if img != image.last
+              images += ","
+            end
           end
         end
       end
-      part.image = images
-      part.save
+      if images.length > 2
+        part.image = images
+        part.save
+      end
     end
     render body: partimages
   end
