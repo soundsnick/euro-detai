@@ -374,7 +374,7 @@ class AppController < ApplicationController
         if img.split('http').length > 0
           img = img.split()[0]
           begin
-            download = open(img)
+            download = open(URI.parse(URI.encode(img, "[]")))
             imagehex = Digest::SHA256.hexdigest img.split('/').last
             imagehex = imagehex.slice(0, 10)
             imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
