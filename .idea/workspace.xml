@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/deploy.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="69">
-              <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+              <caret line="3" column="91" selection-start-line="3" selection-start-column="91" selection-end-line="3" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -535,12 +535,12 @@
       <workItem from="1556266555546" duration="25081000" />
       <workItem from="1556357202653" duration="3590000" />
       <workItem from="1556361171153" duration="7279000" />
-      <workItem from="1556389584454" duration="3415000" />
+      <workItem from="1556389584454" duration="3683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223012000" />
+    <option name="totallyTimeSpent" value="223280000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -938,7 +938,7 @@
     <entry file="file://$PROJECT_DIR$/deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
-          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+          <caret line="3" column="91" selection-start-line="3" selection-start-column="91" selection-end-line="3" selection-end-column="91" />
         </state>
       </provider>
     </entry>
