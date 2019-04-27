@@ -11,7 +11,7 @@ aside.advanced-search.uk-card.uk-card-default[new]
               - new_image = "no_photo.png"
               - if new.attachments.count > 0
                 - new_image = new.attachments.take.image
-              div[uk-lightbox]
+              div[uk-lightbox style="text-align: center"]
                 a href="/images/#{new_image}" data-caption=new.title
                   img.new-card__image src="/images/#{new_image}"
               p.new-card__content = new.content.slice(0, 30)

@@ -9,7 +9,7 @@ html, body{
 body{
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
+  background: linear-gradient(rgba(255,255,255, .5), rgba(255,255,255,.5)), url(https://yugfilter.ru/bitrix/templates/main/images/Pattern.jpg);
   font-weight: 200;
   font-size: 14px;
   font-family: "Gotham Pro", sans-serif;
@@ -309,6 +309,7 @@ input[type="submit"],
     .new-card__content{
       font-size: 13px;
       margin: 10px 0;
+      text-align: center;
     }
     .uk-card-body{
       padding: 20px!important;
