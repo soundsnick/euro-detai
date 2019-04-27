@@ -365,6 +365,7 @@ class AppController < ApplicationController
 
   def parseimg
     require 'open-uri'
+    require 'cgi'
     @p = Part.where('image like ?', "%http%").order(id: :asc)
     partimages = ""
     @p.each do |part|
@@ -374,7 +375,7 @@ class AppController < ApplicationController
         if img.split('http').length > 0
           img = img.split()[0]
           begin
-            download = open(URI.parse(URI.encode(img, "[]")))
+            download = open(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
             imagehex = Digest::SHA256.hexdigest img.split('/').last
             imagehex = imagehex.slice(0, 10)
             imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
