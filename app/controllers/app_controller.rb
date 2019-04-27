@@ -366,6 +366,8 @@ class AppController < ApplicationController
   def parseimg
     require 'open-uri'
     require 'cgi'
+    require "down"
+
     @p = Part.where('image like ?', "%http%").order(id: :asc)
     partimages = ""
     @p.each do |part|
@@ -375,15 +377,15 @@ class AppController < ApplicationController
         if img.split('http').length > 0
           img = img.split()[0]
           begin
-            download = open(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
-            imagehex = Digest::SHA256.hexdigest img.split('/').last
+            download = Down.download(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
+            imagehex = Digest::SHA256.hexdigest download.original_filename
             imagehex = imagehex.slice(0, 10)
             imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
             imagehex2 = imagehex2.slice(0, 10)
             imagehex = imagehex2 + imagehex
-            File.open(Rails.root.join('public', 'images', imagehex + img.split('/').last), 'wb') do |file|
-              file.write(imagehex + img.split('/').last, download.read)
-              images += imagehex + img.split('/').last
+            File.open(Rails.root.join('public', 'images', imagehex +  download.original_filename), 'wb') do |file|
+              file.write(download.read)
+              images += imagehex +  download.original_filename
               if img != image.last
                 images += ","
               end
