@@ -365,7 +365,7 @@ class AppController < ApplicationController
 
   def parseimg
     require 'open-uri'
-    @p = Part.all
+    @p = Part.where('image like ?', "%http%").order(id: :asc)
     partimages = ""
     @p.each do |part|
       image = part.image.split(',')

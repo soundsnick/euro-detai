@@ -67,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="393" column="9" selection-start-line="393" selection-start-column="9" selection-end-line="393" selection-end-column="9" />
+            <state relative-caret-position="178">
+              <caret line="367" column="42" selection-start-line="367" selection-start-column="42" selection-end-line="367" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -545,12 +545,12 @@
       <workItem from="1556209592807" duration="15119000" />
       <workItem from="1556266555546" duration="25081000" />
       <workItem from="1556357202653" duration="3590000" />
-      <workItem from="1556361171153" duration="1447000" />
+      <workItem from="1556361171153" duration="2219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213765000" />
+    <option name="totallyTimeSpent" value="214537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -944,8 +944,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="393" column="9" selection-start-line="393" selection-start-column="9" selection-end-line="393" selection-end-column="9" />
+        <state relative-caret-position="178">
+          <caret line="367" column="42" selection-start-line="367" selection-start-column="42" selection-end-line="367" selection-end-column="42" />
         </state>
       </provider>
     </entry>
