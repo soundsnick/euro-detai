@@ -14,6 +14,12 @@ body{
   font-size: 14px;
   font-family: "Gotham Pro", sans-serif;
 }
+img.home-grid__image {
+  width: 82px;
+  height: 58px!important;
+  align-self: center;
+  padding-right: 22px;
+}
 .container{
   max-width: 1200px;
   margin: auto;
