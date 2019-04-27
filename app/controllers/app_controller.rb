@@ -2,11 +2,10 @@ class AppController < ApplicationController
 
   def home
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
-    @news = New.all
-    @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
+    @news = New.limit(5)
+    @manufacturers = Manufacturer.where.not(id: 1).select(:id, :name, :image).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
-    @volumes = Volume.all.order(id: :asc)
     @fuels = Fuel.all.order(id: :asc)
     @carcasses = Carcass.all.order(id: :asc)
     @categories = Category.all.order(id: :asc)
@@ -125,7 +124,9 @@ class AppController < ApplicationController
     end
     if params[:model]
       model = Model.find_by(id: params[:model])
-      @a_parts = @a_parts.where("title like ? OR description like ?", "%"+model.name+"%", "%"+model.name+"%")
+      if model
+        @a_parts = @a_parts.where("title like ? OR description like ?", "%"+model.name+"%", "%"+model.name+"%")
+      end
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1
       @a_parts = @a_parts.where(carcass_id: params[:carcass])
@@ -173,8 +174,18 @@ class AppController < ApplicationController
     end
 
     @filter = {'category': Category.find_by(id: params[:category]).name}
-    @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
-    @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
+    @sd = Manufacturer.find_by(id: params[:manufacturer])
+    if @sd
+      @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
+    else
+      @filter[:manufacturer] = "Не задано"
+    end
+    @m = Model.find_by(id: params[:model])
+    if @m
+      @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
+    else
+      @filter[:model] = "Не задано"
+    end
     @filter[:carcass] = Carcass.find_by(id: params[:carcass]).name if params[:carcass]
     @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
     @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
@@ -350,6 +361,35 @@ class AppController < ApplicationController
         end
       end
     end
+  end
+
+  def parseimg
+    require 'open-uri'
+    @p = Part.all
+    partimages = ""
+    @p.each do |part|
+      image = part.image.split(',')
+      images = ""
+      image.each do |img|
+        img = img.split()[0]
+        download = open(img)
+        imagehex = Digest::SHA256.hexdigest img.split('/').last
+        imagehex = imagehex.slice(0, 10)
+        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+        imagehex2 = imagehex2.slice(0, 10)
+        imagehex = imagehex2 + imagehex
+        File.open(Rails.root.join('public', 'images', imagehex + img.split('/').last), 'wb') do |file|
+          file.write(imagehex + img.split('/').last, download.read)
+          images += imagehex + img.split('/').last
+          if img != image.last
+            images += ","
+          end
+        end
+      end
+      part.image = images
+      part.save
+    end
+    render body: partimages
   end
 
 end

@@ -333,7 +333,7 @@ class CarController < ApplicationController
   end
 
   def model
-    if admin && params[:method]
+    if params[:method]
       case params[:method]
       when 'all'
         render json: construct_response(200, 'success', Model.all)

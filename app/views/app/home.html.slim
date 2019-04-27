@@ -63,7 +63,7 @@ main.home
           li = "еженедельное пополнение складов"
   .uk-card.uk-card-default
     .container style="text-align: center"
-      .uk-card-body.uk-grid-small[uk-grid]
+      .uk-card-body.uk-flex-center.uk-text-center.uk-grid-small[uk-grid]
         - @manufacturers.each do |manufacturers|
           - if manufacturers.image
             .manufacturer
@@ -92,7 +92,7 @@ main.home
               | Вы получаете заказанный агрегат на терминале транспортной компании в Вашем Городе.
 
 coffee:
-  $('#form-horizontal-man').on('change', ->
+  $('#form-horizontal-man').change(() ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
       options = ""
       formOption = (option) ->
