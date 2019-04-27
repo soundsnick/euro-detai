@@ -60,7 +60,7 @@ main.parts
               - if part.image
                 - images = part.image.split(',')
                 - p_image = (images[0] == nil) ? "/images/no_photo.png" : "/images/#{images[0]}"
-                - if images[0].split('http').count > 0
+                - if images[0].split('http').length > 1
                   - p_image = images[0]
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
