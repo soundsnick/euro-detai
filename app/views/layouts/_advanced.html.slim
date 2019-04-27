@@ -16,7 +16,9 @@ aside.advanced-search.uk-card.uk-card-default
         div class="uk-width-1-2@m"
           label.uk-form-label = "Модель автомобиля:"
           .uk-margin
-            input.uk-input type="text" name="model" placeholder="Не задано"
+            select.uk-select#form-horizontal-model name="model"
+              - @models.each do |model|
+                option value=model.id = model.name
           label.uk-form-label = "Категория:"
           .uk-margin
             select.uk-select name="category"

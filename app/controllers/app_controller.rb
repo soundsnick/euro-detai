@@ -124,7 +124,8 @@ class AppController < ApplicationController
       @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
     end
     if params[:model]
-      @a_parts = @a_parts.where("title like ?", "%"+params[:model]+"%")
+      model = Model.find_by(id: params[:model])
+      @a_parts = @a_parts.where("title like ? OR description like ?", "%"+model.name+"%", "%"+model.name+"%")
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1
       @a_parts = @a_parts.where(carcass_id: params[:carcass])
@@ -173,7 +174,7 @@ class AppController < ApplicationController
 
     @filter = {'category': Category.find_by(id: params[:category]).name}
     @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
-    @filter[:model] =  params[:model] if params[:model]
+    @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
     @filter[:carcass] = Carcass.find_by(id: params[:carcass]).name if params[:carcass]
     @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
     @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
@@ -318,7 +319,36 @@ class AppController < ApplicationController
   def manufacturer
     if params[:name] && @manufacturer = Manufacturer.find_by(name: params[:name])
       @news = New.limit(5)
+      @title = "Б/у запчасти для автомобилей " + @manufacturer.name
+      @meta = {
+          'description': @manufacturer.text,
+          'keywords': @manufacturer.name
+      }
     else redirect_to root_path, notice: 'Производитель не найден'
+    end
+  end
+
+
+  def modelparser
+    require 'open-uri'
+
+    url = 'https://motorlandby.ru/'
+    html = open(url)
+    require 'nokogiri'
+    doc = Nokogiri::HTML(html)
+    doc.css('.brands-logo li a').each do |li|
+      urls = li['href']
+      htmls = open(urls)
+      docs = Nokogiri::HTML(htmls)
+      docs.css('.bl .bl-row2')[1].css('.accordion-inner a').each do |model|
+        @p = Model.new
+        @m = Manufacturer.where('lower(name) like ? ', li.children[0]['title'].downcase).take
+        if @m
+          @p.manufacturer_id = @m.id
+          @p.name = model.inner_html
+          @p.save
+        end
+      end
     end
   end
 

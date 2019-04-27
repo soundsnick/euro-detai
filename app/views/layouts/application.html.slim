@@ -5,6 +5,9 @@ html
     - if @title
       - title = @title
     title = title
+    - if @meta and @meta['description'] and @meta['keywords']
+      meta name="Description" content=@meta['description']
+      meta name="Keywords" content=@meta['keywords']
     meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
