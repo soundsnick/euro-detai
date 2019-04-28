@@ -175,7 +175,7 @@ class AdminController < ApplicationController
 
   def news
     if admin
-      @news = New.all
+      @news = New.paginate(page: params[:page], per_page: 10)
     else admin_err
     end
   end
@@ -514,7 +514,7 @@ class AdminController < ApplicationController
   def announcement
     if admin
       @announcement = Announcement.take
-      @news = New.all
+      @news = New.limit(10)
     else admin_err
     end
   end

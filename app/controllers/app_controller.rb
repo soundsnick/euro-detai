@@ -14,17 +14,17 @@ class AppController < ApplicationController
 
   def warranties
     @title = "Продажа бу запчастей. Гарантийные условия"
-    @news = New.all
+    @news = New.limit(5)
   end
 
   def contacts
     @title = "Ищете, где купить контрактный двигатель, АКПП, МКПП? Звоните нам!"
-    @news = New.all
+    @news = New.limit(5)
   end
 
   def payment_shipping
     @title = "Продажа б/у запчастей. Доставка по России, Казахстану!"
-    @news = New.all
+    @news = New.limit(5)
     @cities = City.all
     render 'payment-shipping'
   end
@@ -40,7 +40,7 @@ class AppController < ApplicationController
       @new = New.find_by(id: params[:id])
       if @new
         @commentaries = Commentary.where(new_id: @new.id, status: 1)
-        @news = New.all
+        @news = New.limit(5)
         @title = @new.title
       else redirect_to root_path, notice: 'Новость не найдена'
       end
@@ -50,7 +50,7 @@ class AppController < ApplicationController
 
   def news
     @title = "Бу запчасти с доставкой в регионы"
-    @news = New.paginate(page: params[:page], per_page: 10).order(id: :desc)
+    @news = New.paginate(page: params[:page], per_page: 15).order(id: :desc)
     @page_config = {
         'title': 'Новости'
     }
@@ -205,7 +205,7 @@ class AppController < ApplicationController
 
   def buy
     if params[:partId]
-      @news = New.all.limit(5).order(id: :desc)
+      @news = New.limit(5).order(id: :desc)
       @title = "Купить комплектацию"
     else redirect_to root_path, notice: "Данная комплектация не найдена"
     end
@@ -276,7 +276,7 @@ class AppController < ApplicationController
 
   def query
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
-    @news = New.all
+    @news = New.limit(5)
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models

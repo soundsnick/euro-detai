@@ -22,6 +22,8 @@ main.admin-page
           td = part.created_at
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+    .uk-margin
+      = will_paginate @news
 coffee:
   window.deletePart = (partId) ->
     $.get "/api/new.delete?new_id=#{partId}", (data) ->
