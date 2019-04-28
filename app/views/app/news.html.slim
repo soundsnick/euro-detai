@@ -36,6 +36,7 @@ main.parts
           - if @news.empty?
             .uk-margin
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
+          = will_paginate @news
 coffee:
   $('#form-horizontal-man').on('change', ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->

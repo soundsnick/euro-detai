@@ -50,7 +50,7 @@ class AppController < ApplicationController
 
   def news
     @title = "Бу запчасти с доставкой в регионы"
-    @news = New.all
+    @news = New.paginate(page: params[:page], per_page: 10).order(id: :desc)
     @page_config = {
         'title': 'Новости'
     }

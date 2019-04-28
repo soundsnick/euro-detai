@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/app/news.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/app/news.html.slim" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -46,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="463" column="25" selection-start-line="463" selection-start-column="25" selection-end-line="463" selection-end-column="25" />
+            <state relative-caret-position="207">
+              <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -58,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
+            <state relative-caret-position="163">
               <caret line="560" column="25" selection-start-line="560" selection-start-column="25" selection-end-line="560" selection-end-column="25" />
             </state>
           </provider>
@@ -73,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/app/news.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+            <state relative-caret-position="454">
+              <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -113,13 +114,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>advance</find>
       <find>circle</find>
       <find>title</find>
       <find>contacts</find>
       <find>news_new</find>
       <find>query_ad</find>
-      <find>news</find>
       <find>query</find>
       <find>Query.new</find>
       <find>queries</find>
@@ -143,6 +142,8 @@
       <find>_delete</find>
       <find>new</find>
       <find>def new</find>
+      <find>news</find>
+      <find>def news</find>
     </findStrings>
     <replaceStrings>
       <replace>fuel</replace>
@@ -202,9 +203,9 @@
         <option value="$PROJECT_DIR$/app/controllers/admin_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/car_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_news.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/app/news.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/new.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/app_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/app/news.html.slim" />
       </list>
     </option>
   </component>
@@ -547,12 +548,12 @@
       <workItem from="1556357202653" duration="3590000" />
       <workItem from="1556361171153" duration="7279000" />
       <workItem from="1556389584454" duration="5887000" />
-      <workItem from="1556448196225" duration="11296000" />
+      <workItem from="1556448196225" duration="12023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236780000" />
+    <option name="totallyTimeSpent" value="237507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -912,13 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="560" column="25" selection-start-line="560" selection-start-column="25" selection-end-line="560" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/car_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-920">
@@ -933,13 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/app/news.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/new.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-437">
@@ -949,8 +936,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="463" column="25" selection-start-line="463" selection-start-column="25" selection-end-line="463" selection-end-column="25" />
+        <state relative-caret-position="207">
+          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="560" column="25" selection-start-line="560" selection-start-column="25" selection-end-line="560" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/app/news.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
         </state>
       </provider>
     </entry>
