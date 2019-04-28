@@ -26,8 +26,8 @@ main.parts
                 - p_image = (part.attachments.take.image != nil) ? part.attachments.take.image : 'no_photo.png'
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
-                  a href="/images/#{p_image}" data-caption=part.title
-                    img.part__image src="/images/#{p_image}" style="margin-left: 0"
+                  a href="/news/#{p_image}" data-caption=part.title
+                    img.part__image src="/news/#{p_image}" style="margin-left: 0"
               .uk-card-body
                 .part__info
                   h2.part__title.uk-card-title = part.title

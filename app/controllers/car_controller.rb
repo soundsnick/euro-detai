@@ -305,7 +305,7 @@ class CarController < ApplicationController
           model = New.find_by(id: params[:new_id])
           if model
             @images = Attachment.where(new_id: params[:new_id]).each do |part|
-              File.delete(Rails.root.join('public', 'images', part.image)) if File.exist?(Rails.root.join('public', 'images', part.image))
+              File.delete(Rails.root.join('public', 'news', part.image)) if File.exist?(Rails.root.join('public', 'images', part.image))
               part.destroy
             end
             model.destroy
