@@ -483,17 +483,6 @@ class AppController < ApplicationController
           end
           counter += 1
         end
-        # htmls = open(urls)
-        # docs = Nokogiri::HTML(htmls)
-        # docs.css('.bl .bl-row2')[1].css('.accordion-inner a').each do |model|
-        #   @p = Model.new
-        #   @m = Manufacturer.where('lower(name) like ? ', li.children[0]['title'].downcase).take
-        #   if @m
-        #     @p.manufacturer_id = @m.id
-        #     @p.name = model.inner_html
-        #     @p.save
-        #   end
-        # end
       end
     end
     render body: counter.to_s + "\n" + links
