@@ -409,7 +409,7 @@ class AppController < ApplicationController
     require 'open-uri'
     links = ""
     counter = 0
-    (0..1).each do |page|
+    (0..53).each do |page|
       url = "https://xn----8sbejcd7btry6i.xn--p1ai/news/p/#{page}"
       html = open(url)
       require 'nokogiri'
@@ -422,6 +422,7 @@ class AppController < ApplicationController
           paragraph = ""
           dates = ""
           links += titles + "\n"
+          images = ""
           begin
             new = open("https://xn----8sbejcd7btry6i.xn--p1ai" + urls)
             new_page = Nokogiri::HTML(new)
@@ -435,28 +436,32 @@ class AppController < ApplicationController
                 dates = dates.split()[0] + " " +dates.split()[1]
                 links += dates + "\n" + paragraph + "\n"
                 div.css('td img').select{|img| img['src'] != nil}.each do |img|
-                  image += "https://xn----8sbejcd7btry6i.xn--p1ai" + img['src'] + ','
+                  if img['src'].split('http').length > 1
+                    image += img['src'] + ','
+                  else
+                    image += "https://xn----8sbejcd7btry6i.xn--p1ai" + img['src'] + ','
+                  end
                 end
-                images = ""
                 image.split(',').each do |img|
-                  if img.split('http').length > 0
+                  if img.split('http').length > 1
                     img = img.split()[0]
                     begin
-                      download = Down.download(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
-                      imagehex = Digest::SHA256.hexdigest download.original_filename
-                      imagehex = imagehex.slice(0, 10)
-                      imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
-                      imagehex2 = imagehex2.slice(0, 10)
-                      imagehex = imagehex2 + imagehex
-                      File.open(Rails.root.join('public', 'news', imagehex +  download.original_filename), 'wb') do |file|
-                        file.write(download.read)
-                        images += imagehex +  download.original_filename
-                        if img != image.last
-                          images += ","
+                      if download = Down.download(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
+                        imagehex = Digest::SHA256.hexdigest download.original_filename
+                        imagehex = imagehex.slice(0, 10)
+                        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+                        imagehex2 = imagehex2.slice(0, 10)
+                        imagehex = imagehex2 + imagehex
+                        File.open(Rails.root.join('public', 'news', imagehex +  download.original_filename), 'wb') do |file|
+                          file.write(download.read)
+                          images += imagehex +  download.original_filename
+                          if img != image.last
+                            images += ","
+                          end
                         end
                       end
-                    rescue OpenURI::HTTPError
-                      nil
+                    rescue Down::InvalidUrl
+                      binding.pry
                     end
                   end
                 end
