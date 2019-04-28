@@ -461,7 +461,7 @@ class AppController < ApplicationController
                         end
                       end
                     rescue Down::InvalidUrl
-                      binding.pry
+                      nil
                     end
                   end
                 end
