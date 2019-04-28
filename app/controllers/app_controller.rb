@@ -368,6 +368,8 @@ class AppController < ApplicationController
     require 'cgi'
     require "down"
 
+
+
     @p = Part.where('image like ?', "%http%").order(id: :asc)
     partimages = ""
     @p.each do |part|
@@ -401,6 +403,95 @@ class AppController < ApplicationController
       end
     end
     render body: partimages
+  end
+
+  def newsparser
+    require 'open-uri'
+    links = ""
+    counter = 0
+    (0..1).each do |page|
+      url = "https://xn----8sbejcd7btry6i.xn--p1ai/news/p/#{page}"
+      html = open(url)
+      require 'nokogiri'
+      doc = Nokogiri::HTML(html)
+      doc.css('td.content-part div').each do |li|
+        if li.xpath('./img').length > 0
+          urls = li.xpath('./b/a')[0]['href']
+          titles = li.xpath('./b/a').text
+          img = li.xpath('./img')[0]['src']
+          paragraph = ""
+          dates = ""
+          links += titles + "\n"
+          begin
+            new = open("https://xn----8sbejcd7btry6i.xn--p1ai" + urls)
+            new_page = Nokogiri::HTML(new)
+            image = ""
+            new_page.css('td.content-part div').each do |div|
+              if div.xpath('./img').length > 0
+                dates = div.xpath('./text()').text
+                if div.xpath('./p').length > 0
+                  div.xpath('./p').each{|aas| paragraph += aas.text + "\n" }
+                end
+                dates = dates.split()[0] + " " +dates.split()[1]
+                links += dates + "\n" + paragraph + "\n"
+                div.css('td img').select{|img| img['src'] != nil}.each do |img|
+                  image += "https://xn----8sbejcd7btry6i.xn--p1ai" + img['src'] + ','
+                end
+                images = ""
+                image.split(',').each do |img|
+                  if img.split('http').length > 0
+                    img = img.split()[0]
+                    begin
+                      download = Down.download(URI.parse(CGI.escape(img).gsub("%3A", ":").gsub("%2F", "/")))
+                      imagehex = Digest::SHA256.hexdigest download.original_filename
+                      imagehex = imagehex.slice(0, 10)
+                      imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+                      imagehex2 = imagehex2.slice(0, 10)
+                      imagehex = imagehex2 + imagehex
+                      File.open(Rails.root.join('public', 'images', imagehex +  download.original_filename), 'wb') do |file|
+                        file.write(download.read)
+                        images += imagehex +  download.original_filename
+                        if img != image.last
+                          images += ","
+                        end
+                      end
+                    rescue OpenURI::HTTPError
+                      nil
+                    end
+                  end
+                end
+              end
+            end
+          rescue OpenURI::HTTPError
+            nil
+          end
+          @n = New.new
+          @n.title = titles
+          @n.content = paragraph
+          @n.ready_date = dates
+          @n.save
+          images.split(',').each do |sad|
+            @a = Attachment.new
+            @a.new_id = @n.id
+            @a.image = sad
+            @a.save
+          end
+          counter += 1
+        end
+        # htmls = open(urls)
+        # docs = Nokogiri::HTML(htmls)
+        # docs.css('.bl .bl-row2')[1].css('.accordion-inner a').each do |model|
+        #   @p = Model.new
+        #   @m = Manufacturer.where('lower(name) like ? ', li.children[0]['title'].downcase).take
+        #   if @m
+        #     @p.manufacturer_id = @m.id
+        #     @p.name = model.inner_html
+        #     @p.save
+        #   end
+        # end
+      end
+    end
+    render body: counter.to_s + "\n" + links
   end
 
 end
