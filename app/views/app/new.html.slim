@@ -6,7 +6,7 @@ main.home
         h1.title style="text-align: center" = @new.title
         pre.new-pre
           = @new.content
-          div[style="margin-top: 20px; background: #282828; padding: 20px; border-radius: 6px; " class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider]
+          div[style="margin-top: 20px;" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider]
             ul class="uk-slider-items uk-child-width-1-3" style="align-items: center; padding: 20px;"
               - @new.attachments.each do |image|
                 li style="padding: 10px;"
@@ -16,17 +16,21 @@ main.home
             a[class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"]
             a[class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"]
         .commentaries-wrapper
-          - if auth
-            = form_with model: Commentary, class: 'uk-form-stacked', url:"/commentary/add", method: :post
-              input type="hidden" name="newId" value=@new.id
-              .uk-margin
-                label.uk-form-label = "Добавить комментарий: "
-                .uk-form-controls
-                  textarea.uk-textarea name="text" placeholder="Текст комментария"
-              input.uk-button.uk-button-primary type="submit" value="Добавить"
-          - if not auth
-            .uk-alert.uk-alert-warning
-              span = "Авторизуйтесь чтобы оставить комментарий"
+          = form_with model: Commentary, class: 'uk-form-stacked', url:"/commentary/add", method: :post
+            input type="hidden" name="newId" value=@new.id
+            .uk-margin
+              label.uk-form-label = "Электронная почта:"
+              .uk-form-controls
+                input.uk-input name="email" placeholder="Email"
+            .uk-margin
+              label.uk-form-label = "Ваше имя:"
+              .uk-form-controls
+                input.uk-input name="name" placeholder="Имя"
+            .uk-margin
+              label.uk-form-label = "Добавить комментарий: "
+              .uk-form-controls
+                textarea.uk-textarea name="text" placeholder="Текст комментария"
+            input.uk-button.uk-button-primary type="submit" value="Добавить"
           .commentaries
             h1.title = "Комментарий"
             - if @commentaries.empty?
@@ -34,13 +38,12 @@ main.home
                 span = "Будьте первым кто оставит комментарий"
             - @commentaries.each do |commentary|
               .comment data-id=commentary.id
-                h5.comment-title = commentary.user.name + ":"
+                h5.comment-title = commentary.name + ":"
                 .comment-body
                   p = commentary.text
-                  - if auth and commentary.user_id == session[:auth]['id']
-                    br
-                    a.uk-comment-meta href="/commentary/delete/#{commentary.id}" = "Удалить комментарий"
-                span.comment-published = commentary.created_at.strftime("%Y-%m-%d")
+                  br
+                  a.uk-comment-meta href="/commentary/delete/#{commentary.id}" = "Удалить комментарий"
+                span.comment-published = commentary.created_at.in_time_zone("Moscow").strftime("%Y-%m-%d")
 
 coffee:
   $('#form-horizontal-man').on('change', ->

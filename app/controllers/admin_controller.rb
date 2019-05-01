@@ -101,7 +101,7 @@ class AdminController < ApplicationController
     if auth
       if params[:id]
         commentary = Commentary.find_by(id: params[:id])
-        if commentary.user_id == session[:auth]['id'] or admin
+        if admin
           commentary.destroy
           render json: construct_response(410, 'success')
         else redirect_back fallback_location: root_path

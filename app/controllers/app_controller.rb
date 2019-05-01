@@ -2,7 +2,8 @@ class AppController < ApplicationController
 
   def home
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
-    @news = New.limit(5)
+    @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
     @manufacturers = Manufacturer.where.not(id: 1).select(:id, :name, :image).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -14,17 +15,20 @@ class AppController < ApplicationController
 
   def warranties
     @title = "Продажа бу запчастей. Гарантийные условия"
-    @news = New.limit(5)
+    @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
   end
 
   def contacts
     @title = "Ищете, где купить контрактный двигатель, АКПП, МКПП? Звоните нам!"
-    @news = New.limit(5)
+    @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
   end
 
   def payment_shipping
     @title = "Продажа б/у запчастей. Доставка по России, Казахстану!"
-    @news = New.limit(5)
+    @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
     @cities = City.all
     render 'payment-shipping'
   end
@@ -40,7 +44,8 @@ class AppController < ApplicationController
       @new = New.find_by(id: params[:id])
       if @new
         @commentaries = Commentary.where(new_id: @new.id, status: 1)
-        @news = New.limit(5)
+        @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
         @title = @new.title
       else redirect_to root_path, notice: 'Новость не найдена'
       end
@@ -50,7 +55,8 @@ class AppController < ApplicationController
 
   def news
     @title = "Бу запчасти с доставкой в регионы"
-    @news = New.paginate(page: params[:page], per_page: 15).order(id: :desc)
+    @news = New.order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC").paginate(page: params[:page], per_page: 15)
     @page_config = {
         'title': 'Новости'
     }
@@ -152,15 +158,8 @@ class AppController < ApplicationController
         @a_parts = @a_parts.where(volume_id: ids)
       end
     end
-    if params[:year_from]
-      year_from = params[:year_from]
-      year_to = Date.today.year.to_s
-      if params[:year_from] != ""
-        if params[:year_to] != ""
-          year_to = params[:year_to]
-        end
-        @a_parts = @a_parts.where(year: Integer(year_from)..Integer(year_to))
-      end
+    if params[:year]
+      @a_parts = @a_parts.where('year like ?' , "%#{params[:year]}%")
     end
     if params[:cost_from]
       cost_from = params[:cost_from]
@@ -190,7 +189,7 @@ class AppController < ApplicationController
     @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
     @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
     @filter[:volume_from] = volume_from.to_s + '..' + volume_to.to_s if params[:volume_from]
-    @filter[:year_from] = year_from.to_s + '..' + year_to.to_s if params[:year_from]
+    @filter[:year] = params[:year].to_s
     @filter[:cost_from] = cost_from.to_s + '..' + cost_to.to_s if params[:cost_from]
     @a_parts = @a_parts.order(id: :desc)
     render 'parts'
@@ -205,7 +204,8 @@ class AppController < ApplicationController
 
   def buy
     if params[:partId]
-      @news = New.limit(5).order(id: :desc)
+      @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
       @title = "Купить комплектацию"
     else redirect_to root_path, notice: "Данная комплектация не найдена"
     end
@@ -216,7 +216,8 @@ class AppController < ApplicationController
       if params[:text] and params[:newId]
         commentary = Commentary.new
         commentary.text = params[:text]
-        commentary.user_id = session[:auth]['id']
+        commentary.name = params[:name]
+        commentary.email = params[:email]
         commentary.new_id = params[:newId]
         commentary.status = 0
         commentary.save
@@ -276,7 +277,8 @@ class AppController < ApplicationController
 
   def query
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
-    @news = New.limit(5)
+    @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
     @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
     @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
     @models = @models.count == 0 ? Model.where(id: 1) : @models
@@ -329,7 +331,8 @@ class AppController < ApplicationController
 
   def manufacturer
     if params[:name] && @manufacturer = Manufacturer.find_by(name: params[:name])
-      @news = New.limit(5)
+      @news = New.limit(5).order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC")
       @title = "Б/у запчасти для автомобилей " + @manufacturer.name
       @meta = {
           'description': @manufacturer.text,

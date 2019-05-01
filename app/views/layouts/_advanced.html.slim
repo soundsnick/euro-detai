@@ -11,8 +11,10 @@ aside.advanced-search.uk-card.uk-card-default
                 option value=manufacturer.id = manufacturer.name
           label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
           .uk-margin
-            input.uk-input#form-horizontal-year type="number" value="1900" min="1900" max="2099" step="1" placeholder="с" name="year_from"
-            input.uk-input type="number" min="1900" max="2099" step="1" placeholder="до" name="year_to"
+            select.uk-select#form-horizontal-year name="year"
+              option value="" = "Не задано"
+              - (1985..2019).each do |year|
+                option value=year = year
         div class="uk-width-1-2@m"
           label.uk-form-label = "Модель автомобиля:"
           .uk-margin

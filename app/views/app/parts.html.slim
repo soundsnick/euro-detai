@@ -16,7 +16,7 @@ main.parts
                 h1.title = "Примененные фильтры:"
             p.amount style="margin: 10px 0;" = "В каталоге #{Part.all.count} запчастей"
           - if params[:action] == "advanced_search"
-            table.uk-alert-primary.uk-animation-fade.uk-animation-fast.uk-alert.filter.part__table.uk-table-responsive.uk-table-small
+            table.uk-alert-primary.uk-animation-fade.uk-animation-fast.uk-alert.filter.part__table.uk-table-responsive.uk-table-small style="width: 100%"
               - if params[:category]
                 tr
                   th.uk-table-shrink = "Категория"
@@ -68,25 +68,26 @@ main.parts
                     img.part__image src=p_image
               .uk-card-body
                 .part__info
-                  h2.part__title.uk-card-title = part.title
+                  h2.part__title.uk-card-title
+                    a href=part_path(part.id) data-cost=part.cost = part.title
                   .flex-equal
                     h4.part__manufacturer
                       = part.manufacturer.name
-                  table.part__table.uk-table-responsive.uk-table-hover
-                    tbody
-                      tr
-                        th.uk-table-shrink = '№'
-                        td
-                          = part.id
-                      tr
-                        th.uk-table-shrink = 'Год'
-                        td = part.year
-                      tr
-                        th.uk-table-shrink = 'Тип'
-                        td = part.category.name
-                      tr
-                        th.uk-table-shrink = 'Объем'
-                        td = part.volume.name
+                table.part__table.uk-table-responsive.uk-table-hover
+                  tbody
+                    tr
+                      th.uk-table-shrink = '№'
+                      td
+                        = part.id
+                    tr
+                      th.uk-table-shrink = 'Год'
+                      td = part.year
+                    tr
+                      th.uk-table-shrink = 'Тип'
+                      td = part.category.name
+                    tr
+                      th.uk-table-shrink = 'Объем'
+                      td = part.volume.name
                 .part__cost--wrapper
                   h6.part__cost = 'Цена: ' + part.cost.to_s + 'P'
                   a.part__more.uk-button.uk-button-default.uk-button-small href=part_path(part.id) data-cost=part.cost = 'Подробнее'

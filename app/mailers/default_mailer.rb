@@ -8,7 +8,7 @@ class DefaultMailer < ApplicationMailer
 
   def comment_email(comment)
     @comment = comment
-    mail(to: "detal911@yandex.ru", subject: "Добавлен новый комментарий от пользователя #{@comment.user.name}")
+    mail(to: "detal911@yandex.ru", subject: "Добавлен новый комментарий от пользователя #{@comment.name}")
   end
 
   def feedback_email(feedback)

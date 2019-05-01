@@ -29,10 +29,10 @@ main.parts
                   a href="/news/#{p_image}" data-caption=part.title
                     img.part__image src="/news/#{p_image}" style="margin-left: 0"
               .uk-card-body
-                .part__info
+                .part__info style="flex: 1!important"
                   h2.part__title.uk-card-title
-                    = part.title
-                    - @da = part.created_at.in_time_zone('Moscow').strftime("%Y.%m.%d %H:%M")
+                    a href=new_path(part.id) = part.title
+                    - @da = part.created_at.in_time_zone('Moscow').strftime("%d.%m.%Y %H:%M")
                     - if part.ready_date
                       - @da = part.ready_date
                     span.date = @da

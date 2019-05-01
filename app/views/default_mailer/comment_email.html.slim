@@ -8,7 +8,7 @@ html
       tbody
         tr
           th align="left" = "Автор: "
-          td = @comment.user.name
+          td = @comment.name + " " + @comment.email
         tr
           th align="left" style="text-align: center" = "Запись: "
           td
