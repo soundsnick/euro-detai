@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post 'category/new', to: 'admin#category_new', as: :categories
   get 'query', to: 'app#query', as: :query
   post 'query/add', to: 'app#query_add', as: :queries
+  get 'subcategories', to: 'app#subcategories', as: :subcategory_search
 
   # User Routing
   get 'api/user.auth', to: 'user#authorisation'
@@ -54,12 +55,14 @@ Rails.application.routes.draw do
   get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
   get 'admin/orders', to: 'admin#orders', as: :aorders
   get 'admin/categories', to: 'admin#categories', as: :acategories
+  get 'admin/subcategories', to: 'admin#subcategories', as: :asubcategories
   get 'admin/queries', to: 'admin#queries', as: :aqueries
   get 'admin/query/:id(.:format)', to: 'admin#query', as: :aquery
   get '/api/query/delete/:id(.:format)', to: 'admin#query_delete', as: :query_delete
   post 'parts', to: 'admin#part_new'
   post 'manufacturers', to: 'admin#manufacturer_add', as: :manufacturers
   post 'models', to: 'admin#model_add', as: :models
+  post 'subcategories', to: 'admin#subcategory_add', as: :subcategories
   post 'carcasses', to: 'admin#carcass_add', as: :carcasses
   post 'fuels', to: 'admin#fuel_add', as: :fuels
   post 'volumes', to: 'admin#volumes_add', as: :volumes
@@ -82,6 +85,7 @@ Rails.application.routes.draw do
   get 'api/manufacturer.:method(.:format)', to: 'car#manufacturer'
   get 'api/color.:method(.:format)', to: 'car#color'
   get 'api/category.:method(.:format)', to: 'car#category'
+  get 'api/subcategory.:method(.:format)', to: 'car#subcategory'
   get 'api/new.:method(.:format)', to: 'car#new'
   get 'api/query.:method(.:format)', to: 'car#query'
   get 'api/commentary/delete/:id(.:format)', to: 'admin#commentary_delete'
@@ -92,7 +96,7 @@ Rails.application.routes.draw do
 
   get 'magazin/:name(.:format)', to: 'app#manufacturer'
   # get 'parser', to: 'app#newsparser'
-
+  get 'parser', to: 'app#reviewsparser'
   # get 'parser', to: 'app#parseimg'
   # get 'parser', to: 'app#model/parser'
   # get 'parser', to: 'admin#parser'

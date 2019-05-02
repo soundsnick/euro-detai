@@ -351,7 +351,7 @@ class CarController < ApplicationController
           model = Model.where(manufacturer_id: params[:manufacturer_id])
           if model.count > 0
             render json: construct_response(200, 'success', model)
-          else render json: construct_response(200, 'success', Model.where(id: 1))
+          else render json: construct_response(200, 'success', nil)
           end
         else render json: construct_response(204, 'empty: manufacturer_id')
         end
@@ -391,6 +391,56 @@ class CarController < ApplicationController
           else render json: construct_response(4040, 'not_found: model')
           end
         else render json: construct_response(204, 'empty: model_id')
+        end
+      else render json: construct_response(404, 'not_found: method')
+      end
+    else render json: construct_response(204, 'empty: method or not_admin')
+    end
+  end
+
+  def subcategory
+    if params[:method]
+      case params[:method]
+      when 'all'
+        render json: construct_response(200, 'success', Subcategory.all)
+      when 'get'
+        if params[:subcategory_id]
+          model = Subcategory.find_by(id: params[:subcategory_id])
+          if model
+            render json: construct_response(200, 'success', model)
+          else render json: construct_response(404, 'not_found: model')
+          end
+        else render json: construct_response(204, 'empty: subcategory_id')
+        end
+      when 'getByCategory'
+        if params[:category_id]
+          model = Subcategory.where(category_id: params[:category_id])
+          if model.count > 0
+            render json: construct_response(200, 'success', model)
+          else render json: construct_response(200, 'success', nil)
+          end
+        else render json: construct_response(204, 'empty: category_id')
+        end
+      when 'delete'
+        if params[:subcategory_id]
+          model = Subcategory.find_by(id: params[:subcategory_id])
+          if model
+            model.destroy
+            render json: construct_response(410, 'success')
+          else render json: construct_response(404, 'not_found: subcategory')
+          end
+        else render json: construct_response(204, 'empty: subcategory_id')
+        end
+      when 'change'
+        if params[:subcategory_id] && params[:new_name]
+          model = Subcategory.find_by(id: params[:subcategory_id])
+          if model
+            model.name = params[:new_name]
+            model.save
+            render json: construct_response(200, 'success', model.to_json)
+          else render json: construct_response(4040, 'not_found: model')
+          end
+        else render json: construct_response(204, 'empty: subcategory_id')
         end
       else render json: construct_response(404, 'not_found: method')
       end

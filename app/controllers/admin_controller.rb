@@ -195,6 +195,21 @@ class AdminController < ApplicationController
     end
   end
 
+  def subcategories
+    if admin
+      @categories = Category.all.order(id: :asc)
+      @page_config = {
+          'title': 'Подкатегории',
+          'model': Subcategory,
+          'objects': Subcategory.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/subcategory.change?subcategory_id',
+          'delete_url': '/api/subcategory.delete?subcategory_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
   def carcasses
     if admin
       @page_config = {
@@ -306,6 +321,22 @@ class AdminController < ApplicationController
         else redirect_to amodel_path, notice: 'Произошла ошибка'
         end
       else redirect_to amodels_path, notice: 'Введите название'
+      end
+    else admin_err
+    end
+  end
+
+  def subcategory_add
+    if admin
+      if params[:name]
+        model = Subcategory.new
+        model.name = params[:name]
+        model.category_id = params[:category]
+        if model.save
+          redirect_to asubcategories_path, notice: 'Успешно добавлено'
+        else redirect_to asubcategories_path, notice: 'Произошла ошибка'
+        end
+      else redirect_to asubcategories_path, notice: 'Введите название'
       end
     else admin_err
     end

@@ -123,6 +123,13 @@ img.home-grid__image {
   font-size: 12px;
   padding-bottom: 10px;
 }
+.reply{
+  border-left: 2px solid #9a9a9a;
+  padding-left: 15px;
+  p{
+    margin-top: 0;
+  }
+}
 textarea,
 input.text,
 input[type="text"],
@@ -415,7 +422,7 @@ input[type="submit"],
 .logo{
   height: auto;
   box-sizing: border-box;
-  padding: 10px 20px;
+  padding: 10px 0px;
   margin-bottom: 10px;
   &-container{
     flex: 0 0 30%;

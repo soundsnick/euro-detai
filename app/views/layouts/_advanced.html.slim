@@ -1,14 +1,21 @@
 aside.advanced-search.uk-card.uk-card-default
   .uk-card-body
     h1.uk-card-title = "Расширенный поиск"
-    form.uk-form-horizontal action="/parts/advanced_search" method="get"
+    - form_url = "/parts/advanced_search"
+    - if params[:action] == 'subcategories'
+      - form_url = "/subcategories"
+    form.uk-form-horizontal action=form_url method="get"
       .uk-grid-small[uk-grid]
         div class="uk-width-1-2@m"
           label.uk-form-label = "Марка автомобиля: "
           .uk-margin
             select.uk-select#form-horizontal-man onchange="models()" name="manufacturer"
+              option value="" = "Не задано"
               - @manufacturers.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
+                - if params[:manufacturer] and params[:manufacturer].to_i == manufacturer.id
+                  option value=manufacturer.id selected="" = manufacturer.name
+                - else
+                  option value=manufacturer.id = manufacturer.name
           label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
           .uk-margin
             select.uk-select#form-horizontal-year name="year"
@@ -19,13 +26,29 @@ aside.advanced-search.uk-card.uk-card-default
           label.uk-form-label = "Модель автомобиля:"
           .uk-margin
             select.uk-select#form-horizontal-model name="model"
+              option value="" = "Не задано"
               - @models.each do |model|
-                option value=model.id = model.name
+                - if params[:model] and params[:model].to_i == model.id
+                  option value=model.id selected="" = model.name
+                - else
+                  option value=model.id = model.name
           label.uk-form-label = "Категория:"
           .uk-margin
-            select.uk-select name="category"
+            select.uk-select#form-horizontal-mans name="category"
               - @categories.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
+                - if params[:category] and params[:category].to_i == manufacturer.id
+                  option value=manufacturer.id selected="" = manufacturer.name
+                - else
+                  option value=manufacturer.id = manufacturer.name
+          - if params[:action] == 'subcategories'
+            label.uk-form-label = "Подкатегория:"
+            .uk-margin
+              select.uk-select#form-horizontal-subcategories name="subcategory"
+                - @subcategories.each do |manufacturer|
+                  - if params[:subcategory] and params[:subcategory].to_i == manufacturer.id
+                    option value=manufacturer.id selected="" = manufacturer.name
+                  - else
+                    option value=manufacturer.id = manufacturer.name
       .uk-margin
         button.uk-button.uk-button-default uk-toggle="target: #advanced" type="button" = "Дополнительные параметры"
       .uk-grid-small.uk-margin#advanced[uk-grid hidden]

@@ -123,15 +123,21 @@ class AppController < ApplicationController
         'title': "Поиск по запросу \"#{params[:query]}\""
     }
     if params[:category] and Integer(params[:category]) > 0
-      @a_parts = @a_parts.where(category_id: params[:category])
+      sub = Category.find_by(id: params[:category])
+      if sub.name == "ДВС"
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ? AND category_id = NULL OR lower(title) like ? OR lower(description) like ?  AND category_id = NULL", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%")
+      else
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%")
+      end
     end
-    if params[:manufacturer] and  Integer(params[:manufacturer]) > 1
+    if params[:manufacturer] and  params[:manufacturer].to_i > 1
       @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
+      @models = Model.where(manufacturer_id: params[:manufacturer]).order(id: :asc)
     end
     if params[:model]
       model = Model.find_by(id: params[:model])
       if model
-        @a_parts = @a_parts.where("title like ? OR description like ?", "%"+model.name+"%", "%"+model.name+"%")
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%")
       end
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1
@@ -212,20 +218,17 @@ class AppController < ApplicationController
   end
 
   def commentary_add
-    if auth
-      if params[:text] and params[:newId]
-        commentary = Commentary.new
-        commentary.text = params[:text]
-        commentary.name = params[:name]
-        commentary.email = params[:email]
-        commentary.new_id = params[:newId]
-        commentary.status = 0
-        commentary.save
-        DefaultMailer.comment_email(commentary).deliver
-        redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
-      else redirect_back fallback_location: root_path
-      end
-    else redirect_to login_path, notice: 'Авторизуйтесь чтобы оставить комментарий'
+    if params[:text] and params[:newId]
+      commentary = Commentary.new
+      commentary.text = params[:text]
+      commentary.name = params[:name]
+      commentary.email = params[:email]
+      commentary.new_id = params[:newId]
+      commentary.status = 0
+      commentary.save
+      DefaultMailer.comment_email(commentary).deliver
+      redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
+    else redirect_back fallback_location: root_path
     end
   end
 
@@ -259,7 +262,7 @@ class AppController < ApplicationController
 
   def reviews
     @title = "Контрактные двигатели, МКПП, АКПП от ЕвроДеталь - отзывы"
-    @news = Feedback.where(status: 1).order(id: :desc)
+    @news = Feedback.where(status: 1).order(id: :desc).paginate(page: params[:page], per_page: 15)
     @page_config = {
         'title': 'Отзывы'
     }
@@ -341,6 +344,106 @@ class AppController < ApplicationController
     else redirect_to root_path, notice: 'Производитель не найден'
     end
   end
+
+  def subcategories
+    @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)
+    @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
+    @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
+    @models = @models.count == 0 ? Model.where(id: 1) : @models
+    @volumes = Volume.all.order(id: :asc)
+    @fuels = Fuel.all.order(id: :asc)
+    @carcasses = Carcass.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
+    @subcategories = Subcategory.where("category_id = #{params[:category]} or id = 1")
+    @colors = Color.all.order(id: :asc)
+    @page_config = {
+        'title': "Поиск по запросу \"#{params[:query]}\""
+    }
+    if params[:category] and params[:category].to_i > 0
+      sub = Category.find_by(id: params[:category])
+      if sub.name == "ДВС"
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?  AND category_id = NULL OR lower(title) like ? OR lower(description) like ? AND category_id = NULL", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%")
+      else
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%")
+      end
+    end
+    if params[:subcategory] and params[:subcategory].to_i > 1
+      sub = Subcategory.find_by(id: params[:subcategory])
+      @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%") if sub
+    end
+    if params[:manufacturer] and params[:manufacturer].to_i > 1
+      @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
+      @models = Model.where(manufacturer_id: params[:manufacturer]).order(id: :asc)
+    end
+    if params[:model]
+      model = Model.find_by(id: params[:model])
+      if model
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%")
+      end
+    end
+    if params[:carcass] and  Integer(params[:carcass]) > 1
+      @a_parts = @a_parts.where(carcass_id: params[:carcass])
+    end
+    if params[:color] and  Integer(params[:color]) > 1
+      @a_parts = @a_parts.where(color_id: params[:color])
+    end
+    if params[:fuel] and  Integer(params[:fuel]) > 1
+      @a_parts = @a_parts.where(fuel_id: params[:fuel])
+    end
+    if params[:volume_from]
+      volume_from = params[:volume_from]
+      volume_to = Volume.where.not(id: 1).maximum(:name)
+      if params[:volume_from] != ""
+        if params[:volume_to] != ""
+          volume_to = params[:volume_to]
+        end
+        volumes = Volume.where(name: Float(volume_from)..Float(volume_to)).where.not(id: 1)
+        ids = []
+        volumes.each do |volume|
+          ids.push volume.id
+        end
+        @a_parts = @a_parts.where(volume_id: ids)
+      end
+    end
+    if params[:year]
+      @a_parts = @a_parts.where('year like ?' , "%#{params[:year]}%")
+    end
+    if params[:cost_from]
+      cost_from = params[:cost_from]
+      cost_to = Part.maximum(:cost)
+      if params[:cost_from] != ""
+        if params[:cost_to] != ""
+          cost_to = params[:cost_to]
+        end
+        @a_parts = @a_parts.where(cost: Integer(cost_from)..Integer(cost_to))
+      end
+    end
+    @filter = {'category': Category.find_by(id: params[:category]).name}
+    if params[:subcategory] and Subcategory.find_by(id: params[:subcategory])
+      @filter = {'subcategory': Subcategory.find_by(id: params[:subcategory]).name}
+    end
+    @sd = Manufacturer.find_by(id: params[:manufacturer])
+    if @sd
+      @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
+    else
+      @filter[:manufacturer] = "Не задано"
+    end
+    @m = Model.find_by(id: params[:model])
+    if @m
+      @filter[:model] =  Model.find_by(id: params[:model]).name if params[:model]
+    else
+      @filter[:model] = "Не задано"
+    end
+    @filter[:carcass] = Carcass.find_by(id: params[:carcass]).name if params[:carcass]
+    @filter[:color] = Color.find_by(id: params[:color]).name if params[:color]
+    @filter[:fuel] = Fuel.find_by(id: params[:fuel]).name if params[:fuel]
+    @filter[:volume_from] = volume_from.to_s + '..' + volume_to.to_s if params[:volume_from]
+    @filter[:year] = params[:year].to_s
+    @filter[:cost_from] = cost_from.to_s + '..' + cost_to.to_s if params[:cost_from]
+    @a_parts = @a_parts.order(id: :desc)
+    render 'parts'
+  end
+
 
 
   def modelparser
@@ -485,6 +588,30 @@ class AppController < ApplicationController
             @a.save
           end
           counter += 1
+        end
+      end
+    end
+    render body: counter.to_s + "\n" + links
+  end
+
+  def reviewsparser
+    require 'open-uri'
+    links = ""
+    counter = 0
+    (0..2).reverse_each do |page|
+      url = "https://xn----8sbejcd7btry6i.xn--p1ai/voprosy_i_otvety/p/#{page}"
+      html = open(url)
+      require 'nokogiri'
+      doc = Nokogiri::HTML(html)
+      doc.css("td.content-part div:not(.ticker):not(.site-path):not(.ticker-wrap)").reverse_each do |li|
+        if li.text['201']
+          @f = Feedback.new
+          @f.name = li.xpath('./b').text
+          @f.ready_date = li.xpath('./text()').text.split(':')[0] + ":" + li.xpath('./text()').text.split(':')[1].slice(0..1)
+          @f.text =  li.xpath('./text()').text.split(':')[1].slice(2..-1)
+          @f.reply = li.xpath('./div').text.split('Ответ:')[1]
+          @f.status = 1
+          @f.save
         end
       end
     end

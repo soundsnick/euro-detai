@@ -1,14 +1,14 @@
 Rails.application.configure do
-  config.action_mailer.delivery_method = :smtp
-  # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => 'soundsnick@gmail.com',
-      :password             => '1-14-40era',
-      :authentication       => "plain",
-      :enable_starttls_auto => true
-  }
+  # config.action_mailer.delivery_method = :smtp
+  # # SMTP settings for gmail
+  # config.action_mailer.smtp_settings = {
+  #     :address              => "smtp.gmail.com",
+  #     :port                 => 587,
+  #     :user_name            => 'soundsnick@gmail.com',
+  #     :password             => '1-14-40era',
+  #     :authentication       => "plain",
+  #     :enable_starttls_auto => true
+  # }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

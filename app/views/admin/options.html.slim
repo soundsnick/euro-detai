@@ -7,6 +7,10 @@ main.admin-page
         select.uk-select name="manufacturer"
           - @manufacturers.each do |option|
             option value=option.id = option.name
+      - if @page_config[:model] == Subcategory
+        select.uk-select name="category"
+          - @categories.each do |option|
+            option value=option.id = option.name
       - if @page_config[:model] == Color
         input.uk-input style="width: 70px;" type="color" name="color" value="#2196f3"
       button.uk-button.uk-button-primary = "Добавить"
@@ -20,6 +24,8 @@ main.admin-page
         th = "Название"
         - if @page_config[:model] == Model
           th = "Производитель"
+        - if @page_config[:model] == Subcategory
+          th = "Категория"
         - if @page_config[:model] == Manufacturer
           th = "Текст"
         th = "Добавлено"
@@ -40,10 +46,12 @@ main.admin-page
             input.uk-input.uk-form-blank.part-name data-id=part.id onfocus="window.changing = this.value" onblur="editPart(this, #{part.id}, '#{@page_config[:edit_url]}')" value=part.name
           - if @page_config[:model] == Model
             td = part.manufacturer.name
+          - if @page_config[:model] == Subcategory
+            td = part.category.name
           - if @page_config[:model] == Manufacturer
             td
               input.uk-input.uk-form-blank.part-text data-id=part.id onfocus="window.changings = this.value" onblur="eeditPart(this, #{part.id}, '/api/manufacturer.changeText?manufacturer_id')" value=part.text
-          td = part.created_at
+          td = part.created_at if defined? part.created_at
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id}, '#{@page_config[:delete_url]}')" = "Удалить"
 

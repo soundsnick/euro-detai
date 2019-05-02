@@ -94,9 +94,9 @@ main.home
 coffee:
   $('#form-horizontal-man').change(() ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
-      options = ""
+      options = "<option value=''>Не задано</option>"
       formOption = (option) ->
         options += "<option value=#{option['id']}>#{option['name']}</option>"
-      formOption option for option in data['body']
+      formOption option for option in data['body'] if data['body']
       $('#form-horizontal-model').html options
   )

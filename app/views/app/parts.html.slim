@@ -11,7 +11,7 @@ main.parts
           .flex style="align-items: center;"
             - if params[:action] != "advanced_search"
               h1.title style="flex: 1;" = @page_config[:title]
-            - if params[:action] == "advanced_search"
+            - if params[:action] == "advanced_search" or params[:action] == 'subcategories'
               div.filter-result style="flex: 1"
                 h1.title = "Примененные фильтры:"
             p.amount style="margin: 10px 0;" = "В каталоге #{Part.all.count} запчастей"
@@ -21,6 +21,10 @@ main.parts
                 tr
                   th.uk-table-shrink = "Категория"
                   td = @filter[:category]
+              - if params[:subcategory] and params[:action] == 'subcategories'
+                tr
+                  th.uk-table-shrink = "Подкатегория"
+                  td = @filter[:subcategory]
               - if @filter[:manufacturer]
                 tr
                   th.uk-table-shrink = "Марка автомобиля"
@@ -97,11 +101,21 @@ main.parts
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
     = will_paginate @a_parts
 coffee:
-  $('#form-horizontal-man').on('change', ->
+  $('#form-horizontal-man').change(() ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = "<option value=''>Не задано</option>"
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body'] if data['body']
+      $('#form-horizontal-model').html options
+  )
+
+
+  $('#form-horizontal-mans').change(() ->
+    $.get "/api/subcategory.getByCategory?category_id=#{$('#form-horizontal-mans').val()}", (data) ->
       options = ""
       formOption = (option) ->
         options += "<option value=#{option['id']}>#{option['name']}</option>"
-      formOption option for option in data['body']
-      $('#form-horizontal-model').html options
+      formOption option for option in data['body'] if data['body']
+      $('#form-horizontal-subcategories').html options
   )

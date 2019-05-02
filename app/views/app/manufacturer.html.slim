@@ -11,4 +11,6 @@ main.home
         p.home-paragraph = "Итак, поисковик привел Вас на текущую страничку нашего каталога! А значит, Вам необходимы б/у запчасти для автомобиля #{@manufacturer.name}! Рады предложить Вам свои услуги!"
         p.home-paragraph = @manufacturer.text
         center
-          a.uk-button.uk-button-primary href='/parts/advanced_search?manufacturer=#{@manufacturer.id}&year_from=1900&year_to=&model=&category=0&volume_from=0&volume_to=&fuel=1' = "Запчасти для #{@manufacturer.name}"
+          a.uk-button.uk-button-default href='/subcategories?category=1&manufacturer=#{@manufacturer.id}' = "Двигатели для #{@manufacturer.name}"
+          a.uk-button.uk-button-primary href='/parts/advanced_search?manufacturer=#{@manufacturer.id}&year_from=1900&year_to=&model=&category=0&volume_from=0&volume_to=&fuel=1' = "Все запчасти для #{@manufacturer.name}"
+          a.uk-button.uk-button-default href='/subcategories?category=2&manufacturer=#{@manufacturer.id}' = "Трансмиссия для #{@manufacturer.name}"
