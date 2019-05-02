@@ -20,7 +20,7 @@ main.admin-page
         tr data-id=part.id
           td = part.id
           td
-            - if defined? part.created_at
+            - if defined? part.new
               a href=new_path(part.new_id) = part.new.title
           td = part.email.to_s + " " + part.name
           td = part.text

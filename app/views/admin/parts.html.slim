@@ -15,7 +15,7 @@ main.admin-page
 
     tfoot
       tr
-        td = "Общее количество: #{@count}"
+        td = "Общее количество: #{@parts.count}"
     tbody.uk-card.uk-card-default.uk-card-body
       - @parts.each do |part|
         tr data-id=part.id

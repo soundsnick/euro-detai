@@ -23,11 +23,11 @@ main.home
               - @manufacturers.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
           .uk-margin
-            label.uk-form-label = "Модель автомобиля"
-            input.uk-input type="text" name="model" placeholder="Например, Vectra B, Passat B6, 525 tds E39... "
+            label.uk-form-label.required = "Модель автомобиля"
+            input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" type="text" name="model" placeholder="Например, Vectra B, Passat B6, 525 tds E39... "
           .uk-margin
-            label.uk-form-label = "Марка автомобиля"
-            select.uk-select name="year"
+            label.uk-form-label.required = "Год"
+            select.uk-select.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="year"
               - (1985..2019).each do |manufacturer|
                 option value=manufacturer = manufacturer
           .uk-margin
@@ -36,13 +36,13 @@ main.home
               - @carcasses.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
           .uk-margin
-            label.uk-form-label = "Тип топлива"
-            select.uk-select name="fuel"
+            label.uk-form-label.required = "Тип двигателя"
+            select.uk-select.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="fuel"
               - @fuels.each do |manufacturer|
                 option value=manufacturer.id = manufacturer.name
           .uk-margin
-            label.uk-form-label = "Объем, см3:"
-            input.uk-input type="text" name="volume" placeholder="например, 2500"
+            label.uk-form-label.required = "Объем, см3:"
+            input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" type="text" name="volume" placeholder="например, 2500"
           .uk-margin
             label.uk-form-label = "Мощность, л.с:"
             input.uk-input type="text" name="power" placeholder="Мощность"
@@ -50,11 +50,11 @@ main.home
             label.uk-form-label = "Модель двигателя:"
             input.uk-input type="text" name="engine" placeholder="Модель"
           .uk-margin
-            label.uk-form-label = "Тип коробки передач:"
-            input.uk-input type="text" name="changer" placeholder="например, 3-АКПП"
+            label.uk-form-label.required = "Тип коробки передач:"
+            input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" type="text" name="changer" placeholder="например, 3-АКПП"
           .uk-margin
-            label.uk-form-label = "Привод"
-            select.uk-select name="privod"
+            label.uk-form-label.required = "Привод"
+            select.uk-select.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="privod"
               option value="передний" = "передний"
               option value="передний" = "задний"
               option value="передний" = "постоянный полный"
@@ -78,11 +78,11 @@ main.home
             label.uk-form-label = "Ваше имя:"
             input.uk-input type="text" name="name"
           .uk-margin
-            label.uk-form-label = "Ваш город:"
-            input.uk-input type="text" name="city"
+            label.uk-form-label.required = "Ваш город:"
+            input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" type="text" name="city"
           .uk-margin
-            label.uk-form-label = "Ваш e-mail (для ответа):"
-            input.uk-input type="text" name="email"
+            label.uk-form-label.required = "Ваш e-mail (для ответа):"
+            input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" type="text" name="email"
           .uk-margin
             label.uk-form-label = "Ваш номер телефона (для ответа):"
             input.uk-input type="text" name="phone"

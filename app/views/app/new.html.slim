@@ -23,13 +23,13 @@ main.home
               .uk-form-controls
                 input.uk-input name="email" placeholder="Email"
             .uk-margin
-              label.uk-form-label = "Ваше имя:"
+              label.uk-form-label.required = "Ваше имя:"
               .uk-form-controls
-                input.uk-input name="name" placeholder="Имя"
+                input.uk-input.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="name" placeholder="Имя"
             .uk-margin
-              label.uk-form-label = "Добавить комментарий: "
+              label.uk-form-label.required = "Текст: "
               .uk-form-controls
-                textarea.uk-textarea name="text" placeholder="Текст комментария"
+                textarea.uk-textarea.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="text" placeholder="Текст комментария"
             input.uk-button.uk-button-primary type="submit" value="Добавить"
           .commentaries
             h1.title = "Комментарий"

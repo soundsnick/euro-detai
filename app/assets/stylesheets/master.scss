@@ -418,7 +418,16 @@ input[type="submit"],
     }
   }
 }
-
+label.required::after {
+  content: '*';
+  color: #ff1f1f;
+  padding-left: 5px;
+  font-size: 18px;
+}
+.wp{
+  width: 20px;
+  margin-right: 10px;
+}
 .logo{
   height: auto;
   box-sizing: border-box;
