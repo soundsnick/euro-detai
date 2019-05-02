@@ -8,7 +8,7 @@ main.parts
             a.uk-link href=root_path = "Главная"
             = " | "
             a.uk-link href=parts_path = "Каталог"
-          .flex style="align-items: center;"
+          .flex.responsive-flex style="align-items: center;"
             - if params[:action] != "advanced_search"
               h1.title style="flex: 1;" = @page_config[:title]
             - if params[:action] == "advanced_search" or params[:action] == 'subcategories'
