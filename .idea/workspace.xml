@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/master.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/master.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/commentaries.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/commentaries.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/orders.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/orders.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/parts.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/parts.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/app/new.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/app/new.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/app/query.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/app/query.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/app/reviews.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/app/reviews.html.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/query.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/query.html.slim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.slim" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -29,8 +24,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+            <state relative-caret-position="350">
+              <caret line="49" column="18" lean-forward="true" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/query.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -53,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/master.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="428" column="21" selection-start-line="428" selection-start-column="21" selection-end-line="428" selection-end-column="21" />
+            <state relative-caret-position="345">
+              <caret line="429" column="18" selection-start-line="429" selection-start-column="18" selection-end-line="429" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -107,15 +111,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/orders.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -161,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/default_mailer/query_email.text.erb" />
         <option value="$PROJECT_DIR$/app/views/default_mailer/query_email.html.slim" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/test/mailers/previews/default_mailer_preview.rb" />
@@ -210,8 +204,9 @@
         <option value="$PROJECT_DIR$/app/views/app/reviews.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/new.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/query.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.slim" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/master.scss" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/admin/query.html.slim" />
       </list>
     </option>
   </component>
@@ -564,12 +559,12 @@
       <workItem from="1556448196225" duration="14841000" />
       <workItem from="1556647467092" duration="10345000" />
       <workItem from="1556668186471" duration="7739000" />
-      <workItem from="1556800732730" duration="13971000" />
+      <workItem from="1556800732730" duration="15197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272380000" />
+    <option name="totallyTimeSpent" value="273606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -628,13 +623,6 @@
     <SUITE FILE_PATH="coverage/auto@Production__auto.rcov" NAME="Production: auto Coverage Results" MODIFIED="1554497477089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="auto" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/default_mailer/feedback_email.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="91" selection-start-line="16" selection-start-column="91" selection-end-line="16" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/default_mailer/query_email.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -963,17 +951,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/master.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        <state relative-caret-position="345">
+          <caret line="429" column="18" selection-start-line="429" selection-start-column="18" selection-end-line="429" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/master.scss">
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="428" column="21" selection-start-line="428" selection-start-column="21" selection-end-line="428" selection-end-column="21" />
+        <state relative-caret-position="350">
+          <caret line="49" column="18" lean-forward="true" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/admin/query.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
         </state>
       </provider>
     </entry>
