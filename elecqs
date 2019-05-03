@@ -1,0 +1,49 @@
+                  List of relations
+ Schema |         Name         |   Type   |  Owner   
+--------+----------------------+----------+----------
+ public | announcements        | table    | yernazar
+ public | announcements_id_seq | sequence | yernazar
+ public | ar_internal_metadata | table    | yernazar
+ public | attachments          | table    | yernazar
+ public | attachments_id_seq   | sequence | yernazar
+ public | carcasses            | table    | yernazar
+ public | carcasses_id_seq     | sequence | yernazar
+ public | categories           | table    | yernazar
+ public | categories_id_seq    | sequence | yernazar
+ public | cities               | table    | yernazar
+ public | cities_id_seq        | sequence | yernazar
+ public | colors               | table    | yernazar
+ public | colors_id_seq        | sequence | yernazar
+ public | commentaries         | table    | yernazar
+ public | commentaries_id_seq  | sequence | yernazar
+ public | countries            | table    | yernazar
+ public | countries_id_seq     | sequence | yernazar
+ public | feedbacks            | table    | yernazar
+ public | feedbacks_id_seq     | sequence | yernazar
+ public | fuels                | table    | yernazar
+ public | fuels_id_seq         | sequence | yernazar
+ public | manufacturers        | table    | yernazar
+ public | manufacturers_id_seq | sequence | yernazar
+ public | models               | table    | yernazar
+ public | models_id_seq        | sequence | yernazar
+ public | news                 | table    | yernazar
+ public | news_id_seq          | sequence | yernazar
+ public | orders               | table    | yernazar
+ public | orders_id_seq        | sequence | yernazar
+ public | parts                | table    | yernazar
+ public | parts_id_seq         | sequence | yernazar
+ public | queries              | table    | yernazar
+ public | queries_id_seq       | sequence | yernazar
+ public | query_images         | table    | yernazar
+ public | query_images_id_seq  | sequence | yernazar
+ public | roles                | table    | yernazar
+ public | roles_id_seq         | sequence | yernazar
+ public | schema_migrations    | table    | yernazar
+ public | subcategories        | table    | yernazar
+ public | subcategories_id_seq | sequence | yernazar
+ public | users                | table    | yernazar
+ public | users_id_seq         | sequence | yernazar
+ public | volumes              | table    | yernazar
+ public | volumes_id_seq       | sequence | yernazar
+(44 rows)
+

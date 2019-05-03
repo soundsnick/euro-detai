@@ -20,9 +20,11 @@ main.admin-page
         tr data-id=part.id
           td = part.id
           td
-            - if defined? part.new
+            - if part.new
               a href=new_path(part.new_id) = part.new.title
-          td = part.email.to_s + " " + part.name
+          td
+            - if part.email
+              = part.email + " " + part.name
           td = part.text
           td = part.created_at
           td
@@ -49,8 +51,11 @@ main.admin-page
         tr data-id=part.id
           td = part.id
           td
-            a href=new_path(part.new_id) = part.new.title
-          td = part.email.to_s + " " + part.name
+            - if part.new
+              a href=new_path(part.new_id) = part.new.title
+          td
+            - if part.email
+              = part.email + " " + part.name
           td = part.text
           td = part.created_at
           td
