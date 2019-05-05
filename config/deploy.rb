@@ -82,10 +82,10 @@ namespace :deploy do
   end
   before :starting,     :check_revision
   after :check_revision,        :backup_images
-  after :backup_images, :return_images
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+  after :restart, :return_images
 end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma

@@ -672,75 +672,75 @@ class AdminController < ApplicationController
   end
 
 
-  # def parser
-  #   require 'creek'
-  #
-  #   workbook = Creek::Book.new Rails.root.join('public', 'documents', 'data.xlsx')
-  #   worksheets = workbook.sheets
-  #
-  #   @body = ""
-  #   count = 0
-  #
-  #   worksheets.each do |worksheet|
-  #     @categories = Category.all
-  #     @manufacturers = Manufacturer.all
-  #     worksheet.rows.each do |row|
-  #       if row.values[0] != nil
-  #         r = row.values
-  #         @part = Part.new
-  #         @part.title = r[0]
-  #         # Определение производителя
-  #         @manufacturers.each do |m|
-  #           if (r[3]!= nil and r[3].downcase[m.name.downcase]) or (r[2]!= nil and r[2].downcase[m.name.downcase]) or (r[0]!= nil and r[0].downcase[m.name.downcase])
-  #             @part.manufacturer_id = m.id
-  #             break
-  #           end
-  #         end
-  #         if @part.manufacturer_id == nil and r[0] != nil
-  #           @part.manufacturer_id = 1
-  #         end
-  #         # Image
-  #         @part.image = r[1]
-  #         @part.tags = r[2]
-  #         @part.description = r[3]
-  #         @part.cost = r[4]
-  #         if (@v = Volume.find_by(name: r[5]))
-  #           @part.volume_id = @v.id
-  #         else
-  #           @v = Volume.new
-  #           @v.name = r[5]
-  #           @v.save
-  #           @part.volume_id = @v.id
-  #         end
-  #         if (@f = Fuel.find_by(name: r[6]))
-  #           @part.fuel_id = @f.id
-  #         else
-  #           @f = Fuel.new
-  #           @f.name = r[6]
-  #           @f.save
-  #           @part.fuel_id = @f.id
-  #         end
-  #         @part.mark = r[7]
-  #         @part.privod = r[8]
-  #         @part.year = r[10]
-  #         @part.model_id = 1
-  #         @part.color_id = 1
-  #         @categories.each do |m|
-  #           if (r[0]!= nil and r[0].downcase[m.name.downcase])
-  #             @part.category_id = m.id
-  #             break
-  #           end
-  #         end
-  #         if @part.category_id == nil
-  #           @part.category_id = 0
-  #         end
-  #         @part.carcass_id = 1
-  #         @part.save
-  #       end
-  #     end
-  #   end
-  #   render body: count.to_s + "\n" + @body
-  # end
+  def parser
+    require 'creek'
+
+    workbook = Creek::Book.new Rails.root.join('public', 'documents', 'data.xlsx')
+    worksheets = workbook.sheets
+
+    @body = ""
+    count = 0
+
+    worksheets.each do |worksheet|
+      @categories = Category.all
+      @manufacturers = Manufacturer.all
+      worksheet.rows.each do |row|
+        if row.values[0] != nil
+          r = row.values
+          @part = Part.new
+          @part.title = r[0]
+          # Определение производителя
+          @manufacturers.each do |m|
+            if (r[3]!= nil and r[3].downcase[m.name.downcase]) or (r[2]!= nil and r[2].downcase[m.name.downcase]) or (r[0]!= nil and r[0].downcase[m.name.downcase])
+              @part.manufacturer_id = m.id
+              break
+            end
+          end
+          if @part.manufacturer_id == nil and r[0] != nil
+            @part.manufacturer_id = 1
+          end
+          # Image
+          @part.image = r[1]
+          @part.tags = r[2]
+          @part.description = r[3]
+          @part.cost = r[4]
+          if (@v = Volume.find_by(name: r[5]))
+            @part.volume_id = @v.id
+          else
+            @v = Volume.new
+            @v.name = r[5]
+            @v.save
+            @part.volume_id = @v.id
+          end
+          if (@f = Fuel.find_by(name: r[6]))
+            @part.fuel_id = @f.id
+          else
+            @f = Fuel.new
+            @f.name = r[6]
+            @f.save
+            @part.fuel_id = @f.id
+          end
+          @part.mark = r[7]
+          @part.privod = r[8]
+          @part.year = r[10]
+          @part.model_id = 1
+          @part.color_id = 1
+          @categories.each do |m|
+            if (r[0]!= nil and r[0].downcase[m.name.downcase])
+              @part.category_id = m.id
+              break
+            end
+          end
+          if @part.category_id == nil
+            @part.category_id = 0
+          end
+          @part.carcass_id = 1
+          @part.save
+        end
+      end
+    end
+    redirect_to '/parser_two'
+  end
 
   private
 

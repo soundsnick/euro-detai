@@ -96,8 +96,8 @@ Rails.application.routes.draw do
 
   get 'magazin/:name(.:format)', to: 'app#manufacturer'
   # get 'parser', to: 'app#newsparser'
-  get 'parser', to: 'app#reviewsparser'
-  # get 'parser', to: 'app#parseimg'
+  get 'parser', to: 'admin#parser'
+  get 'parser_two', to: 'app#parseimg'
   # get 'parser', to: 'app#model/parser'
   # get 'parser', to: 'admin#parser'
 end
