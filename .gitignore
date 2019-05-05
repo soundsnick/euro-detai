@@ -14,7 +14,9 @@
 !/tmp/.keep
 /.idea
 /deploy.sh
-    
+/public/assets/*
+/public/images/*
+/public/news/*
 
 /node_modules
 /yarn-error.log
