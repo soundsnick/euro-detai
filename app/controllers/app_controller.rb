@@ -566,6 +566,8 @@ class AppController < ApplicationController
                       end
                     rescue Down::InvalidUrl
                       nil
+                    rescue Down::ClientError
+                      nil
                     end
                   end
                 end
