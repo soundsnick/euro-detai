@@ -496,7 +496,7 @@ class AppController < ApplicationController
                 images += ","
               end
             end
-          rescue OpenURI::HTTPError
+          rescue
             nil
           end
         end
