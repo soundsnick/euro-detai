@@ -68,7 +68,7 @@ main.home
           - if manufacturers.image
             .manufacturer
               a href="/magazin/#{manufacturers.name}"
-                img src=asset_path(manufacturers.image)
+                img src=asset_path(manufacturers.image.gsub("\n", ''))
   .uk-card.uk-card-secondary.steps
     .container
       .uk-card-body

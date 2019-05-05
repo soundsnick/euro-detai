@@ -50,6 +50,18 @@ namespace :deploy do
       end
     end
   end
+  task :backup_images do
+    execute "mkdir /home/#{fetch(:user)}/backup"
+    execute "cp -r /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/images/ /home/#{fetch(:user)}/backup/"
+    execute "cp -r /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/news/ /home/#{fetch(:user)}/backup/"
+  end
+  task :return_images do
+    execute "cp -r /home/#{fetch(:user)}/backup/images/* /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/images/"
+    execute "cp -r /home/#{fetch(:user)}/backup/* /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/news/"
+    date = Time.now.strftime('%d-%m-%Y_%H:%M').to_s
+    execute "rm -rf /home/#{fetch(:user)}/backups/*"
+    execute "mv -r /home/#{fetch(:user)}/backup /home/#{fetch(:user)}/backups/backup_#{date}"
+  end
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -64,6 +76,8 @@ namespace :deploy do
     end
   end
   before :starting,     :check_revision
+  after :check_revision,        :backup_images
+  after :backup_images, :return_images
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
