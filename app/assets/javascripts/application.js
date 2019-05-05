@@ -17,3 +17,6 @@
 //= require jquery.inputmask.extensions
 //= require jquery.inputmask.numeric.extensions
 //= require jquery.inputmask.date.extensions
+//= require jquery
+//= require uikit
+//= require uikit-icons
