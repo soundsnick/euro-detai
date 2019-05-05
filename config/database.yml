@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: auto_production
-  username: yernazar
+  username: deploy
   password: 1-14-40ernazar
