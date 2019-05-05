@@ -69,7 +69,7 @@ main.parts
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
                   a href=p_image data-caption=part.title
-                    = image_tag p_image, class: 'part__image', alt:part.title
+                    img.part__image src=p_image alt=part.title
               .uk-card-body
                 .part__info
                   h2.part__title.uk-card-title
