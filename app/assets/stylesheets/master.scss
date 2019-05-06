@@ -9,7 +9,7 @@ html, body{
 body{
   margin: 0;
   padding: 0;
-  background: #fff url('/assets/bg.png');
+  background: #fff asset-url('bg.png');
   font-weight: 200;
   font-size: 14px;
   font-family: "Gotham Pro", sans-serif;
@@ -204,7 +204,7 @@ input[type="submit"],
 .flex{ display: flex; }
 .part-search__common{
   padding: 10px;
-  background: url(/assets/pattern.png), #f7f7f7;
+  background: asset-url('pattern.png'), #f7f7f7;
   box-shadow: 0 4px 3px -2px rgba(0, 0, 0, 0.05);
   background-size: 17%;
   background-position: center 42px;
@@ -579,7 +579,7 @@ h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}
   padding-right: 29px;
 }
 .steps{
-  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/assets/warehouse.jpg')!important;
+  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), asset-url('warehouse.jpg')!important;
   background-size: cover!important;
   background-position-x: center!important;
   padding-bottom: 40px;
