@@ -1,5 +1,5 @@
 class DefaultMailer < ApplicationMailer
-  default from: "info@xn----8sbejcd7btry6i.xn--p1ai"
+  default from: "detal.ev@yandex.ru"
 
   def query_email(query)
     @query = query

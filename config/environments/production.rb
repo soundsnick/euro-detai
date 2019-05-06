@@ -1,15 +1,16 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: '185.135.81.48', port: 80 }
+  config.action_mailer.default_url_options = { host: '185.135.81.48' }
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       tls: true,
-      address: 'smtp.yandex.ru',
-      port: 587,
-      domain: 'yandex.ru',
-      authentication: 'plain',
+      address: "smtp.yandex.com",
+      port: 465,
+      domain: "yandex.com",
+      authentication: "plain",
+      enable_starttls_auto: true,
       user_name: 'detal.ev@yandex.ru',
-      password: 'BTxMjT',
-      enable_starttls_auto: true
+      password: 'BTxMjT'
   }
   # Settings specified here will take precedence over those in config/application.rb.
 
