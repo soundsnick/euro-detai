@@ -4,11 +4,12 @@ Rails.application.configure do
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => 'soundsnick@gmail.com',
-      :password             => '1-14-40era',
-      :authentication       => "plain",
+      :address              => "smtp.yandex.ru",
+      :port                 => 465,
+      :domain               => 'yandex.ru',
+      :authentication       => 'plain',
+      :user_name            => 'detal.ev@yandex.ru',
+      :password             => 'BTxMjT',
       :enable_starttls_auto => true
   }
   # Settings specified here will take precedence over those in config/application.rb.
