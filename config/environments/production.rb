@@ -5,8 +5,8 @@ Rails.application.configure do
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
       :address              => "smtp.yandex.ru",
-      :port                 => 465,
-      :domain               => 'yandex.ru',
+      :port                 => 587,
+      :domain               => 'mail.yandex.ru',
       :authentication       => 'plain',
       :user_name            => 'detal.ev@yandex.ru',
       :password             => 'BTxMjT',
