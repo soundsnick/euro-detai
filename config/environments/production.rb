@@ -1,16 +1,15 @@
 Rails.application.configure do
+  config.action_mailer.default_url_options = { host: '185.135.81.48', port: 80 }
   config.action_mailer.delivery_method = :smtp
-
-
-  # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.yandex.ru",
-      :port                 => 587,
-      :domain               => 'mail.yandex.ru',
-      :authentication       => 'plain',
-      :user_name            => 'detal.ev@yandex.ru',
-      :password             => 'BTxMjT',
-      :enable_starttls_auto => true
+      tls: true,
+      address: 'smtp.yandex.ru',
+      port: 587,
+      domain: 'yandex.ru',
+      authentication: 'plain',
+      user_name: 'detal.ev@yandex.ru',
+      password: 'BTxMjT',
+      enable_starttls_auto: true
   }
   # Settings specified here will take precedence over those in config/application.rb.
 
