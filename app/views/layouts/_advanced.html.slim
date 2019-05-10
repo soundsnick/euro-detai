@@ -56,6 +56,7 @@ aside.advanced-search.uk-card.uk-card-default
           label.uk-form-label = "Объем двигателя:"
           .uk-margin
             select.uk-select name="volume"
+              option value="no" = "Не задано"
               - for i in (0.8..6.2).step(0.1) do
                 - i = i.round(1)
                 - if params[:volume] and params[:volume] == i

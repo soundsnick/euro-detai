@@ -149,7 +149,7 @@ class AppController < ApplicationController
     if params[:fuel] and  Integer(params[:fuel]) > 1
       @a_parts = @a_parts.where(fuel_id: params[:fuel])
     end
-    if params[:volume]
+    if params[:volume] and params[:volume] != "no"
       @v = Volume.find_by(name: params[:volume]) ? Volume.find_by(name: params[:volume]).id : 0
       @a_parts = @a_parts.where(volume_id: @v)
     end

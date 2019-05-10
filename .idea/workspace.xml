@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_advanced.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_advanced.html.slim" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -37,20 +38,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/_advanced.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
+            <state relative-caret-position="299">
+              <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+            <state relative-caret-position="115">
+              <caret line="151" column="49" selection-start-line="151" selection-start-column="49" selection-end-line="151" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -122,7 +123,6 @@
       <find>def reviews</find>
       <find>logo</find>
       <find>models</find>
-      <find>adva</find>
       <find>model_add</find>
       <find>subcateg</find>
       <find>dvs</find>
@@ -143,6 +143,7 @@
       <find>commenta</find>
       <find>query_</find>
       <find>categories</find>
+      <find>adva</find>
     </findStrings>
     <replaceStrings>
       <replace>fuel</replace>
@@ -194,7 +195,6 @@
         <option value="$PROJECT_DIR$/app/controllers/admin_controller.rb" />
         <option value="$PROJECT_DIR$/app/mailers/default_mailer.rb" />
         <option value="$PROJECT_DIR$/app/views/app/part.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/layouts/_advanced.html.slim" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
         <option value="$PROJECT_DIR$/app/views/app/reviews.html.slim" />
         <option value="$PROJECT_DIR$/config/application.rb" />
@@ -203,8 +203,9 @@
         <option value="$PROJECT_DIR$/config/initializers/recaptcha.rb" />
         <option value="$PROJECT_DIR$/config/secrets.yml" />
         <option value="$PROJECT_DIR$/app/views/app/new.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/app/query.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/app_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/app/query.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_advanced.html.slim" />
       </list>
     </option>
   </component>
@@ -540,12 +541,12 @@
       <workItem from="1557228551350" duration="822000" />
       <workItem from="1557311773659" duration="937000" />
       <workItem from="1557419361569" duration="33000" />
-      <workItem from="1557484019736" duration="8527000" />
+      <workItem from="1557484019736" duration="9074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="311898000" />
+    <option name="totallyTimeSpent" value="312445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -891,13 +892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_advanced.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/reviews.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -919,6 +913,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="151" column="49" selection-start-line="151" selection-start-column="49" selection-end-line="151" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/query.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
@@ -926,10 +927,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_advanced.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="123" column="5" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+        <state relative-caret-position="299">
+          <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
         </state>
       </provider>
     </entry>
