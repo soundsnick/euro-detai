@@ -214,9 +214,13 @@ class AppController < ApplicationController
       commentary.email = params[:email]
       commentary.new_id = params[:newId]
       commentary.status = 0
-      commentary.save
-      DefaultMailer.comment_email(commentary).deliver
-      redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
+      if verify_recaptcha(commentary)
+        commentary.save
+        DefaultMailer.comment_email(commentary).deliver
+        redirect_to new_path(params[:newId]), notice: "Ваш комментарий будет опубликован после модерации"
+      else
+        redirect_to new_path(params[:newId]), notice: "Заполните капчу!"
+      end
     else redirect_back fallback_location: root_path
     end
   end
@@ -304,25 +308,29 @@ class AppController < ApplicationController
     @q.city = params[:city]
     @q.email = params[:email]
     @q.phone = params[:phone]
-    @q.save
-    if params[:images]
-      params[:images].each do |image|
-        imagehex = Digest::SHA256.hexdigest image.original_filename
-        imagehex = imagehex.slice(0, 10)
-        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
-        imagehex2 = imagehex2.slice(0, 10)
-        imagehex = imagehex2 + imagehex
-        File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
-          file.write(image.read)
-          @image = QueryImage.new
-          @image.query_id = @q.id
-          @image.image = imagehex + image.original_filename
-          @image.save
+    if verify_recaptcha(commentary)
+      @q.save
+      if params[:images]
+        params[:images].each do |image|
+          imagehex = Digest::SHA256.hexdigest image.original_filename
+          imagehex = imagehex.slice(0, 10)
+          imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+          imagehex2 = imagehex2.slice(0, 10)
+          imagehex = imagehex2 + imagehex
+          File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+            file.write(image.read)
+            @image = QueryImage.new
+            @image.query_id = @q.id
+            @image.image = imagehex + image.original_filename
+            @image.save
+          end
         end
       end
+      DefaultMailer.query_email(@q).deliver
+      redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
+    else
+      redirect_to query_path, notice: 'Заполните капчу!'
     end
-    DefaultMailer.query_email(@q).deliver
-    redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
   end
 
   def manufacturer

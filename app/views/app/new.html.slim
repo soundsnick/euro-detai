@@ -30,6 +30,8 @@ main.home
               label.uk-form-label.required = "Текст: "
               .uk-form-controls
                 textarea.uk-textarea.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="text" placeholder="Текст комментария"
+            .uk-margin
+              = recaptcha_tags
             input.uk-button.uk-button-primary type="submit" value="Добавить"
           .commentaries
             h1.title = "Комментарий"
