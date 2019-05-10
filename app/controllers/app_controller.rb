@@ -122,10 +122,10 @@ class AppController < ApplicationController
     @page_config = {
         'title': "Поиск по запросу \"#{params[:query]}\""
     }
-    if params[:category] and Integer(params[:category]) > 0
+    if params[:category] and params[:category].to_i > 0
       sub = Category.find_by(id: params[:category])
       if sub.name == "ДВС"
-        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ? AND category_id = NULL OR lower(title) like ? OR lower(description) like ?  AND category_id = NULL", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%")
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?  AND category_id = NULL OR lower(title) like ? OR lower(description) like ? AND category_id = NULL", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%")
       else
         @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%")
       end
