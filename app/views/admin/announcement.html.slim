@@ -10,7 +10,8 @@ main.admin-page
         - @news.each do |option|
           - selected = ''
           - if @announcement
-            - if option.id == @announcement.new_id
-              - selected = 'selected'
-          option selected=selected value=option.id = option.title
+            - if @announcement.new.id == option.id
+              option value=option.id selected="" = option.title
+              - else
+              option value=option.id = option.title
       button.uk-button.uk-button-primary = "Сохранить"
