@@ -1,6 +1,8 @@
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
+  RECAPTCHA_SITE_KEY  = '6Lfn0qIUAAAAAMa8MozzXSbGV5TmAjDcHbowjD2h'
+  RECAPTCHA_SECRET_KEY = '6Lfn0qIUAAAAAFRPkB3OZTYTgcJDjKrODhrtEUiX'
   config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,

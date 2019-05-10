@@ -31,6 +31,8 @@ main.parts
                 label.uk-form-label.required = "Текст: "
                 .uk-form-controls
                   textarea.uk-textarea.required required="required" oninvalid="this.setCustomValidity('Заполните обязательное поле')" oninput="this.setCustomValidity('')" name="text" placeholder="Текст комментария"
+              .uk-margin
+                = recaptcha_tags
               input.uk-button.uk-button-primary type="submit" value="Добавить"
           .flex style="align-items: center;"
             - if params[:action] != "advanced_search"

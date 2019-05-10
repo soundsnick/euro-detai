@@ -13,6 +13,7 @@ gem 'creek'
 gem 'will_paginate', '~> 3.1.0'
 gem "down", "~> 4.4"
 
+gem "recaptcha", require: "recaptcha/rails"
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'

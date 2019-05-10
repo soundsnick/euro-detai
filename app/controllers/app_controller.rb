@@ -149,20 +149,9 @@ class AppController < ApplicationController
     if params[:fuel] and  Integer(params[:fuel]) > 1
       @a_parts = @a_parts.where(fuel_id: params[:fuel])
     end
-    if params[:volume_from]
-      volume_from = params[:volume_from]
-      volume_to = Volume.where.not(id: 1).maximum(:name)
-      if params[:volume_from] != ""
-        if params[:volume_to] != ""
-          volume_to = params[:volume_to]
-        end
-        volumes = Volume.where(name: Float(volume_from)..Float(volume_to)).where.not(id: 1)
-        ids = []
-        volumes.each do |volume|
-          ids.push volume.id
-        end
-        @a_parts = @a_parts.where(volume_id: ids)
-      end
+    if params[:volume]
+      @v = Volume.find_by(name: params[:volume]) ? Volume.find_by(name: params[:volume]).id : 0
+      @a_parts = @a_parts.where(volume_id: @v)
     end
     if params[:year]
       @a_parts = @a_parts.where('year like ?' , "%#{params[:year]}%")
@@ -253,9 +242,13 @@ class AppController < ApplicationController
       commentary.text = params[:text]
       commentary.email = params[:email]
       commentary.name = params[:name]
-      commentary.save
-      DefaultMailer.feedback_email(commentary).deliver
-      redirect_to reviews_path, notice: "Ваше сообщение принято!"
+      if verify_recaptcha(commentary)
+        commentary.save
+        DefaultMailer.feedback_email(commentary).deliver
+        redirect_to reviews_path, notice: "Ваше сообщение принято!"
+      else
+        redirect_to reviews_path, notice: "Заполните капчу!"
+      end
     else redirect_back fallback_location: root_path
     end
   end

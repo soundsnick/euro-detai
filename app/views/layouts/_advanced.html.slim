@@ -53,10 +53,15 @@ aside.advanced-search.uk-card.uk-card-default
         button.uk-button.uk-button-default uk-toggle="target: #advanced" type="button" = "Дополнительные параметры"
       .uk-grid-small.uk-margin#advanced[uk-grid hidden]
         div class="uk-width-1-2@m"
-          label.uk-form-label for="form-horizontal-volume" = "Объем двигателя:"
+          label.uk-form-label = "Объем двигателя:"
           .uk-margin
-            input.uk-input#form-horizontal-volume type="text" value="0" placeholder="с 0" name="volume_from"
-            input.uk-input type="text" placeholder="до" name="volume_to"
+            select.uk-select name="volume"
+              - for i in (0.8..6.2).step(0.1) do
+                - i = i.round(1)
+                - if params[:volume] and params[:volume] == i
+                  option value=i selected="" = i.to_s + "л"
+                - else
+                  option value=i = i.to_s + "л"
         div class="uk-width-1-2@m"
           label.uk-form-label = "Тип топлива:"
           .uk-margin
