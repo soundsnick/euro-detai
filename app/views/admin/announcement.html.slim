@@ -12,6 +12,6 @@ main.admin-page
           - if @announcement
             - if @announcement.new.id == option.id
               option value=option.id selected="" = option.title
-              - else
+            - else
               option value=option.id = option.title
       button.uk-button.uk-button-primary = "Сохранить"
