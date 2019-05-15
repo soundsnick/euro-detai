@@ -139,19 +139,24 @@ class AppController < ApplicationController
       if model
         mname = model.name.split()
         mstr = ""
+        mstr2 = ""
         if mname.length > 1
           mname.each do |m|
             if m['(']
               mstr += m.gsub(/[()]/, "") + " "
+              mstr2 += Translit.convert(m.gsub(/[()]/, ""), :russian) + " "
             else
               mstr += m + " "
+              mstr2 += Translit.convert(m, :russian) + " "
             end
           end
         else
           mstr = mname[0]
+          mstr2 = Translit.convert(mname[0], :russian)
         end
         mstr = mstr.rstrip
-        @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%")
+        mstr2 = mstr2.rstrip
+        @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%")
       end
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1

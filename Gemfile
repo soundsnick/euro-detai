@@ -17,6 +17,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem 'jquery-rails'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'bcrypt'
+gem 'translit'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
 # Use postgresql as the database for Active Record
