@@ -9,7 +9,7 @@ html
         tr
           th align="left" = "Запчасть: "
           td
-            a href="https://евро-деталь.рф/part/#{@order.part.id}"
+            a href="https://евро-деталь.рф/part/#{@order.part.id}" = @order.part.title
         tr
           th align="left" style="text-align: center" = "Дополнительная информация: "
           td = @order.additional
