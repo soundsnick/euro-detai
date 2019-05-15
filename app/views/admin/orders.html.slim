@@ -7,9 +7,8 @@ main.admin-page
         th.uk-table-shrink = "id"
         th = "Запчасть"
         th = "ФИО"
-        th = "Телефон"
-        th = "Email"
-        th = "Город"
+        th = "Контакты"
+        th = "Комментарий"
         th
           = "Управление"
 
@@ -23,9 +22,13 @@ main.admin-page
           td
             a href=part_path(part.part_id) = part.part.title
           td = part.name
-          td = part.phone
-          td = part.email
-          td = part.city
+          td
+            = part.phone
+            br
+            = part.email
+            br
+            = "Город: " + part.city
+          td = part.additional
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
 coffee:
