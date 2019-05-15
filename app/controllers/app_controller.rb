@@ -137,7 +137,21 @@ class AppController < ApplicationController
     if params[:model]
       model = Model.find_by(id: params[:model])
       if model
-        @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%")
+        mname = model.name.split()
+        mstr = ""
+        if mname.length > 1
+          mname.each do |m|
+            if m['(']
+              mstr += m.gsub(/[()]/, "") + " "
+            else
+              mstr += m + " "
+            end
+          end
+        else
+          mstr = mname[0]
+        end
+        mstr = mstr.rstrip
+        @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%")
       end
     end
     if params[:carcass] and  Integer(params[:carcass]) > 1
