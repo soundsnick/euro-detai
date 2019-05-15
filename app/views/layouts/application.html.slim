@@ -1,3 +1,9 @@
+- @meta = {description: "Купить контрактный двигатель, коробку передач б.у, блок ДВС, ГБЦ, раздатки, редукторы, мосты, детали кузова из Германии, Англии, Бельгии, Польши, Литвы. Доставка по России, в Казахстан, Армению, Киргизию.",
+          keywords: ""}
+- @meta['keywords'] = @part.meta_keywords if params[:action] == 'part' and @part.meta_keywords and @part.meta_keywords.length > 2
+- @meta['description'] = @part.meta_description if params[:action] == 'part'and @part.meta_description and @part.meta_description.length > 2
+
+
 doctype html
 html
   head
@@ -6,13 +12,12 @@ html
       - title = @title
     title = title
     - if @meta and @meta['description'] and @meta['keywords']
-      meta name="Description" content=@meta['description']
-      meta name="Keywords" content=@meta['keywords']
+      meta name="description" content=@meta['description']
+      meta name="keywords" content=@meta['keywords']
     meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-    meta name="description" content="Купить контрактный двигатель, коробку передач б.у, блок ДВС, ГБЦ, раздатки, редукторы, мосты, детали кузова из Германии, Англии, Бельгии, Польши, Литвы. Доставка по России, в Казахстан, Армению, Киргизию."
     meta name="wmail-verification" content="aa541131c6148439"
   body
     - if (announcement = Announcement.take)

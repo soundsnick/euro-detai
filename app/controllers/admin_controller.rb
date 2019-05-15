@@ -438,7 +438,7 @@ class AdminController < ApplicationController
     if admin
       @options = Manufacturer.all.order(id: :asc)
       @models = Model.where(manufacturer_id: @options.take.id).order(id: :asc)
-      @volumes = Volume.all.order(id: :asc)
+      @volumes = Volume.all.order(name: :asc)
       @categories = Category.all.order(id: :asc)
       @fuels = Fuel.all.order(id: :asc)
       @carcasses = Carcass.all.order(id: :asc)
@@ -480,6 +480,8 @@ class AdminController < ApplicationController
         @part.category_id = params[:category]
         @part.mark = params[:mark]
         @part.description = params[:description]
+        @part.meta_description = params[:meta_description]
+        @part.meta_keywords = params[:meta_keywords]
         @part.options = params[:options]
         @part.cost = params[:cost]
         if params[:image]
@@ -593,6 +595,8 @@ class AdminController < ApplicationController
       @part.category_id = params[:category]
       @part.mark = params[:mark]
       @part.description = params[:description]
+      @part.meta_description = params[:meta_description]
+      @part.meta_keywords = params[:meta_keywords]
       @part.options = params[:options]
       @part.cost = params[:cost]
       if params[:image]

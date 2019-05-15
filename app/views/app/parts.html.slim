@@ -101,14 +101,12 @@ main.parts
             .uk-margin
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
     = will_paginate @a_parts
-- if @a_parts.count > 0
-  javascript:
-      $(document).ready(function () {
-        // Handler for .ready() called.
-        $('html, body').animate({
-            scrollTop: $('#partss').offset().top
-        }, 'slow');
-      });
+javascript:
+  $(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#partss').offset().top
+    }, 'slow');
+  });
 coffee:
   $('#form-horizontal-man').change(() ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->

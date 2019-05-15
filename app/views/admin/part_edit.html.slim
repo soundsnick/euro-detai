@@ -91,6 +91,16 @@ main.admin-page
       .uk-form-controls
         div uk-form-custom="target: true"
           input.uk-input#form-horizontal-cost type="number" name="cost" placeholder="Цена" value=@part.cost
+    hr
+      h6 = "SEO"
+      .uk-margin
+        label.uk-form-label = "Мета описание"
+        .uk-form-controls
+          textarea.uk-textarea type="text" name="meta_description" placeholder="Meta description" = @part.meta_description
+      .uk-margin
+        label.uk-form-label = "Ключевые слова"
+        .uk-form-controls
+          textarea.uk-textarea type="text" name="meta_keywords" placeholder="Meta keywords" = @part.meta_keywords
     .uk-margin
       .uk-form-controls
         button.uk-button.uk-button-primary type="submit" ="Сохранить"

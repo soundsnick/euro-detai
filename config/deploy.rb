@@ -51,22 +51,6 @@ namespace :deploy do
       end
     end
   end
-  task :backup_images do
-    on roles(:app) do
-      execute "mkdir /home/#{fetch(:user)}/backup"
-      execute "cp -r /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/images/ /home/#{fetch(:user)}/backup/"
-      execute "cp -r /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/news/ /home/#{fetch(:user)}/backup/"
-    end
-  end
-  task :return_images do
-    on roles(:app) do
-      execute "cp -r /home/#{fetch(:user)}/backup/images/* /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/images/"
-      execute "cp -r /home/#{fetch(:user)}/backup/* /home/#{fetch(:user)}/apps/#{fetch(:application)}/current/public/news/"
-      date = Time.now.strftime('%d-%m-%Y_%H:%M').to_s
-      execute "rm -rf /home/#{fetch(:user)}/backups/*"
-      execute "mv /home/#{fetch(:user)}/backup /home/#{fetch(:user)}/backups/backup_#{date}"
-    end
-  end
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -80,10 +64,22 @@ namespace :deploy do
       invoke 'puma:restart'
     end
   end
+  task :image_backup do
+    on roles(:app) do
+      execute "cp -r -n /home/deploy/apps/euro-detai/current/public/images/* /home/deploy/backup/images && cp -r -n /home/deploy/apps/euro-detai/current/public/news/* /home/deploy/backup/news"
+    end
+  end
+  task :image_back do
+    on roles(:app) do
+      execute "cp -r /home/deploy/backup/images/* /home/deploy/apps/euro-detai/current/public/images && cp -r /home/deploy/backup/news/* /home/deploy/apps/euro-detai/current/public/news"
+    end
+  end
   before :starting,     :check_revision
+  after  :starting,      :image_backup
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  after  :finishing,      :image_back
+  after  :image_back,    :restart
 end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190502142403) do
+ActiveRecord::Schema.define(version: 20190515101848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 20190502142403) do
     t.integer "category_id"
     t.text "tags"
     t.string "privod"
+    t.text "meta_keywords"
+    t.text "meta_description"
   end
 
   create_table "queries", force: :cascade do |t|

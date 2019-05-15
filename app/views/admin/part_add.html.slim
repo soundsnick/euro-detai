@@ -78,9 +78,21 @@ main.admin-page
       .uk-form-controls
         div uk-form-custom="target: true"
           input.uk-input#form-horizontal-cost type="number" name="cost" placeholder="Цена"
+    hr
+    h6 = "SEO"
+    .uk-margin
+      label.uk-form-label = "Мета описание"
+      .uk-form-controls
+        textarea.uk-textarea type="text" name="meta_description" placeholder="Meta description"
+    .uk-margin
+      label.uk-form-label = "Ключевые слова"
+      .uk-form-controls
+        textarea.uk-textarea type="text" name="meta_keywords" placeholder="Meta keywords"
     .uk-margin
       .uk-form-controls
-        button.uk-button.uk-button-primary type="submit" ="Добавить"
+        button.uk-button.uk-button-primary type="submit" = "Добавить"
+
+
 coffee:
   $('#form-horizontal-man').on('change', ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
