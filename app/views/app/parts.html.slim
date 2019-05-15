@@ -58,6 +58,7 @@ main.parts
                   th.uk-table-shrink = "Цена"
                   td = @filter[:cost]
             a href=parts_path  = "Сбросить фильтр"
+            #partss
           - @a_parts.each do |part|
             .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
               - p_image = "/images/no_photo.png"
@@ -100,6 +101,14 @@ main.parts
             .uk-margin
               .empty.uk-alert.uk-alert-warning = "Ничего не найдено. Вы можете вернуться на главную страницу сайта или связаться с нами по контактам указанным на сайте"
     = will_paginate @a_parts
+- if @a_parts.count > 0
+  javascript:
+      $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#partss').offset().top
+        }, 'slow');
+      });
 coffee:
   $('#form-horizontal-man').change(() ->
     $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->

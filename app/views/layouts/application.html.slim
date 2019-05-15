@@ -99,16 +99,17 @@ html
     header.header-nav
       .container
         nav.uk-navbar
-          a.uk-link-text href=root_path = 'О компании'
-          a.uk-link-text href="/subcategories?category=1" = "Двигатели"
-          a.uk-link-text href="/subcategories?category=2" = "МКПП"
-          a.uk-link-text href="/subcategories?category=4" = "АКПП"
-          a.uk-link-text href=parts_path = 'Каталог'
-          a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
-          a.uk-link-text href=warranties_path = 'Гарантия'
-          a.uk-link-text href=news_path = 'Отгрузки'
-          a.uk-link-text href=reviews_path = 'Отзывы'
-          a.uk-link-text href=contacts_path = 'Контакты'
+          div#headerFreeze data-turbolinks-permanent="true" style="align-self: center; display: flex;"
+            a#main.uk-link-text href=root_path = 'О компании'
+            a#dvs.uk-link-text href="/subcategories?category=1" = "Двигатели"
+            a#mkpp.uk-link-text href="/subcategories?category=2" = "МКПП"
+            a#akpp.uk-link-text href="/subcategories?category=4" = "АКПП"
+            a#catalog.uk-link-text href=parts_path = 'Каталог'
+            a#payment.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
+            a#warranties.uk-link-text href=warranties_path = 'Гарантия'
+            a#news.uk-link-text href=news_path = 'Отгрузки'
+            a#feedack.uk-link-text href=reviews_path = 'Отзывы'
+            a#contacts.uk-link-text href=contacts_path = 'Контакты'
           .uk-navbar-right
             - if not auth
               a.uk-link-text uk-tooltip="Войти или зарегистрироваться" href=login_path = 'Войти'
@@ -121,7 +122,7 @@ html
         .container
           form.common-search.flex action="/parts/search" method="get"
             input.uk-input type="search" name="query" placeholder="Поиск по названию..." value=params[:query]
-            input.uk-button.uk-button-secondary type="submit" value="Поиск"
+            input.uk-button.uk-button-secondary style="background: #184a84;" type="submit" value="Поиск"
     - if notice
       .container.notice
         .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
@@ -163,6 +164,11 @@ html
           .footer__copyright
             a href="https://кубань-сайт.рф"
               img src=asset_path('kuban_site.png')
+
     coffee:
       $('.previous_page').html "Назад"
       $('.next_page').html "Вперед"
+      $('.header-nav .uk-link-text').click(() ->
+        $('a').removeClass('active');
+        $(this).addClass('active');
+      )

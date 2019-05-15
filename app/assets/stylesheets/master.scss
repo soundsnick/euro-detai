@@ -179,7 +179,7 @@ input[type="submit"],
       transition: width $transition;
       will-change: width;
     }
-    &:hover{
+    &:hover, &.active{
       text-decoration: none;
       &::after{
         width: 100%;
