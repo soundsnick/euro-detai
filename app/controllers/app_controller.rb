@@ -95,7 +95,7 @@ class AppController < ApplicationController
     else
       @categories = Category.all.order(id: :asc)
       @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
-      @a_parts = Part.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(mark) like ?  or lower(constr_num) like ? or lower(model) like ?", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%").paginate(page: params[:page], per_page: 10).order(id: :desc)
+      @a_parts = Part.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(mark) like ?  or lower(constr_num) like ?", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%").paginate(page: params[:page], per_page: 10).order(id: :desc)
       @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
       @models = @models.count == 0 ? Model.where(id: 1) : @models
       @volumes = Volume.all.order(id: :asc)
