@@ -176,7 +176,7 @@ class AdminController < ApplicationController
 
   def news
     if admin
-      @news = New.paginate(page: params[:page], per_page: 10)
+      @news = New.order(id: :desc).paginate(page: params[:page], per_page: 10)
     else admin_err
     end
   end

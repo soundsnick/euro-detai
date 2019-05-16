@@ -170,7 +170,7 @@ class AppController < ApplicationController
     end
     if params[:volume] and params[:volume] != "no"
       @v = Volume.find_by(name: params[:volume]) ? Volume.find_by(name: params[:volume]).id : 0
-      @a_parts = @a_parts.where(volume_id: @v)
+      @a_parts = @a_parts.where('volume_id=? or lower(title) like ?', @v, "%#{@v}%")
     end
     if params[:year]
       @a_parts = @a_parts.where('year like ?' , "%#{params[:year]}%")
