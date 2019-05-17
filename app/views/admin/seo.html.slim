@@ -8,31 +8,31 @@ main.admin-page
       input.uk-input type="text" name="description" placeholder="description"
       button.uk-button.uk-button-primary = "Добавить"
   table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
-    caption = "Страницы"
+    caption = "Главные страницы"
     thead
       tr
         th = "URL"
         th = "Title"
         th = "Keywords"
         th = "Description"
-
-    tfoot
-      tr
-        td = "Общее количество: #{@count}"
+        th = "Управление"
     tbody.uk-card.uk-card-default.uk-card-body
       - @items.each do |part|
         tr data-id=part.id
           td
             - begin
-              = link_to part.action, public_send("#{part.action}_path") if part.action != 'home'
+              = link_to part.action, public_send("#{part.action}_path") if part.action != 'home' and part.action != 'subcategories' and part.action != 'advanced_search'
             - rescue
               = part.action
             = link_to part.action, public_send("root_path") if part.action == 'home'
+            = link_to part.action, '/parts/advanced_search?manufacturer=&year=&model=&category=0&volume=no&fuel=1' if part.action == 'advanced_search'
+            = link_to part.action,'/subcategories?category=2' if part.action == 'subcategories'
           td[contenteditable=""] = part.title
           td[contenteditable=""] = part.keywords
           td[contenteditable=""] = part.description
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+  a.uk-button.uk-button-primary style="display: block;" href=aparts_path = "Изменить SEO настройки товаров"
 coffee:
   window.deletePart = (partId) ->
     $.get "/api/seo.delete?seo_id=#{partId}", (data) ->

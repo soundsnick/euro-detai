@@ -260,8 +260,7 @@ class CarController < ApplicationController
           if color
             color.title = params[:title]
             color.keywords = params[:keywords]
-            color.description = params[:descriptions]
-            # color.hex = params[:color]
+            color.description = params[:description]
             color.save
             render json: construct_response(200, 'success', color.to_json)
           else render json: construct_response(4040, 'not_found: color')
