@@ -677,7 +677,7 @@ class AdminController < ApplicationController
   end
 
   def seo
-    @items = Seo.all
+    @items = Seo.all.order(id: :desc)
   end
 
   def seo_new
