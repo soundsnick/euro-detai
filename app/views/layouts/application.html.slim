@@ -8,6 +8,10 @@
   - @meta[:keywords] = @seo.keywords
   - @meta[:description] = @seo.description
   - @meta[:title] = @seo.title
+- if params[:action] == 'search'
+  - @meta[:title] = params[:query]
+  - @meta[:keywords] = params[:query]
+  - @meta[:description] = params[:query]
 doctype html
 html
   head
