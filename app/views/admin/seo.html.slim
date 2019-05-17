@@ -7,6 +7,9 @@ main.admin-page
       input.uk-input type="text" name="keywords" placeholder="keywords"
       input.uk-input type="text" name="description" placeholder="description"
       button.uk-button.uk-button-primary = "Добавить"
+  .flex.flex-equal
+    a.uk-button.uk-button-secondary style="display: block; flex: 1;" href=anews_path = "Изменить SEO настройки новостей"
+    a.uk-button.uk-button-primary style="display: block; flex: 1;" href=aparts_path = "Изменить SEO настройки товаров"
   table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
     caption = "Главные страницы"
     thead
@@ -32,7 +35,6 @@ main.admin-page
           td[contenteditable=""] = part.description
           td
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
-  a.uk-button.uk-button-primary style="display: block;" href=aparts_path = "Изменить SEO настройки товаров"
 coffee:
   window.deletePart = (partId) ->
     $.get "/api/seo.delete?seo_id=#{partId}", (data) ->

@@ -53,6 +53,8 @@ class AppController < ApplicationController
     end
   end
 
+
+
   def news
     @title = "Бу запчасти с доставкой в регионы"
     @news = New.order("ready_date IS NULL DESC,

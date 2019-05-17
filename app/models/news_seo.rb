@@ -1,0 +1,2 @@
+class NewsSeo < ApplicationRecord
+end

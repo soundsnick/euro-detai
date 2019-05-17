@@ -465,6 +465,17 @@ class AdminController < ApplicationController
     end
   end
 
+  def new_edit
+    if admin && params[:new_id]
+      @part = New.find_by(id: params[:new_id])
+      if @part
+
+      else redirect_to anews_path, notice: 'Не найдено'
+      end
+    else admin_err
+    end
+  end
+
   def part_update
     if admin && params[:part_id]
       @part = Part.find_by(id: params[:part_id])
@@ -507,6 +518,7 @@ class AdminController < ApplicationController
     end
   end
 
+
   def new_add
     if admin
 
@@ -520,6 +532,8 @@ class AdminController < ApplicationController
         @new = New.new
         @new.title = params[:title]
         @new.content = params[:content]
+        @new.meta_keywords = params[:meta_keywords]
+        @new.meta_description = params[:meta_description]
         @new.save
         if params[:images]
           params[:images].each do |image|
@@ -540,6 +554,48 @@ class AdminController < ApplicationController
         redirect_to anews_path, notice: 'Успешно добавлено!'
       else
         redirect_to newadd_path, notice: 'Заполните все поля'
+      end
+    else admin_err
+    end
+  end
+
+  def new_update
+    if admin
+      if params[:new_id] and params[:title] and params[:content]
+        if @new = New.find_by(id: params[:new_id])
+          @new.title = params[:title]
+          @new.content = params[:content]
+          @new.meta_keywords = params[:meta_keywords]
+          @new.meta_description = params[:meta_description]
+          @new.save
+          if @new.attachments
+            @new.attachments.each do |at|
+              File.delete(Rails.root.join('public', 'news', at.image)) if File.exist?(Rails.root.join('public', 'news', at.image))
+              at.destroy
+            end
+          end
+          if params[:images]
+            params[:images].each do |image|
+              imagehex = Digest::SHA256.hexdigest image.original_filename
+              imagehex = imagehex.slice(0, 10)
+              imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+              imagehex2 = imagehex2.slice(0, 10)
+              imagehex = imagehex2 + imagehex
+              File.open(Rails.root.join('public', 'news', imagehex + image.original_filename), 'wb') do |file|
+                file.write(image.read)
+                @image = Attachment.new
+                @image.new_id = @new.id
+                @image.image = imagehex + image.original_filename
+                @image.save
+              end
+            end
+          end
+          redirect_to anews_edit_path(params[:new_id]), notice: 'Сохранено!'
+        else
+          redirect_to anews_path, notice: 'Не найдено!'
+        end
+      else
+        redirect_to anews_edit_path(params[:new_id]), notice: 'Заполните все поля'
       end
     else admin_err
     end

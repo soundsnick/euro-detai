@@ -4,6 +4,9 @@
 - @meta[:keywords] = @part.meta_keywords if params[:action] == 'part' and @part.meta_keywords and @part.meta_keywords.length > 2
 - @meta[:description] = @part.meta_description if params[:action] == 'part' and @part.meta_description and @part.meta_description.length > 2
 - @meta[:title] = @part.title if params[:action] == 'part' and @part.title and @part.title.length > 2
+- @meta[:keywords] = @new.meta_keywords if params[:action] == 'new' and @new.meta_keywords and @new.meta_keywords.length > 2
+- @meta[:description] = @new.meta_description if params[:action] == 'new' and @new.meta_description and @new.meta_description.length > 2
+- @meta[:title] = @new.title if params[:action] == 'new' and @new.title and @new.title.length > 2
 - if @seo = Seo.find_by(action: params[:action])
   - @meta[:keywords] = @seo.keywords
   - @meta[:description] = @seo.description

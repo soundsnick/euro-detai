@@ -37,7 +37,9 @@ Rails.application.routes.draw do
   get 'parts/add', to: 'admin#part_add', as: :partadd
   get 'news/add', to: 'admin#new_add', as: :newadd
   put 'parts', to: 'admin#part_update'
+  put 'news', to: 'admin#new_update'
   get 'admin/parts/:part_id(.:format)', to: 'admin#part_edit', as: :aparts_edit
+  get 'admin/news/:new_id(.:format)', to: 'admin#new_edit', as: :anews_edit
   get 'admin/news', to: 'admin#news', as: :anews
   get 'admin/manufacturers', to: 'admin#manufacturers', as: :amanufacturers
   get 'admin/models', to: 'admin#models', as: :amodels

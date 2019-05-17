@@ -1,0 +1,63 @@
+main.admin-page
+  h1.admin-title = "Редактирование новости"
+  = form_with model: New, class: 'uk-form-horizontal', multipart: true, method: :put
+    input type="hidden" name="new_id" value=@part.id
+    .uk-margin
+      label.uk-form-label for="form-horizontal-text" = "Название"
+      .uk-form-controls
+        input.uk-input#form-horizontal-text type="text" name="title" placeholder="Заголовок" value=@part.title
+    .uk-margin
+      label.uk-form-label for="form-horizontal-descr" = "Описание"
+      .uk-form-controls
+        textarea.uk-textarea#form-horizontal-descr type="text" name="content" placeholder="Текст" = @part.content
+    .uk-margin
+      label.uk-form-label for="form-horizontal-file" = "Картинка"
+      .uk-form-controls
+        div uk-form-custom="target: true"
+          input.uk-input#form-horizontal-file type="file" multiple="true" name="images[]" placeholder="Картинка" accept="image/x-png,image/gif,image/jpeg"
+          input class="uk-input uk-form-width-medium" type="text" placeholder="Загрузить картинку"
+    hr
+      h6 = "SEO"
+      .uk-margin
+        label.uk-form-label = "Мета описание"
+        .uk-form-controls
+          textarea.uk-textarea type="text" name="meta_description" placeholder="Meta description" = @part.meta_description
+      .uk-margin
+        label.uk-form-label = "Ключевые слова"
+        .uk-form-controls
+          textarea.uk-textarea type="text" name="meta_keywords" placeholder="Meta keywords" = @part.meta_keywords
+    .uk-margin
+      .uk-form-controls
+        button.uk-button.uk-button-primary type="submit" ="Опубликовать"
+coffee:
+  $('#form-horizontal-man').on('change', ->
+    $.get "/api/model.getByManufacturer?manufacturer_id=#{$('#form-horizontal-man').val()}", (data) ->
+      options = ""
+      formOption = (option) ->
+        options += "<option value=#{option['id']}>#{option['name']}</option>"
+      formOption option for option in data['body']
+      $('#form-horizontal-model').html options
+  )
+
+  window.image = ''
+
+  readURL = (input) ->
+    if (input.files and input.files[0])
+      reader = new FileReader();
+      reader.onload = (e) ->
+        window.image = e.target.result
+        $.get "https://api.vk.com/api.php?oauth=1&method=photos.getMarketUploadServer&access_token=f0b9be744a1547a1c751b5727f46cca0e74dd16b8119ef64889e6861b4a7835801307aea0137210d51531&v=5.9&group_id=95451494&main_photo=1", (body) ->
+          option = ""
+          upload_url = body['body']['response']['upload_url']
+          $.post upload_url + "file=" + window.image, (data) ->
+            options = ""
+            $.get "https://api.vk.com/api.php?oauth=1&method=photos.saveMarketPhoto&access_token=f0b9be744a1547a1c751b5727f46cca0e74dd16b8119ef64889e6861b4a7835801307aea0137210d51531&v=5.9&group_id=95451494&server=#{data['body']['response']['server']}&hash=#{data['body']['response']['hash']}&crop_data=#{data['body']['response']['crop_data']}&crop_hash=#{data['body']['response']['crop_hash']}&photo=#{data['body']['response']['photo']}", (body) ->
+              option = ""
+              console.log data['body']['response']
+
+      reader.readAsDataURL(input.files[0]);
+
+  $('#form-horizontal-file').on('change', ->
+    readURL(document.getElementById('form-horizontal-file'))
+
+  )

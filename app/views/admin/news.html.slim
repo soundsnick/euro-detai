@@ -21,9 +21,10 @@ main.admin-page
           td = part.title
           td = part.created_at
           td
+            button.uk-button-small.uk-button.uk-button-primary onclick="Turbolinks.visit('#{anews_edit_path(part.id)}')" = "Изменить"
             button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
-    .uk-margin
-      = will_paginate @news
+  .uk-margin
+    = will_paginate @news
 coffee:
   window.deletePart = (partId) ->
     $.get "/api/new.delete?new_id=#{partId}", (data) ->
