@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get 'admin/queries', to: 'admin#queries', as: :aqueries
   get 'admin/query/:id(.:format)', to: 'admin#query', as: :aquery
   get '/api/query/delete/:id(.:format)', to: 'admin#query_delete', as: :query_delete
+  get 'admin/seo', to: 'admin#seo', as: :aseo
   post 'parts', to: 'admin#part_new'
   post 'manufacturers', to: 'admin#manufacturer_add', as: :manufacturers
   post 'models', to: 'admin#model_add', as: :models
@@ -71,7 +72,7 @@ Rails.application.routes.draw do
   post 'roles', to: 'admin#roles_add', as: :roles
   post 'news', to: 'admin#news_new'
   post 'announcement', to: 'admin#announcement_change'
-
+  post 'seo', to: 'admin#seo_new', as: :seos
 
   # Api Routing
   get 'api/user.:method(.:format)', to: 'user#user'
@@ -93,6 +94,7 @@ Rails.application.routes.draw do
   get 'api/review/delete/:id(.:format)', to: 'admin#review_delete'
   get 'api/review/publish/:id(.:format)', to: 'admin#review_publish'
   get 'api/order/delete/:id(.:format)', to: 'admin#order_delete'
+  get 'api/seo.:method(.:format)', to: 'car#seo'
 
   get 'magazin/:name(.:format)', to: 'app#manufacturer'
   # get 'parser', to: 'app#newsparser'

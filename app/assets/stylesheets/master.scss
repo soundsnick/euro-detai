@@ -167,6 +167,7 @@ input[type="submit"],
     position: relative;
     font-weight: 300;
     padding: 20px 15px;
+    transition: background 0.2s;
     &::after{
       content: '';
       display: block;
@@ -184,6 +185,10 @@ input[type="submit"],
       &::after{
         width: 100%;
       }
+    }
+    &.active{
+      background: #FF5722;
+      color: #fff!important;
     }
   }
 }

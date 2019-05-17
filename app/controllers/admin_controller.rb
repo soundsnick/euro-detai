@@ -676,6 +676,21 @@ class AdminController < ApplicationController
     end
   end
 
+  def seo
+    @items = Seo.all
+  end
+
+  def seo_new
+    if params[:actions] and params[:title] and params[:keywords] and params[:description]
+      @s = Seo.new(params.permit(:title, :keywords, :description))
+      @s.action = params[:actions]
+      @s.save
+      redirect_to aseo_path, notice: 'Добавлено!'
+    else
+      redirect_to aseo_path, notice: 'Заполните все поля'
+    end
+  end
+
 
   def parser
     require 'creek'

@@ -230,6 +230,50 @@ class CarController < ApplicationController
     end
   end
 
+  def seo
+    if admin && params[:method]
+      case params[:method]
+      when 'all'
+        render json: construct_response(200, 'success', Seo.all)
+      when 'get'
+        if params[:seo_id]
+          color = Seo.find_by(id: params[:seo_id])
+          if color
+            render json: construct_response(200, 'success', color)
+          else render json: construct_response(404, 'not_found: color')
+          end
+        else render json: construct_response(204, 'empty: color_id')
+        end
+      when 'delete'
+        if params[:seo_id]
+          color = Seo.find_by(id: params[:seo_id])
+          if color
+            color.destroy
+            render json: construct_response(410, 'success')
+          else render json: construct_response(404, 'not_found: color')
+          end
+        else render json: construct_response(204, 'empty: color_id')
+        end
+      when 'change'
+        if params[:seo_id]
+          color = Seo.find_by(id: params[:seo_id])
+          if color
+            color.title = params[:title]
+            color.keywords = params[:keywords]
+            color.description = params[:descriptions]
+            # color.hex = params[:color]
+            color.save
+            render json: construct_response(200, 'success', color.to_json)
+          else render json: construct_response(4040, 'not_found: color')
+          end
+        else render json: construct_response(204, 'empty: color_id')
+        end
+      else render json: construct_response(404, 'not_found: method')
+      end
+    else render json: construct_response(204, 'empty: method or not_admin')
+    end
+  end
+
   def part
     if admin && params[:method]
       case params[:method]

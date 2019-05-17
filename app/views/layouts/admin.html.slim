@@ -38,6 +38,7 @@ html
                 = "Отзывы"
                 - if Feedback.where.not(status: 1).count > 0
                   .counter = Feedback.where.not(status: 1).count
+              a.admin-sidebar__nav.uk-nav href=aseo_path = "SEO"
               a.admin-sidebar__nav.uk-nav style="color: red" href=aorders_path
                 = "Заказы"
                 - if Order.all.count > 0

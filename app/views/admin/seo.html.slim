@@ -1,0 +1,53 @@
+main.admin-page
+  h1.admin-title = "SEO настройка"
+  = form_with model: Seo, class: 'uk-form'
+    .uk-margin.uk-flex
+      input.uk-input type="text" name="actions" placeholder="URL"
+      input.uk-input type="text" name="title" placeholder="title"
+      input.uk-input type="text" name="keywords" placeholder="keywords"
+      input.uk-input type="text" name="description" placeholder="description"
+      button.uk-button.uk-button-primary = "Добавить"
+  table.uk-table.uk-table-divider.uk-table-hover.uk-table-small
+    caption = "Страницы"
+    thead
+      tr
+        th = "URL"
+        th = "Title"
+        th = "Keywords"
+        th = "Description"
+
+    tfoot
+      tr
+        td = "Общее количество: #{@count}"
+    tbody.uk-card.uk-card-default.uk-card-body
+      - @items.each do |part|
+        tr data-id=part.id
+          td
+            - begin
+              = link_to part.action, public_send("#{part.action}_path") if part.action != 'home'
+            - rescue
+              = part.action
+            = link_to part.action, public_send("root_path") if part.action == 'home'
+          td[contenteditable=""] = part.title
+          td[contenteditable=""] = part.keywords
+          td[contenteditable=""] = part.description
+          td
+            button.uk-button-small.uk-button.uk-button-danger onclick="deletePart(#{part.id})" = "Удалить"
+coffee:
+  window.deletePart = (partId) ->
+    $.get "/api/seo.delete?seo_id=#{partId}", (data) ->
+      if data.headers.status == 410
+        $("tr[data-id=#{partId}]").remove()
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
+  $("td").on 'blur', () ->
+    partid = $(this).parents('tr').attr('data-id')
+    els = $(this).parents('tr').children()
+    console.log els[1].innerHTML
+    $.get "/api/seo.change?seo_id=" + partid + "&title=#{els[1].innerHTML}&keywords=#{els[2].innerHTML}&description=#{els[3].innerHTML}", (data) ->
+      if data.headers.status == 410
+        console.log 'Сохранено!'
+      else
+        console.log(data.headers)
+        console.log("Ошибка")
