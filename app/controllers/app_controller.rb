@@ -646,4 +646,23 @@ class AppController < ApplicationController
     render body: counter.to_s + "\n" + links
   end
 
+
+  def texts
+    if admin
+    else redirect_to root_path
+    end
+  end
+
+  def texts_new
+    if admin and params[:action] and params[:counter] and params[:content]
+      @s = Text.new
+      @s.action = params[:action]
+      @s.counter = params[:counter]
+      @s.content = params[:content]
+      @s.save
+      redirect_to '/texts'
+    else redirect_to root_path
+    end
+  end
+
 end

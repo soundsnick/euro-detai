@@ -98,6 +98,9 @@ Rails.application.routes.draw do
   get 'api/order/delete/:id(.:format)', to: 'admin#order_delete'
   get 'api/seo.:method(.:format)', to: 'car#seo'
 
+  get '/texts', to: 'app#texts', as: :texts
+  post '/texts', to: 'app#texts_new'
+
   get 'magazin/:name(.:format)', to: 'app#manufacturer'
   # get 'parser', to: 'app#newsparser'
   # get 'parserimg', to: 'app#parseimg'
