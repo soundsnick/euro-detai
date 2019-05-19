@@ -8,7 +8,11 @@ module ApplicationHelper
   end
 
   def texts
-    Text.where(action: params[:action]).order(counter: :desc)
+    Text.where(action: params[:action]).order(counter: :asc)
+  end
+
+  def layout_texts
+    Text.where(action: 'layout').order(counter: :asc)
   end
 
 end

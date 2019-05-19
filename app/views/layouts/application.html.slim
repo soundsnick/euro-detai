@@ -37,18 +37,15 @@ html
           .logo-wrapper
             a href=root_path
               img.logo src=asset_path('logo.png')
-          .logo__info = "Контрактные б/у двигатели, коробки передач для иномарок из Европы, Японии и США"
+          .logo__info.editable data-edit-id=layout_texts[0].id = layout_texts[0].content
         .header__contacts
-          span = "Звонок по России - бесплатно!"
+          span.editable data-edit-id=layout_texts[1].id = layout_texts[1].content
           h6.header__phone
             img.wp src=asset_path('phone-call.svg')
-            a href="tel:+78002343150" = "8 (800) 23-43-150"
+            a.editable href="tel:#{layout_texts[2].content}" data-edit-id=layout_texts[2].id = layout_texts[2].content
         .header__adress
           p
-            = "Офис: "
-            = "г. Краснодар"
-            br
-            = "ул. Волгоградская, 95/1"
+            span.editable.pre data-edit-id=layout_texts[3].id = layout_texts[3].content
             br
             a href="https://wa.me/78002343150"
               img.wp src=asset_path('whatsapp.svg')
@@ -140,7 +137,10 @@ html
         .uk-alert-primary.uk-animation-fade.uk-animation-fast[uk-alert]
           a.uk-alert-close[uk-close]
           p = notice
+
     = yield
+    - if admin
+      .edit-button = "Изменить текст на странице"
     footer.footer
       header.header-nav.uk-card.uk-card-default
         .container
@@ -198,7 +198,24 @@ html
           noscript
             div
               img src="https://mc.yandex.ru/watch/53670472" style="position:absolute; left:-9999px;" alt=""
-
+    - if admin
+      coffee:
+        $('.edit-button').click(() ->
+          if $('body').hasClass('editing')
+            $('body').removeClass 'editing'
+            $('.editable').attr('contenteditable', false)
+            resp = []
+            resp.push({content: text.innerHTML, id: text.getAttribute('data-edit-id')}) for text in $('.editable')
+            save = (item) ->
+              $.get "/texts/change?array=#{encodeURI(JSON.stringify(item))}", (data) ->
+                console.log data
+            save item for item in resp
+            $(this).html "Изменить текст на странице"
+          else
+            $('body').addClass 'editing'
+            $('.editable').attr('contenteditable', true)
+            $(this).html "Сохранить"
+        )
     coffee:
       $('.previous_page').html "Назад"
       $('.next_page').html "Вперед"

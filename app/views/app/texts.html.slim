@@ -1,6 +1,6 @@
 main
   = form_with url: '/texts', class: 'uk-form-horizontal', multipart: true, method: :post
-    input.uk-input type="text" name="action" placeholder="Action"
+    input.uk-input type="text" name="actions" placeholder="Action"
     input.uk-input type="text" name="counter" placeholder="Counter"
-    input.uk-input type="text" name="content" placeholder="Content"
+    textarea.uk-textarea type="text" name="content" placeholder="Content"
     input.uk-button.uk-button-default type="submit" value="Save"

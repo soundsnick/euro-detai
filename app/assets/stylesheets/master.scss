@@ -600,3 +600,27 @@ h1,h2,h3,h4,h5,h6{ font-family: inherit!important;}
   text-align: center;
   padding: 10px 0;
 }
+body pre, .pre{
+  display: pre;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-weight: 200;
+  border: none;
+  padding: 0;
+  word-break: break-word;
+}
+.edit-button{
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  background: #ef3f3f;
+  z-index: 9999;
+  color: #fff;
+  padding: 20px;
+  border-radius: 100px;
+  box-shadow: 0 15px 25px rgba(0,0,0,.4);
+  cursor: pointer;
+}
+body.editing .editable {
+  box-shadow: 0 0 0px 2px #ffc56d;
+}

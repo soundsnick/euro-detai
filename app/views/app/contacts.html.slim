@@ -3,41 +3,27 @@ main.home
     .admin-wrapper
       = render 'layouts/news'
       main.admin-page style="padding: 40px;"
-        h1.admin-title style="text-align: center" = "Контакты"
-        h1.title = "Отдел продаж Краснодар:"
-        p.home-paragraph
-          = "Тел.: "
-          b style="font-weight: 300" = "8-800-23-43-150"
-          = " - для бесплатного звонка на территории России"
-        p.home-paragraph = "Краснодарский край, г. Краснодар, ул. Волгоградская, 95/1, тел.: +7-928-406-56-06"
-        p.home-paragraph = "График работы: Пн-Пт: 9.00-18.00, Сб-10.00-17.00, Вс- выходной (по Московскому времени)"
+        h1.admin-title.editable style="text-align: center" data-edit-id=texts[0].id = texts[0].content
+        h1.title.editable data-edit-id=texts[1].id = texts[1].content
+        pre.home-paragraph.editable data-edit-id=texts[2].id = texts[2].content
         a.uk-link href="mailto:detal911@yandex.ru"
           img src=asset_path("mail.png")
           = "  detal911@yandex.ru"
-        p.home-paragraph
-          | ИП Белоконь София Эдуардовна, ИНН 231137651295, ОГРН 317237500323012
-          br
-          | ИП Белоконь Эдуард Владимирович, ИНН 231109310254, ОГРНИП 305231102000210
-        h1.title = "Склад:"
+        pre.home-paragraph.editable data-edit-id=texts[3].id = texts[3].content
+        h1.title.editable data-edit-id=texts[4].id = texts[4].content
         p.home-paragraph
           = "Тел.: +7-926-665-20-97, "
           img style="width: 25px;" src=asset_path("viber.png")
           = " "
           img style="width: 25px;" src=asset_path("whatsapp.png")
           = " +37525-733-72-90"
-        p.home-paragraph
-          | «АвтоМОЛЛ» Кольцо», Меньковский тракт, 2, сектор продажи б/у запчастей
-            223021, Р. Беларусь, Минская область, Минский район, район а/г. Озерцо
-        p.home-paragraph
-          | ИП Белоконь Эдуард Владимирович, ИНН 231109310254, ОГРНИП 305231102000210
-            Представитель - Ванышев Вениамин Викторович
-        h1.title style="color: red" = "Будьте внимательны!!!"
+        pre.home-paragraph.editable data-edit-id=texts[5].id = texts[5].content
+        h1.title.editable style="color: red" data-edit-id=texts[6].id = texts[6].content
         p.home-paragraph
           b
             span style="color: red" = "Оплата за заказываемые детали производится ТОЛЬКО по указанным выше реквизитам! "
             | Перед осуществлением оплаты свяжитесь с менеджерами по телефонам для проверки договора по реестрам!
-        p.home-paragraph
-          | В последнее время участились случаи взлома злоумышленниками почтовых аккаунтов и кабинетов мобильных операторов компаний-поставщиков. Не всегда представляется возможным своевременно выявить несанкционированный доступ и мошенники получают возможность отправить сообщения различного содержания, в том числе и с предложением перевести деньги на какие-либо банковские карты или счета. Поэтому, если намереваетесь произвести платеж, ОБЯЗАТЕЛЬНО сверяйте реквизиты в договоре и в печати на нем с указаными на официальном сайте поставщика (ФИО, ИНН, ОГРН) и связывайтесь с менеджерами компании.
+        pre.home-paragraph.editable data-edit-id=texts[7].id = texts[7].content
         iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Acc0a6b5f6393dee9733c253ae6f9993ab4c978f000b4d40f018de3deca601b83&amp;source=constructor" width="100%" height="400" frameborder="0"
 coffee:
   $('#form-horizontal-man').on('change', ->

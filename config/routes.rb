@@ -100,6 +100,7 @@ Rails.application.routes.draw do
 
   get '/texts', to: 'app#texts', as: :texts
   post '/texts', to: 'app#texts_new'
+  get '/texts/change', to: 'app#texts_change'
 
   get 'magazin/:name(.:format)', to: 'app#manufacturer'
   # get 'parser', to: 'app#newsparser'

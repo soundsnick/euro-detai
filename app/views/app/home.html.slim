@@ -6,62 +6,55 @@ main.home
         .uk-margin
           = render 'layouts/advanced'
         br
-        h1.title style="text-align: center"
+        h1.title.editable data-edit-id=texts[0].id style="text-align: center"
           = texts[0].content
         .home-grid
           div[uk-grid class="uk-child-width-expand@s uk-text-center uk-card uk-card-default uk-card-body" style="margin: 0;border-radius: 100px;padding-bottom: 20px!important"]
             div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
               .circle = "7"
               div.home-grid__info
-                h4.home-grid__titlez = "7 лет на рынке б/у запчастей"
+                h4.home-grid__titlez.editable data-edit-id=texts[1].id = texts[1].content
             div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
               .circle = "1800+"
               div.home-grid__info
-                h4.home-grid__titlez = "отгруженных агрегатов"
+                h4.home-grid__titlez.editable data-edit-id=texts[2].id = texts[2].content
             div.uk-flex style="align-items: center; align-items: center;padding: 0 10px;align-self: center;"
               img.home-grid__image src=asset_path("fgs16_city_y1-color.svg")
               div.home-grid__info
-                h4.home-grid__titlez = "офис в Краснодаре"
+                h4.home-grid__titlez.editable data-edit-id=texts[3].id = texts[3].content
         br
         br
-        h1.title style="text-align: center" = "Почему стоит покупать б/у запчасти именно у нас?"
+        h1.title.editable data-edit-id=texts[4].id style="text-align: center" = texts[4].content
         .home-grid
           div[uk-grid class="uk-child-width-expand@s uk-text-center"]
             div.uk-flex
               img.home-grid__image src=asset_path("icon1.png") style="height: 80px!important"
               div.home-grid__info
-                h4.home-grid__title = "Гарантия"
-                p = "выкупаем машинокомплекты только «на своем ходу», т.е. все агрегаты рабочие, проверены специалистами"
+                h4.home-grid__title.editable data-edit-id=texts[5].id = texts[5].content
+                pre.editable data-edit-id=texts[6].id = texts[6].content
             div.uk-flex
               img.home-grid__image src=asset_path("icon2.png")
               div.home-grid__info
-                h4.home-grid__title = "Доставка"
-                p = "отправляем детали в любой город России, Казахстана, а также в Армению через ТК \"КИТ\" и \"Энергия\""
+                h4.home-grid__title.editable data-edit-id=texts[7].id = texts[7].content
+                pre.editable data-edit-id=texts[8].id = texts[8].content
           div[uk-grid class="uk-child-width-expand@s uk-text-center"]
             div.uk-flex
               img.home-grid__image src=asset_path("icon3.png")
               div.home-grid__info
-                h4.home-grid__title = "Договор"
-                p = "заключаем договор, четко соблюдая сроки и гарантийные условия, указанные в нем"
+                h4.home-grid__title.editable data-edit-id=texts[9].id = texts[9].content
+                pre.editable data-edit-id=texts[10].id = texts[10].content
             div.uk-flex
               img.home-grid__image src=asset_path("icon4.png")
               div.home-grid__info
-                h4.home-grid__title = "Скидки"
-                p = "для постоянных клиентов – автосервисов, СТО – действуют скидки и особые условия"
+                h4.home-grid__title.editable data-edit-id=texts[11].id = texts[11].content
+                pre.editable data-edit-id=texts[12].id = texts[12].content
 
-        p.home-paragraph
-          | Наша компания с 2011 г. работает в сфере поставок б/у контрактных запчастей и силовых агрегатов к иномаркам, произведенным различными автоконцернами (в т.ч. японскими и корейскими) для европейского и американского рынков.
-        p.home-paragraph
-          | Основное направление – это бу двигатели, как бензиновые, так и дизельные, коробки переключения передач, раздатки, редукторы, мосты для легковых авто, внедорожников и микроавтобусов (коммерческий транспорт) из Европы и США. В дополнение к нему также занимаемся поставкой навесного оборудования к двигателям: стартеры, генераторы, компрессоры кондиционера, топливные насосы (ТНВД), форсунки, турбины, насосы ГУР, сцепления и детали кузова.
-        p.home-paragraph
-          | В 2012 году было создано представительство в интернете - данный сайт, который мы постоянно дорабатываем и совершенствуем для лучшего предоставления информации пользователям.
-        p.home-paragraph
-          | Чтобы быть ближе к покупателю, в 2015 году открыто представительство в г. Краснодаре - офис и склад навесного оборудования к ДВС: б/у стартеры, генераторы, компрессоры кондиционера.
-        h1.title = "Еще немного наших преимуществ"
+        pre.home-paragraph.editable data-edit-id=texts[13].id = texts[13].content
+        h1.title.editable data-edit-id=texts[14].id = texts[14].content
         ul.uk-list.success-iconed
-          li = "широкое наличие бу двигателей и коробок передач - порядка 2 000 моторокомплектов - на складах в Беларуси"
-          li = "сотрудничество с крупными разборками и поставщиками б/у запчастей в Европе (Англия, Ирландия, Испания, Германия, Бельгия и др.) и Америке"
-          li = "еженедельное пополнение складов"
+          li.editable data-edit-id=texts[15].id = texts[15].content
+          li.editable data-edit-id=texts[16].id = texts[16].content
+          li.editable data-edit-id=texts[17].id = texts[17].content
   .uk-card.uk-card-default
     .container style="text-align: center"
       .uk-card-body.uk-flex-center.uk-text-center.uk-grid-small[uk-grid]
@@ -73,24 +66,20 @@ main.home
   .uk-card.uk-card-secondary.steps
     .container
       .uk-card-body
-        h1.uk-card-title = "Этапы работы"
+        h1.uk-card-title.editable data-edit-id=texts[18].id = texts[18].content
         div[uk-grid class="uk-grid uk-grid-small uk-child-width-expand@s"]
           div
-            h1.home-grid__title = "1. Заявка"
-            p
-              | Вы оставляете заявку на сайте или по телефону. Мы подтверждаем наличие на складе, комплектность и стоимость
+            h1.home-grid__title.editable data-edit-id=texts[19].id = "#{texts[19].content}"
+            pre.editable data-edit-id=texts[20].id = texts[20].content
           div
-            h1.home-grid__title = "2. Договор"
-            p
-              | Заключаем договор. Вы совершаете оплату 100%. Передаем заказ в работу. Готовим агрегат к отгрузке. Отправляем фотоотчет на утверждение.
+            h1.home-grid__title.editable data-edit-id=texts[21].id = "#{texts[21].content}"
+            pre.editable data-edit-id=texts[22].id = texts[22].content
           div
-            h1.home-grid__title = "3. Отгрузка"
-            p
-              | Получаем подтверждение фотоотчета и сдаем груз в транспортную компанию. Отправляем накладную для отслеживания.
+            h1.home-grid__title.editable data-edit-id=texts[23].id = "#{texts[23].content}"
+            pre.editable data-edit-id=texts[24].id = texts[24].content
           div
-            h1.home-grid__title = "4. Заказ выполнен!"
-            p
-              | Вы получаете заказанный агрегат на терминале транспортной компании в Вашем Городе.
+            h1.home-grid__title.editable data-edit-id=texts[25].id = "#{texts[25].content}"
+            pre.editable data-edit-id=texts[26].id = texts[26].content
 
 coffee:
   $('#form-horizontal-man').change(() ->

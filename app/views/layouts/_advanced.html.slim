@@ -1,74 +1,79 @@
-aside.advanced-search.uk-card.uk-card-default
-  .uk-card-body
-    h1.uk-card-title style="margin-bottom: 5px;" = "Расширенный поиск"
-    - form_url = "/parts/advanced_search"
-    - if params[:action] == 'subcategories'
-      - form_url = "/subcategories"
-    form.uk-form-horizontal action=form_url method="get"
-      .uk-grid-small[uk-grid]
-        div class="uk-width-1-2@m"
-          label.uk-form-label = "Марка автомобиля: "
-          .uk-margin
-            select.uk-select#form-horizontal-man onchange="models()" name="manufacturer"
-              option value="" = "Не задано"
-              - @manufacturers.each do |manufacturer|
-                - if params[:manufacturer] and params[:manufacturer].to_i == manufacturer.id
-                  option value=manufacturer.id selected="" = manufacturer.name
-                - else
-                  option value=manufacturer.id = manufacturer.name
-          label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
-          .uk-margin
-            select.uk-select#form-horizontal-year name="year"
-              option value="" = "Не задано"
-              - (1985..2019).each do |year|
-                option value=year = year
-        div class="uk-width-1-2@m"
-          label.uk-form-label = "Модель автомобиля:"
-          .uk-margin
-            select.uk-select#form-horizontal-model name="model"
-              option value="" = "Не задано"
-              - @models.each do |model|
-                - if params[:model] and params[:model].to_i == model.id
-                  option value=model.id selected="" = model.name
-                - else
-                  option value=model.id = model.name
-          label.uk-form-label = "Категория:"
-          .uk-margin
-            select.uk-select#form-horizontal-mans name="category"
-              - @categories.each do |manufacturer|
-                - if params[:category] and params[:category].to_i == manufacturer.id
-                  option value=manufacturer.id selected="" = manufacturer.name
-                - else
-                  option value=manufacturer.id = manufacturer.name
-          - if params[:action] == 'subcategories'
-            label.uk-form-label = "Подкатегория:"
+.flex.responsive-flex
+  aside.advanced-search.uk-card.uk-card-default style="flex: 1; width: 100%"
+    .uk-card-body
+      h1.uk-card-title style="margin-bottom: 5px;" = "Расширенный поиск"
+      - form_url = "/parts/advanced_search"
+      - if params[:action] == 'subcategories'
+        - form_url = "/subcategories"
+      form.uk-form-horizontal action=form_url method="get"
+        .uk-grid-small[uk-grid]
+          div class="uk-width-1-2@m"
+            label.uk-form-label = "Марка автомобиля: "
             .uk-margin
-              select.uk-select#form-horizontal-subcategories name="subcategory"
-                - @subcategories.each do |manufacturer|
-                  - if params[:subcategory] and params[:subcategory].to_i == manufacturer.id
+              select.uk-select#form-horizontal-man onchange="models()" name="manufacturer"
+                option value="" = "Не задано"
+                - @manufacturers.each do |manufacturer|
+                  - if params[:manufacturer] and params[:manufacturer].to_i == manufacturer.id
                     option value=manufacturer.id selected="" = manufacturer.name
                   - else
                     option value=manufacturer.id = manufacturer.name
-      .uk-margin
-        button.uk-button.uk-button-default uk-toggle="target: #advanced" type="button" = "Дополнительные параметры"
-      .uk-grid-small.uk-margin#advanced[uk-grid hidden]
-        div class="uk-width-1-2@m"
-          label.uk-form-label = "Объем двигателя:"
-          .uk-margin
-            select.uk-select name="volume"
-              option value="no" = "Не задано"
-              - for i in (0.8..6.2).step(0.1) do
-                - i = i.round(1)
-                - if params[:volume] and params[:volume] == i
-                  option value=i selected="" = i.to_s + "л"
-                - else
-                  option value=i = i.to_s + "л"
-        div class="uk-width-1-2@m"
-          label.uk-form-label = "Тип топлива:"
-          .uk-margin
-            select.uk-select name="fuel"
-              - @fuels.each do |manufacturer|
-                option value=manufacturer.id = manufacturer.name
+            label.uk-form-label for="form-horizontal-year" = "Год выпуска:"
+            .uk-margin
+              select.uk-select#form-horizontal-year name="year"
+                option value="" = "Не задано"
+                - (1985..2019).each do |year|
+                  option value=year = year
+          div class="uk-width-1-2@m"
+            label.uk-form-label = "Модель автомобиля:"
+            .uk-margin
+              select.uk-select#form-horizontal-model name="model"
+                option value="" = "Не задано"
+                - @models.each do |model|
+                  - if params[:model] and params[:model].to_i == model.id
+                    option value=model.id selected="" = model.name
+                  - else
+                    option value=model.id = model.name
+            label.uk-form-label = "Категория:"
+            .uk-margin
+              select.uk-select#form-horizontal-mans name="category"
+                - @categories.each do |manufacturer|
+                  - if params[:category] and params[:category].to_i == manufacturer.id
+                    option value=manufacturer.id selected="" = manufacturer.name
+                  - else
+                    option value=manufacturer.id = manufacturer.name
+            - if params[:action] == 'subcategories'
+              label.uk-form-label = "Подкатегория:"
+              .uk-margin
+                select.uk-select#form-horizontal-subcategories name="subcategory"
+                  - @subcategories.each do |manufacturer|
+                    - if params[:subcategory] and params[:subcategory].to_i == manufacturer.id
+                      option value=manufacturer.id selected="" = manufacturer.name
+                    - else
+                      option value=manufacturer.id = manufacturer.name
+        .uk-margin
+          button.uk-button.uk-button-default uk-toggle="target: #advanced" type="button" = "Дополнительные параметры"
+        .uk-grid-small.uk-margin#advanced[uk-grid hidden]
+          div class="uk-width-1-2@m"
+            label.uk-form-label = "Объем двигателя:"
+            .uk-margin
+              select.uk-select name="volume"
+                option value="no" = "Не задано"
+                - for i in (0.8..6.2).step(0.1) do
+                  - i = i.round(1)
+                  - if params[:volume] and params[:volume] == i
+                    option value=i selected="" = i.to_s + "л"
+                  - else
+                    option value=i = i.to_s + "л"
+          div class="uk-width-1-2@m"
+            label.uk-form-label = "Тип топлива:"
+            .uk-margin
+              select.uk-select name="fuel"
+                - @fuels.each do |manufacturer|
+                  option value=manufacturer.id = manufacturer.name
 
 
-      input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
+        input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
+
+  .right-block style="flex: 0 0 40%; padding: 25px"
+    h1.title.editable data-edit-id=layout_texts[6].id = layout_texts[6].content
+    pre.editable data-edit-id=layout_texts[5].id = layout_texts[5].content

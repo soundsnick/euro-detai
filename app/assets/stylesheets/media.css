@@ -6,6 +6,9 @@
         align-items: flex-start!important;
         flex-direction: column;
     }
+    .responsive-flex *{
+        flex: 1;
+    }
     .mobile-header{
         display: block;
     }

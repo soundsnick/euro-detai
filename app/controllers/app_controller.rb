@@ -1,5 +1,22 @@
 class AppController < ApplicationController
 
+
+  def texts_change
+    if params[:array] and admin
+      array = params[:array]
+      array += params[:format] if params[:format]
+      s = JSON.parse array
+      if @s = Text.find_by(id: s['id'])
+        @s.content = s['content']
+        @s.save
+        render body: 'success'
+      else
+        render body: 'error'
+      end
+    else redirect_back fallback_location: root_path
+    end
+  end
+
   def home
     @title = "Контрактные двигатели, АКПП, МКПП, кузовные запчасти для иномарок из Европы и Америки"
     @news = New.limit(5).order("ready_date IS NULL DESC,
@@ -656,11 +673,11 @@ class AppController < ApplicationController
   def texts_new
     if admin and params[:action] and params[:counter] and params[:content]
       @s = Text.new
-      @s.action = params[:action]
+      @s.action = params[:actions]
       @s.counter = params[:counter]
       @s.content = params[:content]
       @s.save
-      redirect_to '/texts'
+      redirect_to '/texts', notice: 'Added'
     else redirect_to root_path
     end
   end
