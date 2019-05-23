@@ -406,9 +406,9 @@ class AppController < ApplicationController
       if params[:category] and params[:category].to_i > 0
         sub = Category.find_by(id: params[:category])
         if sub.name == "ДВС"
-          @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?  AND category_id = NULL OR lower(title) like ? OR lower(description) like ? AND category_id = NULL", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%")
+          @a_parts = @a_parts.where("lower(title) like ? OR (lower(description) like ?  AND category_id = NULL) OR lower(title) like ? OR (lower(description) like ? AND category_id = NULL) or category_id=?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%", sub.id)
         else
-          @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%")
+          @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ? or category_id = ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", sub.id)
         end
       end
       if params[:subcategory] and params[:subcategory].to_i > 1
@@ -442,6 +442,7 @@ class AppController < ApplicationController
           mstr = mstr.rstrip
           mstr2 = mstr2.rstrip
           @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or model_id = ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", model.id)
+        end
       end
       if params[:carcass] and  Integer(params[:carcass]) > 1
         @a_parts = @a_parts.where(carcass_id: params[:carcass])

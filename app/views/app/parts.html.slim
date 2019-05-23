@@ -120,7 +120,7 @@ coffee:
 
   $('#form-horizontal-mans').change(() ->
     $.get "/api/subcategory.getByCategory?category_id=#{$('#form-horizontal-mans').val()}", (data) ->
-      options = ""
+      options = "<option value='null'>Не задано</option>"
       formOption = (option) ->
         options += "<option value=#{option['id']}>#{option['name']}</option>"
       formOption option for option in data['body'] if data['body']
