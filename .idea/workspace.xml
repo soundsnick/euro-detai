@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/admin_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/part_add.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/part_add.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/part_edit.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/part_edit.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/admin.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/admin.html.slim" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -27,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="178" column="510" selection-start-line="178" selection-start-column="510" selection-end-line="178" selection-end-column="510" />
+            <state relative-caret-position="577">
+              <caret line="443" column="511" selection-start-line="443" selection-start-column="511" selection-end-line="443" selection-end-column="511" />
             </state>
           </provider>
         </entry>
@@ -121,8 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>url</find>
-      <find>advance</find>
       <find>review_</find>
       <find>commenta</find>
       <find>query_</find>
@@ -151,6 +144,8 @@
       <find>part_</find>
       <find>def part</find>
       <find>part_new</find>
+      <find>subcate</find>
+      <find>def subca</find>
     </findStrings>
     <replaceStrings>
       <replace>fuel</replace>
@@ -567,12 +562,12 @@
       <workItem from="1558021100739" duration="1511000" />
       <workItem from="1558110399063" duration="9903000" />
       <workItem from="1558534448236" duration="808000" />
-      <workItem from="1558570757358" duration="1545000" />
+      <workItem from="1558570757358" duration="2286000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="351627000" />
+    <option name="totallyTimeSpent" value="352368000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
@@ -972,8 +967,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="178" column="510" selection-start-line="178" selection-start-column="510" selection-end-line="178" selection-end-column="510" />
+        <state relative-caret-position="577">
+          <caret line="443" column="511" selection-start-line="443" selection-start-column="511" selection-end-line="443" selection-end-column="511" />
         </state>
       </provider>
     </entry>
