@@ -495,18 +495,28 @@ class AdminController < ApplicationController
         @part.meta_keywords = params[:meta_keywords]
         @part.options = params[:options]
         @part.cost = params[:cost]
-        if params[:image]
-          if @part.image
-            File.delete(Rails.root.join('public', 'images', @part.image)) if File.exist?(Rails.root.join('public', 'images', @part.image))
+        @images = ""
+        @images_old = @part.image.split(',')
+        if params[:images]
+          if @images_old
+            @images_old.each do |image|
+              File.delete(Rails.root.join('public', 'images', image)) if File.exist?(Rails.root.join('public', 'images', image))
+            end
           end
-          image = params[:image]
-          imagehex = Digest::SHA256.hexdigest image.original_filename
-          imagehex = imagehex.slice(0, 10)
-          File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
-            file.write(image.read)
-            @part.image = imagehex + image.original_filename
+          params[:images].each do |image, index|
+            imagehex = Digest::SHA256.hexdigest image.original_filename
+            imagehex = imagehex.slice(0, 10)
+            imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+            imagehex2 = imagehex2.slice(0, 10)
+            imagehex = imagehex2 + imagehex
+            File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+              file.write(image.read)
+              @images += imagehex + image.original_filename + "," if index != params[:images].length - 1
+              @images += imagehex + image.original_filename if index == params[:images].length - 1
+            end
           end
         end
+        @part.image = @images
         if @part.save
           redirect_to aparts_path, notice: 'Успешно добавлено'
         else
@@ -655,18 +665,22 @@ class AdminController < ApplicationController
       @part.meta_keywords = params[:meta_keywords]
       @part.options = params[:options]
       @part.cost = params[:cost]
-      if params[:image]
-        image = params[:image]
-        imagehex = Digest::SHA256.hexdigest image.original_filename
-        imagehex = imagehex.slice(0, 10)
-        imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
-        imagehex2 = imagehex2.slice(0, 10)
-        imagehex = imagehex2 + imagehex
-        File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
-          file.write(image.read)
-          @part.image = imagehex + image.original_filename
+      @images = ""
+      if params[:images]
+        params[:images].each do |image, index|
+          imagehex = Digest::SHA256.hexdigest image.original_filename
+          imagehex = imagehex.slice(0, 10)
+          imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+          imagehex2 = imagehex2.slice(0, 10)
+          imagehex = imagehex2 + imagehex
+          File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+            file.write(image.read)
+            @images += imagehex + image.original_filename + "," if index != params[:images].length - 1
+            @images += imagehex + image.original_filename if index == params[:images].length - 1
+          end
         end
       end
+      @part.image = @images
       if @part.save
         redirect_to partadd_path, notice: 'Успешно добавлено'
       else

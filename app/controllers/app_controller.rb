@@ -176,7 +176,7 @@ class AppController < ApplicationController
           end
           mstr = mstr.rstrip
           mstr2 = mstr2.rstrip
-          @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%")
+          @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or model_id = ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", model.id)
         end
       end
       if params[:carcass] and  Integer(params[:carcass]) > 1

@@ -71,7 +71,7 @@ main.admin-page
       label.uk-form-label for="form-horizontal-file" = "Картинка"
       .uk-form-controls
         div uk-form-custom="target: true"
-          input.uk-input#form-horizontal-file type="file" name="image" placeholder="Картинка" accept="image/x-png,image/gif,image/jpeg"
+          input.uk-input#form-horizontal-file type="file"  multiple="true" name="images[]" placeholder="Картинка" accept="image/x-png,image/gif,image/jpeg"
           input class="uk-input uk-form-width-medium" type="text" placeholder="Загрузить картинку"
     .uk-margin
       label.uk-form-label for="form-horizontal-cost" = "Цена"
