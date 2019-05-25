@@ -350,7 +350,7 @@ class AppController < ApplicationController
     @q.city = params[:city]
     @q.email = params[:email]
     @q.phone = params[:phone]
-    if verify_recaptcha(commentary)
+    if verify_recaptcha(commentary) and q.email.length > 4
       @q.save
       if params[:images]
         params[:images].each do |image|
@@ -371,7 +371,7 @@ class AppController < ApplicationController
       DefaultMailer.query_email(@q).deliver
       redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
     else
-      redirect_to query_path, notice: 'Заполните капчу!'
+      redirect_to query_path, notice: 'Заполните все поля и капчу!'
     end
   end
 
