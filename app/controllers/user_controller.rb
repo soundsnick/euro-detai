@@ -15,19 +15,23 @@ class UserController < ApplicationController
           end
         else
           if params[:country]
-            user = User.new
-            user.country_id = params[:country]
-            user.phone = params[:phone]
-            user.password = Digest::SHA256.hexdigest params[:password]
-            user.email = params[:email]
-            user.name = params[:name]
-            user.role_id = 0
-            if user.save
-              session[:auth] = user
-              redirect_to root_path
-              # render json: construct_response(200, 'successful_auth',{:user => {:country => user.country, :phone => user.phone, :password => "filtered", :role => user.role}})
-            else
-              render json: construct_response(200, 'not_existent_country')
+            binding.pry
+            if params[:privacy] == "on"
+              user = User.new
+              user.country_id = params[:country]
+              user.phone = params[:phone]
+              user.password = Digest::SHA256.hexdigest params[:password]
+              user.email = params[:email]
+              user.name = params[:name]
+              user.role_id = 0
+              if user.save
+                session[:auth] = user
+                redirect_to root_path
+                # render json: construct_response(200, 'successful_auth',{:user => {:country => user.country, :phone => user.phone, :password => "filtered", :role => user.role}})
+              else
+                render json: construct_response(200, 'not_existent_country')
+              end
+            else auth_error "Вы не дали согласие на обработку данных"
             end
           else auth_error "Заполните все поля"
           end

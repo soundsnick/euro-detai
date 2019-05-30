@@ -25,10 +25,19 @@ main.login
         label.uk-form-label for="form-horizontal-pass" = "Пароль"
         .uk-form-controls
           input.uk-input#form-horizontal-pass type="password" name="password" placeholder="мин. 6 символов"
+      .uk-margin
+        .uk-form-controls.flex style="align-items: center;"
+          input#checkbox.uk-checkbox type="checkbox" name="privacy"
+          label.uk-form-label for="checkbox" style="padding-left: 20px;" = "Я согласен(-на) на обработку личных данных"
       .uk-margin style="text-align: center"
         .uk-form-controls
-          input.uk-button.uk-button-primary type="submit" value="Зарегистрироваться"
+          input#sub.uk-button.uk-button-primary type="submit" disabled="" value="Зарегистрироваться"
         .uk-margin
           a.uk-link href=login_path = "Войти"
 javascript:
     $("#form-horizontal-num").inputmask({"mask": "+9(999) 999-9999"});
+coffee:
+    $('#checkbox').on 'change', () ->
+      ifChecked = $(this)[0].checked
+      $('#sub').removeAttr("disabled") if ifChecked
+      $('#sub').attr("disabled", true) if not ifChecked
