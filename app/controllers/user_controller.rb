@@ -15,7 +15,6 @@ class UserController < ApplicationController
           end
         else
           if params[:country]
-            binding.pry
             if params[:privacy] == "on"
               user = User.new
               user.country_id = params[:country]

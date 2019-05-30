@@ -87,4 +87,13 @@ main.home
             label.uk-form-label = "Ваш номер телефона (для ответа):"
             input.uk-input type="text" name="phone"
           = recaptcha_tags
-          input.uk-button.uk-button-primary type="submit" value="Отправить"
+          .uk-margin
+            .uk-form-controls.flex style="align-items: center;"
+              input#checkbox.uk-checkbox type="checkbox" name="privacy"
+              label.uk-form-label for="checkbox" style="padding-left: 20px;" = "Я согласен(-на) на обработку личных данных"
+          input#sub.uk-button.uk-button-primary type="submit" disabled="" value="Отправить"
+coffee:
+  $('#checkbox').on 'change', () ->
+    ifChecked = $(this)[0].checked
+    $('#sub').removeAttr("disabled") if ifChecked
+    $('#sub').attr("disabled", true) if not ifChecked

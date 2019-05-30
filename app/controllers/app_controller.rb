@@ -332,46 +332,49 @@ class AppController < ApplicationController
   end
 
   def query_add
-    @q = Query.new
-    @q.manufacturer_id = params[:manufacturer]
-    @q.model = params[:model]
-    @q.year = params[:year]
-    @q.carcass_id = params[:carcass]
-    @q.fuel_id = params[:fuel]
-    @q.volume = params[:volume]
-    @q.power = params[:power]
-    @q.engine = params[:engine]
-    @q.changer = params[:changer]
-    @q.privod = params[:privod]
-    @q.kpp = params[:kpp]
-    @q.part = params[:part]
-    @q.description = params[:description]
-    @q.name = params[:name]
-    @q.city = params[:city]
-    @q.email = params[:email]
-    @q.phone = params[:phone]
-    if verify_recaptcha(commentary) and q.email.length > 4
-      @q.save
-      if params[:images]
-        params[:images].each do |image|
-          imagehex = Digest::SHA256.hexdigest image.original_filename
-          imagehex = imagehex.slice(0, 10)
-          imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
-          imagehex2 = imagehex2.slice(0, 10)
-          imagehex = imagehex2 + imagehex
-          File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
-            file.write(image.read)
-            @image = QueryImage.new
-            @image.query_id = @q.id
-            @image.image = imagehex + image.original_filename
-            @image.save
+    if params[:privacy] == "on"
+      @q = Query.new
+      @q.manufacturer_id = params[:manufacturer]
+      @q.model = params[:model]
+      @q.year = params[:year]
+      @q.carcass_id = params[:carcass]
+      @q.fuel_id = params[:fuel]
+      @q.volume = params[:volume]
+      @q.power = params[:power]
+      @q.engine = params[:engine]
+      @q.changer = params[:changer]
+      @q.privod = params[:privod]
+      @q.kpp = params[:kpp]
+      @q.part = params[:part]
+      @q.description = params[:description]
+      @q.name = params[:name]
+      @q.city = params[:city]
+      @q.email = params[:email]
+      @q.phone = params[:phone]
+      if verify_recaptcha(commentary) and q.email.length > 4
+        @q.save
+        if params[:images]
+          params[:images].each do |image|
+            imagehex = Digest::SHA256.hexdigest image.original_filename
+            imagehex = imagehex.slice(0, 10)
+            imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
+            imagehex2 = imagehex2.slice(0, 10)
+            imagehex = imagehex2 + imagehex
+            File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
+              file.write(image.read)
+              @image = QueryImage.new
+              @image.query_id = @q.id
+              @image.image = imagehex + image.original_filename
+              @image.save
+            end
           end
         end
+        DefaultMailer.query_email(@q).deliver
+        redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
+      else
+        redirect_to query_path, notice: 'Заполните все поля и капчу!'
       end
-      DefaultMailer.query_email(@q).deliver
-      redirect_to query_path, notice: 'Ваш запрос принят! Мы скоро с вами свяжемся!'
-    else
-      redirect_to query_path, notice: 'Заполните все поля и капчу!'
+    else redirect_to query_path, notice: 'Вы должны дать согласие на обработку данных'
     end
   end
 
