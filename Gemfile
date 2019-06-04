@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'slim'
+gem 'multipart-post'
 gem 'pry'
 gem 'jquery-inputmask-rails'
 gem 'rack-cors'

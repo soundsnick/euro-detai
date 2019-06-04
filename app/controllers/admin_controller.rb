@@ -560,6 +560,25 @@ class AdminController < ApplicationController
               @image.save
             end
           end
+          require "uri"
+          require "net/http"
+          paramss = {'file1' => Base64.encode64(File.open(params[:images].first.tempfile).read),
+                    'access_token' => "85bc55e548e9c9ae6857bb98c5ba08b3c28e51685aa549b10706f441ae0c5c64fbe78153a52fb15be4f1e",
+                    'v' => 5.85
+          }
+          upload_server_req = URI.parse("https://api.vk.com/method/photos.getUploadServer?access_token=85bc55e548e9c9ae6857bb98c5ba08b3c28e51685aa549b10706f441ae0c5c64fbe78153a52fb15be4f1e&v=5.85&album_id=263577622&group_id=176237678")
+          upload_server = JSON.parse(upload_server_req.read)['response']['upload_url']
+
+          require 'net/http/post/multipart'
+
+          url = URI.parse(upload_server)
+          File.open(params[:images].first.tempfile) do |jpg|
+            req = Net::HTTP::Post::Multipart.new url.path, "file1" => UploadIO.new(jpg, "image/jpeg", "image.jpg")
+            res = Net::HTTP.start(url.host, url.port, :use_ssl => 'true') do |http|
+              http.request(req)
+            end
+            puts res.body
+          end
         end
         redirect_to anews_path, notice: 'Успешно добавлено!'
       else
