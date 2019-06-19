@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   # Admin Routing
   get 'admin/', to: 'admin#main'
   get 'admin/parts', to: 'admin#parts', as: :aparts
+  get 'admin/parts_search', to: 'admin#parts_search', as: :aparts_search
+  get 'admin/news_search', to: 'admin#news_search', as: :anews_search
+  get 'admin/models_search', to: 'admin#models_search', as: :amodels_search
   get 'parts/add', to: 'admin#part_add', as: :partadd
   get 'news/add', to: 'admin#new_add', as: :newadd
   put 'parts', to: 'admin#part_update'

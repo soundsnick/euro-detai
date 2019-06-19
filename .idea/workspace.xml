@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/part_add.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/part_add.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/admin/part_edit.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/part_edit.html.slim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/app/parts.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/app/parts.html.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admin_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/news.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/news.html.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/options.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/options.html.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/parts.html.slim" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/parts.html.slim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/config/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -24,64 +26,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="225">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/master.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="508" column="8" lean-forward="true" selection-start-line="508" selection-start-column="8" selection-end-line="508" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/app/new.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/app/part.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/new_add.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="87" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/part_add.html.slim">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/part_edit.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="759">
               <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="118" column="66" selection-start-line="118" selection-start-column="66" selection-end-line="118" selection-end-column="66" />
+            <state relative-caret-position="437">
+              <caret line="116" column="279" lean-forward="true" selection-start-line="116" selection-start-column="249" selection-end-line="116" selection-end-column="279" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/locales/en.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -89,8 +55,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/admin/parts.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="23">
+              <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="3" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/news.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="3" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="224" column="52" lean-forward="true" selection-start-line="224" selection-start-column="52" selection-end-line="224" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/admin/options.html.slim">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -98,12 +100,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/app/parts.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
+            <state relative-caret-position="2139">
               <caret line="129" column="14" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="14" />
               <folding>
                 <element signature="e#2601#4429#0" />
-                <element signature="e#4718#5805#0" />
-                <element signature="e#4765#4988#0" />
               </folding>
             </state>
           </provider>
@@ -112,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/app/news.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="39" selection-end-column="111" />
+            <state relative-caret-position="506">
+              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="39" selection-end-column="111" />
               <folding>
                 <element signature="e#940#1990#0" />
               </folding>
@@ -125,11 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>categories</find>
-      <find>adva</find>
-      <find>def search</find>
-      <find>header</find>
-      <find>advanced</find>
       <find>part_add</find>
       <find>def searc</find>
       <find>def adva</find>
@@ -155,6 +150,11 @@
       <find>news_new</find>
       <find>Год</find>
       <find>search</find>
+      <find>def sear</find>
+      <find>def parts</find>
+      <find>def news_searc</find>
+      <find>reviews</find>
+      <find>models</find>
     </findStrings>
     <replaceStrings>
       <replace>fuel</replace>
@@ -166,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/ya-copy.sh" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -192,10 +191,8 @@
         <option value="$PROJECT_DIR$/app/views/admin/new_add.html.slim" />
         <option value="$PROJECT_DIR$/app/views/admin/new_edit.html.slim" />
         <option value="$PROJECT_DIR$/app/views/admin/seo.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/admin/news.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/app/texts.html.slim" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/app/contacts.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/warranties.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/payment-shipping.html.slim" />
@@ -209,14 +206,17 @@
         <option value="$PROJECT_DIR$/app/controllers/user_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/app/query.html.slim" />
         <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/app/controllers/admin_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.slim" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/master.scss" />
         <option value="$PROJECT_DIR$/app/views/admin/part_add.html.slim" />
         <option value="$PROJECT_DIR$/app/views/admin/part_edit.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/admin/parts.html.slim" />
         <option value="$PROJECT_DIR$/app/views/app/parts.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/admin/parts.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/app_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/admin/news.html.slim" />
+        <option value="$PROJECT_DIR$/app/controllers/admin_controller.rb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/admin/options.html.slim" />
       </list>
     </option>
   </component>
@@ -241,8 +241,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="RailsProjectView" />
       <pane id="Scope" />
+      <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -342,6 +342,12 @@
               <item name="auto" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
               <item name="initializers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="auto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="auto" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="locales" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="auto" type="b2602c69:ProjectViewProjectNode" />
@@ -579,18 +585,19 @@
       <workItem from="1559786219240" duration="757000" />
       <workItem from="1559831913958" duration="618000" />
       <workItem from="1559845247029" duration="278000" />
-      <workItem from="1559929665788" duration="671000" />
+      <workItem from="1559929665788" duration="1134000" />
+      <workItem from="1560981824516" duration="863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="369900000" />
+    <option name="totallyTimeSpent" value="371226000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="705" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.35627836" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19818456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -643,20 +650,6 @@
     <SUITE FILE_PATH="coverage/auto@Production__auto.rcov" NAME="Production: auto Coverage Results" MODIFIED="1554497477089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="auto" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/mailers/default_mailer.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-156">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recaptcha.env" />
     <entry file="file://$PROJECT_DIR$/app/views/app/reviews.html.slim">
       <provider selected="true" editor-type-id="text-editor">
@@ -771,24 +764,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/options.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="68" column="33" lean-forward="true" selection-start-line="67" selection-start-column="6" selection-end-line="68" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -841,13 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/admin/news.html.slim">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/payment-shipping.html.slim">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -873,13 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="736">
           <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12903">
-          <caret line="561" column="13" selection-start-line="561" selection-start-column="13" selection-end-line="561" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -927,72 +892,112 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/master.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="508" column="8" lean-forward="true" selection-start-line="508" selection-start-column="8" selection-end-line="508" selection-end-column="8" />
+        <state relative-caret-position="11684">
+          <caret line="508" column="8" selection-start-line="508" selection-start-column="8" selection-end-line="508" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/new.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
+        <state relative-caret-position="322">
           <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/part.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="437">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/part_add.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
+        <state relative-caret-position="644">
           <caret line="28" column="55" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/part_edit.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="759">
           <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///var/lib/gems/2.5.0/gems/actionpack-5.1.7/lib/action_controller/metal/strong_parameters.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="1065" column="8" selection-start-line="1065" selection-start-column="8" selection-end-line="1065" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/admin/parts.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        <state relative-caret-position="23">
+          <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="3" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="116" column="279" lean-forward="true" selection-start-line="116" selection-start-column="249" selection-end-line="116" selection-end-column="279" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/admin_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="224" column="52" lean-forward="true" selection-start-line="224" selection-start-column="52" selection-end-line="224" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/locales/en.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/app/parts.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2139">
+          <caret line="129" column="14" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="14" />
+          <folding>
+            <element signature="e#2601#4429#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/app/news.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="39" selection-end-column="111" />
+        <state relative-caret-position="506">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="39" selection-end-column="111" />
           <folding>
             <element signature="e#940#1990#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/app/parts.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/news.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="129" column="14" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="14" />
-          <folding>
-            <element signature="e#2601#4429#0" />
-            <element signature="e#4718#5805#0" />
-            <element signature="e#4765#4988#0" />
-          </folding>
+        <state relative-caret-position="23">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="3" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/app_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/admin/options.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="118" column="66" selection-start-line="118" selection-start-column="66" selection-end-line="118" selection-end-column="66" />
+        <state relative-caret-position="69">
+          <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
         </state>
       </provider>
     </entry>

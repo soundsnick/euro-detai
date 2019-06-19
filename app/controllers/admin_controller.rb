@@ -21,6 +21,24 @@ class AdminController < ApplicationController
     end
   end
 
+  def parts_search
+    if admin
+      @parts = Part.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(mark) like ?  or lower(constr_num) like ?", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%").paginate(page: params[:page]).order(id: :desc).order(id: :asc)
+      @count = @parts.count
+      render 'parts'
+    else admin_err
+    end
+  end
+
+  def news_search
+    if admin
+      @news = New.where("lower(title) like ? or lower(content) like ?", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%").order("ready_date IS NULL DESC,
+         (CASE WHEN ready_date IS NULL THEN -id ELSE id END) ASC").order(id: :desc).paginate(page: params[:page], per_page: 10)
+      render 'news'
+    else admin_err
+    end
+  end
+
   def commentaries
     if admin
       @parts = Commentary.where.not(status: 1).order(id: :asc)
@@ -188,6 +206,21 @@ class AdminController < ApplicationController
           'title': 'Модели',
           'model': Model,
           'objects': Model.where.not(id: 1).order(id: :asc),
+          'edit_url': '/api/model.change?model_id',
+          'delete_url': '/api/model.delete?model_id'
+      }
+      render 'options'
+    else admin_err
+    end
+  end
+
+  def models_search
+    if admin
+      @manufacturers = Manufacturer.all.order(id: :asc)
+      @page_config = {
+          'title': 'Модели',
+          'model': Model,
+          'objects': Model.where.not(id: 1).where("lower(name) like ?", "%#{params[:query].downcase}%").order(id: :asc),
           'edit_url': '/api/model.change?model_id',
           'delete_url': '/api/model.delete?model_id'
       }

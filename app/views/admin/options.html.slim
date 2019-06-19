@@ -1,4 +1,8 @@
 main.admin-page
+  - if @page_config[:model] == Model
+    h1.admin-title = "Поиск по ключу"
+    form.uk-form action=amodels_search_path
+      input.uk-input name="query" placeholder="Запрос"
   h1.admin-title = @page_config[:title]
   = form_with model: @page_config[:model], class: 'uk-form', multipart: true
     .uk-margin.uk-flex
