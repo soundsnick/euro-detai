@@ -2,9 +2,9 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
-        h1.admin-title style="text-align: center" = "Узнать стоимость ДВС, КПП, раздатки, редуктора"
-        h3.title
+      main.admin-page.padding-40
+        h1.admin-title.text-center = "Узнать стоимость ДВС, КПП, раздатки, редуктора"
+        h2.title
           = "Узнать, сколько стоит необходимая запчасть - легко!"
           br
           = "Просто заполните представленную ниже форму!"
@@ -88,9 +88,9 @@ main.home
             input.uk-input type="text" name="phone"
           = recaptcha_tags
           .uk-margin
-            .uk-form-controls.flex style="align-items: center;"
+            .uk-form-controls.flex.text-center
               input#checkbox.uk-checkbox type="checkbox" name="privacy"
-              label.uk-form-label for="checkbox" style="padding-left: 20px;" = "Я согласен(-на) на обработку личных данных"
+              label.uk-form-label.padding-left-20 for="checkbox" = "Я согласен(-на) на обработку личных данных"
           input#sub.uk-button.uk-button-primary type="submit" disabled="" value="Отправить"
 coffee:
   $('#checkbox').on 'change', () ->

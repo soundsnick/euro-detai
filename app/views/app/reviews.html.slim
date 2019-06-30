@@ -9,8 +9,8 @@ main.parts
               label.uk-form-label = "Поиск отзыва: "
               .uk-form-controls
                 input.uk-input type="text" name="query" placeholder="Введите запрос..."
-            input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
-      main.admin-page style="padding: 40px;"
+            input.uk-button.uk-button-primary.width-100.block type="submit" value="Поиск"
+      main.admin-page.padding-40
         .parts
           uk.horizontal-nav
             a.uk-link href=root_path = "Главная"
@@ -18,7 +18,7 @@ main.parts
             a.uk-link href=news_path = "Новости"
           .review-form
             = form_with model: Feedback, class: 'uk-form-stacked uk-margin', url: "/review/add", method: :post
-              h1.title = "Добавить отзыв"
+              h2.title = "Добавить отзыв"
               .uk-margin
                 label.uk-form-label = "Ваш email: "
                 .uk-form-controls
@@ -34,14 +34,14 @@ main.parts
               .uk-margin
                 = recaptcha_tags
               input.uk-button.uk-button-primary type="submit" value="Добавить"
-          .flex style="align-items: center;"
+          .flex.vertical-center
             - if params[:action] != "advanced_search"
-              h1.title style="flex: 1;" = @page_config[:title]
+              h2.title.uk-flex-1 = @page_config[:title]
           - @news.each do |part|
             .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
               .uk-card-body
-                .part__info style="flex: 1"
-                  h2.part__title.uk-card-title = part.name
+                .part__info.uk-flex-1
+                  h3.part__title.uk-card-title = part.name
                   - @da = part.created_at.in_time_zone('Moscow').strftime("%d.%m.%Y %H:%M")
                   - if part.ready_date
                     - @da = part.ready_date

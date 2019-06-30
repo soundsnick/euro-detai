@@ -2,10 +2,10 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
-        h1.title.editable data-edit-id=texts[1].id style="text-align: center" = texts[1].content
+      main.admin-page.padding-40
+        h1.title.editable.text-center data-edit-id=texts[1].id = texts[1].content
         pre.home-paragraph.editable data-edit-id=texts[0].id = texts[0].content
-        h1.title.editable data-edit-id=texts[2].id = texts[2].content
+        h2.title.editable data-edit-id=texts[2].id = texts[2].content
         ul.uk-list.success-iconed
           li.editable data-edit-id=texts[3].id = texts[3].content
           li.editable data-edit-id=texts[4].id = texts[4].content
@@ -14,13 +14,13 @@ main.home
           li.editable data-edit-id=texts[7].id = texts[7].content
           li.editable data-edit-id=texts[8].id = texts[8].content
           li.editable data-edit-id=texts[9].id = texts[9].content
-        h1.title.editable data-edit-id=texts[10].id = texts[10].content
+        h2.title.editable data-edit-id=texts[10].id = texts[10].content
         ul.uk-list.success-iconed
           li.editable data-edit-id=texts[11].id = texts[11].content
           li.editable data-edit-id=texts[12].id = texts[12].content
           li.editable data-edit-id=texts[13].id = texts[13].content
         pre.home-paragraph.editable data-edit-id=texts[14].id = texts[14].content
-        h1.title.editable data-edit-id=texts[15].id = texts[15].content
+        h2.title.editable data-edit-id=texts[15].id = texts[15].content
         pre.home-paragraph.editable data-edit-id=texts[16].id = texts[16].content
 coffee:
   $('#form-horizontal-man').on('change', ->

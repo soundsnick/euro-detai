@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'app#home'
 
+
+
+  get 'sitemap', to: 'app#sitemap'
+  get 'robots', to: 'app#robots', format: :text
   get 'login', to: 'app#login', as: :login
   get 'register', to: 'app#register', as: :register
   get 'parts', to: 'app#parts', as: :parts

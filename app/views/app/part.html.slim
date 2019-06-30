@@ -1,24 +1,24 @@
 main.part-page
   .container
-    .part data-id=@part.id style="align-items: flex-start; border-bottom: none;"
+    .part.flex-center data-id=@part.id
       - p_image = "/images/no_photo.png"
       - if @part.image
         - images = @part.image.split(',')
       .part__image--wrapper data-image=p_image
-        div[style="margin-top: 20px;" class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider]
-          ul class="" style="align-items: center; "
+        div[class="uk-position-relative uk-visible-toggle uk-light margin-top-20" tabindex="-1" uk-slider]
+          ul.vertical-center class=""
             - images.each do |image|
               li
                 div[uk-lightbox]
                   - p_image = (image == nil) ? "/images/no_photo.png" : "/images/#{image}"
                   - if image.split('http').length > 1
                     - p_image = image
-                  a class="uk-button uk-button-default" href=p_image data-caption=@part.title style="padding: 0!important"
+                  a class="uk-button uk-button-default padding-0" href=p_image data-caption=@part.title
                     img.part__image src=p_image
-      .part__cost--wrapper style="flex: 1"
+      .part__cost--wrapper.uk-flex-1
         - part = @part
-        h1.title style="text-align: left; padding-left: 50px;" = part.title
-        table.uk-table.uk-table-responsive.uk-table-striped.uk-table-small.table-part style="width: 100%"
+        h1.title.part-h1 = part.title
+        table.uk-table.uk-table-responsive.uk-table-striped.uk-table-small.table-part.width-100
           caption = 'Характеристики'
           tbody
             tr
@@ -61,5 +61,5 @@ main.part-page
                   tr
                     th = option[0]
                     td = option[1]
-        h6.part__cost = @part.cost.to_s + 'P'
+        span.part__cost = @part.cost.to_s + 'P'
         a.part__buy.uk-button.uk-button-primary href=buy_path(@part.id) data-cost=@part.cost = 'Запросить счет'

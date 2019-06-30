@@ -95,6 +95,7 @@ GEM
       railties (>= 3.2, < 6.1)
     down (4.8.0)
       addressable (~> 2.5)
+    dynamic_sitemaps (2.0.0)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0)
@@ -257,6 +258,7 @@ DEPENDENCIES
   creek
   dotenv-rails
   down (~> 4.4)
+  dynamic_sitemaps
   jbuilder (~> 2.5)
   jquery-inputmask-rails
   jquery-rails

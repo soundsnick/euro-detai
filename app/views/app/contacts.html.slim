@@ -3,25 +3,25 @@ main.home
     .admin-wrapper
       = render 'layouts/news'
       main.admin-page style="padding: 40px;"
-        h1.admin-title.editable style="text-align: center" data-edit-id=texts[0].id = texts[0].content
-        h1.title.editable data-edit-id=texts[1].id = texts[1].content
+        h1.admin-title.editable.text-center data-edit-id=texts[0].id = texts[0].content
+        h2.title.editable data-edit-id=texts[1].id = texts[1].content
         pre.home-paragraph.editable data-edit-id=texts[2].id = texts[2].content
         a.uk-link href="mailto:detal911@yandex.ru"
           img src=asset_path("mail.png")
           = "  detal911@yandex.ru"
         pre.home-paragraph.editable data-edit-id=texts[3].id = texts[3].content
-        h1.title.editable data-edit-id=texts[4].id = texts[4].content
+        h2.title.editable data-edit-id=texts[4].id = texts[4].content
         p.home-paragraph
           = "Тел.: +7-926-665-20-97, "
-          img style="width: 25px;" src=asset_path("viber.png")
+          img.width-25 src=asset_path("viber.png")
           = " "
-          img style="width: 25px;" src=asset_path("whatsapp.png")
+          img.width-25 src=asset_path("whatsapp.png")
           = " +37525-733-72-90"
         pre.home-paragraph.editable data-edit-id=texts[5].id = texts[5].content
-        h1.title.editable style="color: red" data-edit-id=texts[6].id = texts[6].content
+        h3.title.editable.color-red data-edit-id=texts[6].id = texts[6].content
         p.home-paragraph
           b
-            span style="color: red" = "Оплата за заказываемые детали производится ТОЛЬКО по указанным выше реквизитам! "
+            span.color-red = "Оплата за заказываемые детали производится ТОЛЬКО по указанным выше реквизитам! "
             | Перед осуществлением оплаты свяжитесь с менеджерами по телефонам для проверки договора по реестрам!
         pre.home-paragraph.editable data-edit-id=texts[7].id = texts[7].content
         iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Acc0a6b5f6393dee9733c253ae6f9993ab4c978f000b4d40f018de3deca601b83&amp;source=constructor" width="100%" height="400" frameborder="0"

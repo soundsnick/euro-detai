@@ -2,9 +2,9 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
+      main.admin-page.padding-40
         h1.admin-title.editable data-edit-id=texts[0].id = texts[0].content
-        h1.title.editable data-edit-id=texts[1].id = texts[1].content
+        h2.title.editable data-edit-id=texts[1].id = texts[1].content
         pre.home-paragraph.editable data-edit-id=texts[2].id = texts[2].content
         ul.uk-list.success-iconed
           li.editable data-edit-id=texts[3].id = texts[3].content
@@ -15,16 +15,16 @@ main.home
         p.editable data-edit-id=texts[8].id = texts[8].content
         br
         br
-        h1.title.editable data-edit-id=texts[9].id = texts[9].content
+        h2.title.editable data-edit-id=texts[9].id = texts[9].content
         pre.home-paragraph.editable data-edit-id=texts[10].id = texts[10].content
-        h1.title.editable data-edit-id=texts[11].id = texts[11].content
+        h2.title.editable data-edit-id=texts[11].id = texts[11].content
         b = "Россия"
-        p.home-paragraph style="columns: 4"
+        p.home-paragraph.columns-4
           - @cities.where(country: "Россия").each do |city|
             = city.name
             br
         b = "Казахстан"
-        p.home-paragraph style="columns: 4"
+        p.home-paragraph.columns-4
           - @cities.where(country: "Казахстан").each do |city|
             = city.name
             br

@@ -2,8 +2,8 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
-        h1.title style="text-align: center" = "Б/у запчасти для автомобилей #{@manufacturer.name}"
+      main.admin-page.padding-40
+        h1.title.text-center = "Б/у запчасти для автомобилей #{@manufacturer.name}"
         p.home-paragraph
           = "Если ее не окажется в наличии - оставьте заявку через форму "
           a href="/query" = "«Узнать стоимость»."
@@ -12,5 +12,5 @@ main.home
         p.home-paragraph = @manufacturer.text
         center
           a.uk-button.uk-button-default href='/subcategories?category=1&manufacturer=#{@manufacturer.id}' = "Двигатели для #{@manufacturer.name}"
-          a.uk-button.uk-button-primary href='/parts/advanced_search?manufacturer=#{@manufacturer.id}&year_from=1900&year_to=&model=&category=0&volume_from=0&volume_to=&fuel=1' = "Все запчасти для #{@manufacturer.name}"
+          a.uk-button.uk-button-primary href='/parts/advanced_search?manufacturer=#{@manufacturer.id}&year=&model=&category=0&volume=no&fuel=1' = "Все запчасти для #{@manufacturer.name}"
           a.uk-button.uk-button-default href='/subcategories?category=2&manufacturer=#{@manufacturer.id}' = "Трансмиссия для #{@manufacturer.name}"

@@ -2,8 +2,8 @@ main.home
   .container
     .admin-wrapper
       = render 'layouts/news'
-      main.admin-page style="padding: 40px;"
-        h1.title style="text-align: center" = "Запросить счет"
+      main.admin-page.padding-40
+        h1.title.text-center = "Запросить счет"
         = form_with model: Order, class: 'uk-form'
           input type="hidden" name="partId" value=params[:partId]
           .uk-margin

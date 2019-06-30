@@ -92,6 +92,16 @@ class AppController < ApplicationController
     end
   end
 
+  def sitemap
+    respond_to do |format|
+      format.xml { render file: 'public/sitemaps/sitemap.xml' }
+      format.html { redirect_to root_url }
+    end
+  end
+
+  def robots
+  end
+
   def parts
     @title = "Ищете, где купить б.у запчасти? Каталог с ценами здесь!"
     @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)

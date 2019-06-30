@@ -9,16 +9,16 @@ main.parts
               label.uk-form-label = "Поиск новости: "
               .uk-form-controls
                 input.uk-input type="text" name="query" placeholder="Введите запрос..."
-            input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
-      main.admin-page style="padding: 40px;"
+            input.uk-button.uk-button-primary.news-button type="submit" value="Поиск"
+      main.admin-page.padding-40
         .parts
           uk.horizontal-nav
             a.uk-link href=root_path = "Главная"
             = " | "
             a.uk-link href=news_path = "Новости"
-          .flex style="align-items: center;"
+          .flex.vertical-center
             - if params[:action] != "advanced_search"
-              h1.title style="flex: 1;" = @page_config[:title]
+              h2.title.uk-flex-1 = @page_config[:title]
           - @news.each do |part|
             .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
               - p_image = 'no_photo.png'
@@ -27,9 +27,9 @@ main.parts
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
                   a href="/news/#{p_image}" data-caption=part.title
-                    img.part__image src="/news/#{p_image}" style="margin-left: 0"
+                    img.part__image.margin-left-0 src="/news/#{p_image}"
               .uk-card-body
-                .part__info style="flex: 1!important"
+                .part__info.uk-flex-1
                   h2.part__title.uk-card-title
                     a href=new_path(part.id) = part.title
                     - @da = part.created_at.in_time_zone('Moscow').strftime("%d.%m.%Y %H:%M")

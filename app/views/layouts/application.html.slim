@@ -16,9 +16,10 @@
   - @meta[:keywords] = params[:query]
   - @meta[:description] = params[:query]
 doctype html
-html
+html lang="ru"
   head
     title = @meta[:title]
+    meta charset="utf-8"
     meta name="description" content=@meta[:description]
     meta name="keywords" content=@meta[:keywords]
     meta name="viewport" content="width=device-width, initial-scale=1"
@@ -42,7 +43,7 @@ html
           .logo__info.editable data-edit-id=layout_texts[0].id = layout_texts[0].content
         .header__contacts
           span.editable data-edit-id=layout_texts[1].id = layout_texts[1].content
-          h6.header__phone
+          p.header__phone
             img.wp src=asset_path('phone-call.svg')
             a.editable href="tel:#{layout_texts[2].content}" data-edit-id=layout_texts[2].id = layout_texts[2].content
         .header__adress
@@ -76,7 +77,7 @@ html
     div id="offcanvas-overlay" uk-offcanvas="overlay: true"
       div class="uk-offcanvas-bar"
         button[class="uk-offcanvas-close" type="button" uk-close]
-        h3 = "Навигация по сайту"
+        h1 = "Навигация по сайту"
         ul class="uk-list uk-list-divider uk-list-large"
           li
             a.uk-link-text href=root_path = 'О компании'
