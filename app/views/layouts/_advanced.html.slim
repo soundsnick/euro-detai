@@ -1,7 +1,7 @@
 .flex.responsive-flex
   aside.advanced-search.uk-card.uk-card-default style="flex: 1; width: 100%"
     .uk-card-body
-      h1.uk-card-title style="margin-bottom: 5px;" = "Расширенный поиск"
+      h2.uk-card-title style="margin-bottom: 5px;" = "Расширенный поиск"
       - form_url = "/parts/advanced_search"
       - if params[:action] == 'subcategories'
         - form_url = "/subcategories"
@@ -75,5 +75,5 @@
         input.uk-button.uk-button-primary style="width: 100%; display: block" type="submit" value="Поиск"
 
   .right-block style="flex: 0 0 40%; padding: 25px"
-    h1.title.editable data-edit-id=layout_texts[6].id = layout_texts[6].content
+    h2.title.editable data-edit-id=layout_texts[6].id = layout_texts[6].content
     pre.editable data-edit-id=layout_texts[5].id = layout_texts[5].content
