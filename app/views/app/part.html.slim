@@ -1,6 +1,6 @@
 main.part-page
   .container
-    .part.flex-center data-id=@part.id
+    .part.flex-start.no-border data-id=@part.id
       - p_image = "/images/no_photo.png"
       - if @part.image
         - images = @part.image.split(',')
