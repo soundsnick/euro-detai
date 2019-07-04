@@ -585,6 +585,11 @@ class AdminController < ApplicationController
             imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
             imagehex2 = imagehex2.slice(0, 10)
             imagehex = imagehex2 + imagehex
+            imagem = MiniMagick::Image.open File.open(image.tempfile)
+            f_w = imagem.width
+            f_h = imagem.height
+            imagem.resize "#{f_w/3}x#{f_h/3}"
+            imagem.write "public/news/compressed_#{imagehex + image.original_filename}"
             File.open(Rails.root.join('public', 'news', imagehex + image.original_filename), 'wb') do |file|
               file.write(image.read)
               @image = Attachment.new
@@ -706,6 +711,13 @@ class AdminController < ApplicationController
           imagehex2 = Digest::SHA256.hexdigest rand(0..100).to_s
           imagehex2 = imagehex2.slice(0, 10)
           imagehex = imagehex2 + imagehex
+          imagem = MiniMagick::Image.open File.open(image.tempfile)
+          f_w = imagem.width
+          f_h = imagem.height
+          imagem.resize "#{f_w/3}x#{f_h/3}"
+          imagem.write "public/images/compressed_#{imagehex + image.original_filename}"
+
+
           File.open(Rails.root.join('public', 'images', imagehex + image.original_filename), 'wb') do |file|
             file.write(image.read)
             @images += imagehex + image.original_filename + "," if index != params[:images].length - 1

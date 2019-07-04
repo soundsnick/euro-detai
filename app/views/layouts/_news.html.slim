@@ -11,6 +11,7 @@ aside.advanced-search.uk-card.uk-card-default[new style="flex: 0 0 240px;"]
               - new_image = "no_photo.png"
               - if new.attachments.count > 0
                 - new_image = new.attachments.take.image
+                - new_image = "compressed_#{new.attachments.take.image}" if File.exists?("#{Rails.root.to_s}/public/news/compressed_#{new.attachments.take.image}")
               div[uk-lightbox style="text-align: center"]
                 a href="/news/#{new_image}" data-caption=new.title
                   img.new-card__image src="/news/#{new_image}"

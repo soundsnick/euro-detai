@@ -22,11 +22,13 @@ main.parts
           - @news.each do |part|
             .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
               - p_image = 'no_photo.png'
+              - p_img = 'no_photo.png'
               - if part.attachments.length > 0
                 - p_image = (part.attachments.take.image != nil) ? part.attachments.take.image : 'no_photo.png'
+                - p_img = (part.attachments.take.image != nil) ? "compressed_" + part.attachments.take.image : 'no_photo.png'
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
-                  a href="/news/#{p_image}" data-caption=part.title
+                  a href="/news/#{p_img}" data-caption=part.title
                     img.part__image.margin-left-0 src="/news/#{p_image}"
               .uk-card-body
                 .part__info.uk-flex-1

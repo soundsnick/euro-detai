@@ -64,12 +64,14 @@ main.parts
               - p_image = "/images/no_photo.png"
               - if part.image
                 - images = part.image.split(',')
-                - p_image = (images[0] == nil) ? "/images/no_photo.png" : "/images/#{images[0]}"
+                - p_image = (images[0] == nil) ? "/images/no_photo.png" : "/images/compressed_#{images[0]}"
+                - p_img = (images[0] == nil) ? "/images/no_photo.png" : "/images/#{images[0]}"
+                - p_image = p_img unless File.exists?("#{Rails.root.to_s}/public/images/compressed_#{images[0]}")
                 - if images[0].split('http').length > 1
                   - p_image = images[0]
               .part__image--wrapper data-image=p_image
                 div[uk-lightbox]
-                  a href=p_image data-caption=part.title
+                  a href=p_img data-caption=part.title
                     img.part__image src=p_image alt=part.title
               .uk-card-body
                 .part__info
@@ -107,11 +109,14 @@ main.parts
             - @a_news.each do |part|
               .part.uk-card.uk-card-default.uk-card-hover data-id=part.id
                 - p_image = 'no_photo.png'
+                - p_img = 'no_photo.png'
                 - if part.attachments.length > 0
-                  - p_image = (part.attachments.take.image != nil) ? part.attachments.take.image : 'no_photo.png'
+                  - p_image = (part.attachments.take.image != nil) ? "compressed_" + part.attachments.take.image : 'no_photo.png'
+                  - p_img = (part.attachments.take.image != nil) ? part.attachments.take.image : 'no_photo.png'
+                  - p_image = p_img unless File.exists?("#{Rails.root.to_s}/public/news/compressed_#{part.attachments.take.image}")
                 .part__image--wrapper data-image=p_image
                   div[uk-lightbox]
-                    a href="/news/#{p_image}" data-caption=part.title
+                    a href="/news/#{p_img}" data-caption=part.title
                       img.part__image.margin-left-0 src="/news/#{p_image}"
                 .uk-card-body
                   .part__info.uk-flex-1
