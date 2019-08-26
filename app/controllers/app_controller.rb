@@ -364,7 +364,7 @@ class AppController < ApplicationController
       @q.city = params[:city]
       @q.email = params[:email]
       @q.phone = params[:phone]
-      if verify_recaptcha(@q) and q.email.length > 4
+      if verify_recaptcha(@q) and @q.email.length > 4
         @q.save
         if params[:images]
           params[:images].each do |image|
