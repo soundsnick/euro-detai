@@ -2,53 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/car_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/car_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/user_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/user_controller.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>def new</find>
-      <find>part</find>
-      <find>texts</find>
-      <find>p.ed</find>
-      <find>home</find>
-      <find>pre</find>
-      <find>column</find>
-      <find>p{</find>
-      <find>active</find>
-      <find>part_edit</find>
-      <find>part_</find>
-      <find>def part</find>
-      <find>subcate</find>
-      <find>def subca</find>
-      <find>def query</find>
-      <find>Год</find>
-      <find>search</find>
-      <find>def sear</find>
-      <find>def parts</find>
-      <find>def news_searc</find>
-      <find>reviews</find>
-      <find>models</find>
-      <find>h</find>
-      <find>.part{</find>
-      <find>style</find>
-      <find>h2</find>
-      <find>h1</find>
-      <find>part_new</find>
-      <find>news_new</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>fuel</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -282,7 +243,7 @@
       <workItem from="1561984490460" duration="499000" />
       <workItem from="1562065260960" duration="1468000" />
       <workItem from="1562280490826" duration="3396000" />
-      <workItem from="1566852856340" duration="80000" />
+      <workItem from="1566852856340" duration="786000" />
     </task>
     <servers />
   </component>
