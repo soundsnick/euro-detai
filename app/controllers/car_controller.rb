@@ -1,4 +1,5 @@
 class CarController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def fuel
     if admin && params[:method]

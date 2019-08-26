@@ -4,13 +4,16 @@
     <data-source name="Rails auto: production" uuid="0044d749-3316-4b21-b133-78545b2f3bbe">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
       <user-name>auto</user-name>
+      <schema-mapping />
     </data-source>
     <data-source name="Rails auto: development" uuid="d9862204-81c8-4c07-9d22-bb65893df5d9">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
       <user-name>postgres</user-name>
+      <schema-mapping />
     </data-source>
     <data-source name="Rails auto: test" uuid="a1fd8589-36a1-4bbb-a90d-de8caa02573f">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>
