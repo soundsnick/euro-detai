@@ -3,7 +3,7 @@ class DefaultMailer < ApplicationMailer
 
   def query_email(query)
     @query = query
-    mail(to: "detal911@yandex.ru", subject: 'Узнать стоимость ДВС, КПП...')
+    mail(to: "soundsnick@gmail.com", subject: 'Узнать стоимость ДВС, КПП...')
   end
 
   def comment_email(comment)

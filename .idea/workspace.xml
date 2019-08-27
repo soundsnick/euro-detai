@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="273e3d3a-d8ed-48af-82f3-e2ece80d2255" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/app_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/app_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/default_mailer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/mailers/default_mailer.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +243,8 @@
       <workItem from="1561984490460" duration="499000" />
       <workItem from="1562065260960" duration="1468000" />
       <workItem from="1562280490826" duration="3396000" />
-      <workItem from="1566852856340" duration="1246000" />
+      <workItem from="1566852856340" duration="2034000" />
+      <workItem from="1566895731133" duration="56000" />
     </task>
     <servers />
   </component>
@@ -258,7 +259,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
