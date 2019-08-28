@@ -364,8 +364,7 @@ class AppController < ApplicationController
       @q.city = params[:city]
       @q.email = params[:email]
       @q.phone = params[:phone]
-      if verify_recaptcha(@q)
-        @q.save
+      if @q.save
         if params[:images]
           params[:images].each do |image|
             imagehex = Digest::SHA256.hexdigest image.original_filename
