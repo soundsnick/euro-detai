@@ -245,6 +245,29 @@ class AppController < ApplicationController
     end
   end
 
+  def manufacturer_parts
+    @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)
+    @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
+    @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
+    @models = @models.count == 0 ? Model.where(id: 1) : @models
+    @volumes = Volume.all.order(id: :asc)
+    @fuels = Fuel.all.order(id: :asc)
+    @carcasses = Carcass.all.order(id: :asc)
+    @categories = Category.all.order(id: :asc)
+    @colors = Color.all.order(id: :asc)
+    @page_config = {
+        'title': "Запчасти для #{params[:manufacturer].upcase}"
+    }
+    @manu = Manufacturer.where('name LIKE ? OR name LIKE ? OR name LIKE ?', params[:manufacturer], params[:manufacturer].upcase, params[:manufacturer].capitalize).take
+    if @manu
+      @a_parts = @a_parts.where(manufacturer_id: @manu.id)
+      @models = Model.where(manufacturer_id: @manu.id).order(id: :asc)
+    else
+      @a_parts = @a_parts.where(title: "sdadasdsdadadd")
+    end
+    render 'parts'
+  end
+
   def part
     if @part = Part.find_by(id: params[:id])
       @title = @part.title
@@ -404,7 +427,7 @@ class AppController < ApplicationController
   end
 
   def subcategories
-    if params[:category]
+    if @cate = Category.find_by(seo_name: params[:category])
       @a_parts = Part.paginate(page: params[:page], per_page: 10).order(id: :desc)
       @manufacturers = Manufacturer.where.not(id: 1).order(name: :asc)
       @models = Model.where(manufacturer_id: @manufacturers.take.id).order(id: :asc)
@@ -413,26 +436,27 @@ class AppController < ApplicationController
       @fuels = Fuel.all.order(id: :asc)
       @carcasses = Carcass.all.order(id: :asc)
       @categories = Category.all.order(id: :asc)
-      @subcategories = Subcategory.where("category_id = #{params[:category]} or id = 1")
+      @subcategories = Subcategory.where("category_id = #{@cate.id} or id = 1")
       @colors = Color.all.order(id: :asc)
       @page_config = {
           'title': "Поиск по запросу \"#{params[:query]}\""
       }
-      if params[:category] and params[:category].to_i > 0
-        sub = Category.find_by(id: params[:category])
-        if sub.name == "ДВС"
-          @a_parts = @a_parts.where("lower(title) like ? OR (lower(description) like ?  AND category_id = NULL) OR lower(title) like ? OR (lower(description) like ? AND category_id = NULL) or category_id=?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%", sub.id)
-        else
-          @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ? or category_id = ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", sub.id)
-        end
+      sub = @cate
+      if sub.name == "ДВС"
+        @a_parts = @a_parts.where("lower(title) like ? OR (lower(description) like ?  AND category_id = NULL) OR lower(title) like ? OR (lower(description) like ? AND category_id = NULL) or category_id=?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", "%двигател%", "%двигател%", sub.id)
+      else
+        @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ? or category_id = ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%", sub.id)
       end
       if params[:subcategory] and params[:subcategory].to_i > 1
         sub = Subcategory.find_by(id: params[:subcategory])
         @a_parts = @a_parts.where("lower(title) like ? OR lower(description) like ?", "%#{sub.name.downcase}%", "%#{sub.name.downcase}%") if sub
       end
-      if params[:manufacturer] and params[:manufacturer].to_i > 1
-        @a_parts = @a_parts.where(manufacturer_id: params[:manufacturer])
-        @models = Model.where(manufacturer_id: params[:manufacturer]).order(id: :asc)
+      if params[:manufacturer]
+        @manu = Manufacturer.where('name LIKE ? OR name LIKE ? OR name LIKE ?', params[:manufacturer], params[:manufacturer].upcase, params[:manufacturer].capitalize).take
+        if @manu
+          @a_parts = @a_parts.where(manufacturer_id: @manu.id)
+          @models = Model.where(manufacturer_id: @manu.id).order(id: :asc)
+        end
       end
       if params[:model]
         model = Model.find_by(id: params[:model])
@@ -496,13 +520,13 @@ class AppController < ApplicationController
           @a_parts = @a_parts.where(cost: Integer(cost_from)..Integer(cost_to))
         end
       end
-      @filter = {'category': Category.find_by(id: params[:category]).name} if Category.find_by(id: params[:category])
+      @filter = {'category': @cate.name} if @cate
       if params[:subcategory] and Subcategory.find_by(id: params[:subcategory])
         @filter = {'subcategory': Subcategory.find_by(id: params[:subcategory]).name}
       end
-      @sd = Manufacturer.find_by(id: params[:manufacturer])
+      @sd = @manu
       if @sd
-        @filter[:manufacturer] = Manufacturer.find_by(id: params[:manufacturer]).name if params[:manufacturer]
+        @filter[:manufacturer] = @sd.name if @sd
       else
         @filter[:manufacturer] = "Не задано"
       end

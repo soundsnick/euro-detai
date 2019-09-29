@@ -113,9 +113,9 @@ html lang="ru"
         nav.uk-navbar
           div#headerFreeze data-turbolinks-permanent="true" style="align-self: center; display: flex;"
             a#main.uk-link-text href=root_path = 'О компании'
-            a#dvs.uk-link-text href="/subcategories?category=1" = "Двигатели"
-            a#mkpp.uk-link-text href="/subcategories?category=2" = "МКПП"
-            a#akpp.uk-link-text href="/subcategories?category=4" = "АКПП"
+            a#dvs.uk-link-text href=catalog_path('engines') = "Двигатели"
+            a#mkpp.uk-link-text href=catalog_path('mechanics') = "МКПП"
+            a#akpp.uk-link-text href=catalog_path('automatics') = "АКПП"
             a#catalog.uk-link-text href=parts_path = 'Каталог'
             a#payment.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
             a#warranties.uk-link-text href=warranties_path = 'Гарантия'
@@ -149,9 +149,9 @@ html lang="ru"
         .container
           nav.uk-navbar
             a.uk-link-text href=root_path = 'О компании'
-            a.uk-link-text href="/subcategories?category=1" = "Двигатели"
-            a.uk-link-text href="/subcategories?category=2" = "МКПП"
-            a.uk-link-text href="/subcategories?category=4" = "АКПП"
+            a.uk-link-text href=catalog_path('engines') = "Двигатели"
+            a.uk-link-text href=catalog_path('mechanics') = "МКПП"
+            a.uk-link-text href=catalog_path('automatics') = "АКПП"
             a.uk-link-text href=parts_path = 'Каталог'
             a.uk-link-text href=payment_shipping_path = 'Оплата и доставка'
             a.uk-link-text href=warranties_path = 'Гарантия'

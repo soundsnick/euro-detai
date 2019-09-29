@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/administration', as: 'rails_admin'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'app#home'
 
@@ -30,6 +31,10 @@ Rails.application.routes.draw do
   get 'query', to: 'app#query', as: :query
   post 'query/add', to: 'app#query_add', as: :queries
   get 'subcategories', to: 'app#subcategories', as: :subcategory_search
+  get 'catalog/:category', to: 'app#subcategories', as: :catalog
+  get 'catalog/:category/:manufacturer', to: 'app#subcategories', as: :catalog_manufacturer
+  get 'manufacturer/:manufacturer', to: 'app#manufacturer_parts', as: :manufacturer_parts
+
 
   # User Routing
   get 'api/user.auth', to: 'user#authorisation'

@@ -28,6 +28,8 @@ main.admin-page
         th = "Название"
         - if @page_config[:model] == Model
           th = "Производитель"
+        - if @page_config[:model] == Category
+          th = "SEO name"
         - if @page_config[:model] == Subcategory
           th = "Категория"
         - if @page_config[:model] == Manufacturer
@@ -50,6 +52,8 @@ main.admin-page
             input.uk-input.uk-form-blank.part-name data-id=part.id onfocus="window.changing = this.value" onblur="editPart(this, #{part.id}, '#{@page_config[:edit_url]}')" value=part.name
           - if @page_config[:model] == Model
             td = part.manufacturer.name
+          - if @page_config[:model] == Category
+            th = part.seo_name
           - if @page_config[:model] == Subcategory
             td = part.category.name
           - if @page_config[:model] == Manufacturer

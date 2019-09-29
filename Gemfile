@@ -16,6 +16,7 @@ gem "down", "~> 4.4"
 gem 'dynamic_sitemaps'
 # gem 'whenever', require: false
 gem 'mini_magick'
+gem 'rails_admin'
 
 gem "recaptcha", require: "recaptcha/rails"
 gem 'jquery-rails'
