@@ -3,8 +3,6 @@
     .uk-card-body
       h2.uk-card-title style="margin-bottom: 5px;" = "Расширенный поиск"
       - form_url = "/parts/advanced_search"
-      - if params[:action] == 'subcategories'
-        - form_url = "/subcategories"
       form.uk-form-horizontal action=form_url method="get"
         .uk-grid-small[uk-grid]
           div class="uk-width-1-2@m"
