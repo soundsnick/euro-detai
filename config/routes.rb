@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'subcategories', to: 'app#subcategories', as: :subcategory_search
   get 'catalog/:category', to: 'app#subcategories', as: :catalog
   get 'catalog/:category/:manufacturer', to: 'app#subcategories', as: :catalog_manufacturer
+  get 'catalog/:category/:manufacturer/:model', to: 'app#subcategories', as: :catalog_model
   get 'manufacturer/:manufacturer', to: 'app#manufacturer_parts', as: :manufacturer_parts
 
 

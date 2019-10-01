@@ -456,10 +456,12 @@ class AppController < ApplicationController
         if @manu
           @a_parts = @a_parts.where(manufacturer_id: @manu.id)
           @models = Model.where(manufacturer_id: @manu.id).order(id: :asc)
+          @page_config[:title] = "Запчасти для #{@manu.name}"
         end
       end
       if params[:model]
-        model = Model.find_by(id: params[:model])
+        model = Model.where('name LIKE ? OR name LIKE ? OR name LIKE ?', "%#{params[:model]}%", "%#{params[:model].upcase}%", "%#{params[:model].capitalize}%")
+        model = model.where(manufacturer_id: @manu.id).take
         if model
           mname = model.name.split()
           mstr = ""
@@ -481,6 +483,9 @@ class AppController < ApplicationController
           mstr = mstr.rstrip
           mstr2 = mstr2.rstrip
           @a_parts = @a_parts.where("lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or lower(title) like ? or lower(description) like ? or lower(tags) like ? or model_id = ?", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+model.name.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", "%"+mstr2.downcase+"%", model.id)
+          @page_config[:title] += " #{model.name}"
+        else
+          @a_parts = @a_parts.where(title: "sdasdasdad")
         end
       end
       if params[:carcass] and  Integer(params[:carcass]) > 1
