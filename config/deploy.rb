@@ -1,5 +1,5 @@
 # Change these
-server '185.135.81.48', port: 22, roles: [:web, :app, :db], primary: true
+server '81.177.165.170', port: 22, roles: [:web, :app, :db], primary: true
 set :repo_url,        'git@github.com:soundsnick/euro-detai.git'
 set :application,     'euro-detai'
 set :user,            'deploy'
